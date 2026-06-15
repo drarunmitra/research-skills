@@ -1,6 +1,6 @@
 ---
 name: time-series
-version: 1.0.0
+version: 1.1.0
 description: |
   Analyse and forecast time series in R using the tidyverts ecosystem
   (tsibble, feasts, fable). Covers the full workflow: indexing and gap-filling,
@@ -56,10 +56,12 @@ Trigger on requests such as:
 - "Handle irregular sampling / informative missingness in clinical time series"
 - Anything involving `ts`, `tsibble`, `fable`, `forecast`, `prophet`, ARIMA, ETS, STL
 
-For the user's own work this most often means **TB notification / surveillance
-series from Nikshay**: monthly or weekly counts at TU / district / state level,
-where seasonality, count distributions, denominators, and spatial-temporal
-hierarchy all matter. Lean into that context.
+Worked example (TB case-notification surveillance): a recurring example domain
+throughout this skill is **TB notification / surveillance series** (e.g. from a
+register such as Nikshay): monthly or weekly counts at TU / district / state
+level, where seasonality, count distributions, denominators, and spatial-temporal
+hierarchy all matter. It is used to make the methods concrete; substitute your own
+series and context.
 
 ## The five sources this skill distils
 
@@ -161,17 +163,16 @@ These are non-negotiable. A time-series analysis that breaks one is unreliable.
 
 ## Reproducibility
 
-Match the user's environment and habits (see global memory):
-- Use **R 4.4.1 explicitly**; the default `Rscript` on PATH is a broken empty 4.0.5.
-- The user prefers **DuckDB + duckspatial** for heavy data; pull/aggregate there, model in R.
+- Pin the R version your project uses (record it in `renv`); ensure the `Rscript` on PATH is the intended version.
+- If working with large tables, a columnar store such as **DuckDB** pairs well with `arrow`/`dbplyr`; pull/aggregate there, model in R.
 - For project work, pin packages with `renv` (the rleripio reproducibility stance). Set a seed before any stochastic model (`NNETAR`, bootstrap, MCMC).
 - Prefer Quarto/R Markdown for write-ups so figures and numbers regenerate. Pair with the `academic-writer` / `research-writer` skills for the prose and the `peer-reviewer` skill before submission.
 
 ## Writing up time-series results
 
-When the deliverable is text (a methods paragraph, a results section), follow the
-user's house style (no em dashes; no bold/italic for emphasis in running prose;
-claims matched to evidence). A defensible Methods paragraph names: the series and
+When the deliverable is text (a methods paragraph, a results section), follow
+this suite's default writing conventions (configurable): no em dashes; no
+bold/italic for emphasis in running prose; claims matched to evidence. A defensible Methods paragraph names: the series and
 its index/frequency; gap and transformation handling; the candidate models and
 the selection criterion; the train/test or cross-validation scheme; the accuracy
 measures; and software with versions. Report forecast accuracy out-of-sample with

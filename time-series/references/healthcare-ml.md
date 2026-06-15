@@ -99,10 +99,10 @@ validate against a simple baseline (IRON RULE 4 still applies).
 - For any clinical prediction model intended for a paper, follow **TRIPOD**
   (and TRIPOD-AI for ML); the `peer-reviewer` skill checks against it.
 
-## Relation to the user's TB work
+## Worked example (TB case-notification surveillance): when it becomes clinical-ML
 
-Most Nikshay work is aggregate surveillance (counts per TU per month), which is
-the `epi-surveillance.md` + fable path. This file applies if the project moves
-to **patient-level** TB data: treatment trajectories, loss-to-follow-up or
+Most TB notification work is aggregate surveillance (counts per TU per month),
+which is the `epi-surveillance.md` + fable path. This file applies if the work
+moves to **patient-level** TB data: treatment trajectories, loss-to-follow-up or
 mortality as longitudinal survival, or per-patient outcome prediction. In that
 case start from joint/mixed models in R and escalate deliberately.

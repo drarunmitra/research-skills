@@ -1,10 +1,11 @@
 # Public-health & epidemiology time series
 
-The layer that matters most for the user's work: TB notification and
-surveillance series (Nikshay), counts at TU/district/state level, where the
-data-generating process is discrete, often low-count, seasonal, and tied to a
-shifting denominator. fable is the workhorse, but several epi tasks need
-methods around or beyond it.
+Worked example (TB case-notification surveillance): the running example for this
+layer is TB notification and surveillance series (e.g. from a register such as
+Nikshay), counts at TU/district/state level, where the data-generating process is
+discrete, often low-count, seasonal, and tied to a shifting denominator. fable is
+the workhorse, but several epi tasks need methods around or beyond it. Substitute
+your own surveillance series and context.
 
 ## Counts, not Gaussians
 
@@ -111,15 +112,16 @@ unless Rt is specifically requested.
 Recent counts are incomplete because of notification lag, raw recent points
 understate the truth and look like a spurious decline. Correct before
 forecasting or interpreting trends. Tools: `surveillance::nowcast`,
-`epinowcast`, or a reporting-triangle/delay-distribution model. With Nikshay,
-characterise the delay distribution (notification date vs entry date) and
+`epinowcast`, or a reporting-triangle/delay-distribution model. For a notification
+register (e.g. Nikshay), characterise the delay distribution (notification date vs entry date) and
 nowcast the most recent weeks/months; never read the last few raw points as a
 real downturn.
 
-## Denominators (the user's binding constraint)
+## Denominators (often the binding constraint)
 
-Rates need a denominator, and at TU level the denominator (crosswalk to
-population) is itself a research object in this project. Practical guidance:
+Worked example (TB case-notification surveillance): rates need a denominator, and
+at TU level the denominator (crosswalk to population) can itself be a research
+object. Practical guidance:
 - Model **rates** only where the denominator is trustworthy; otherwise model
   counts and report counts, stating the denominator caveat.
 - Keep population as a time-varying offset if it changes over the series.

@@ -122,7 +122,7 @@ point process, not a tsibble.
   epidemiologically, contagion/clustering of cases).
 - **Relevance.** Outbreak clustering, recurrent clinical events, and any
   irregular event stream. R tools: `spatstat` (spatial/spatio-temporal point
-  patterns, relevant to the user's spatial-epi work), `hawkes`/`emhawkes`,
+  patterns, relevant to spatial-epidemiology applications), `hawkes`/`emhawkes`,
   `ppstat`. Aggregate to counts only if the grid is fine enough not to lose the
   clustering you care about.
 
