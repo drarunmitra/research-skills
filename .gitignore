@@ -12,3 +12,6 @@ skills-backup-*/
 # OS / editor noise
 .DS_Store
 Thumbs.db
+
+# Stray/other local skill folders (not part of this suite)
+visual-frameworks/
