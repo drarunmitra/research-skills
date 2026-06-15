@@ -7,6 +7,8 @@ description: >
   "prepare for medRxiv/journal submission", "code and data availability". Covers
   repos with non-redistributable source data, large spatial/binary files,
   CITATION.cff, Zenodo, and Quarto manuscript front-matter.
+version: 1.0.0
+allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
 # Publishing a Research Compendium
@@ -55,6 +57,76 @@ A >50 MB file in git bloats every clone and the Zenodo archive. Before deciding,
 
 ## CITATION.cff
 Add `cff-version: 1.2.0`, the software `authors` (with ORCIDs), `version`, top-level `doi:` (the Zenodo concept DOI), and a `preferred-citation:` block for the article itself. Enables GitHub's "Cite this repository" and keeps Zenodo metadata in sync. **Validate it parses** (`yaml::read_yaml()`).
+
+Copy-paste template (replace every `<...>` placeholder; do not ship placeholder values):
+```yaml
+cff-version: 1.2.0
+message: "If you use this software or data, please cite both the software (below) and the article (preferred-citation)."
+title: "<Project / compendium title>"
+authors:
+  - family-names: "<Family>"
+    given-names: "<Given>"
+    orcid: "https://orcid.org/<your-orcid>"
+  - family-names: "<Family2>"
+    given-names: "<Given2>"
+    orcid: "https://orcid.org/<coauthor-orcid>"
+version: 1.0.0
+date-released: "2026-01-31"
+doi: 10.5281/zenodo.<concept-doi>     # Zenodo CONCEPT (all-versions) DOI
+repository-code: "https://github.com/<owner>/<repo>"
+url: "https://github.com/<owner>/<repo>"
+license: MIT
+keywords:
+  - reproducible-research
+  - <topic-keyword>
+  - <method-keyword>
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "<Family>"
+      given-names: "<Given>"
+      orcid: "https://orcid.org/<your-orcid>"
+  title: "<Article title as published>"
+  journal: "<Journal name>"
+  year: 2026
+  doi: 10.<publisher-prefix>/<article-doi>
+```
+
+## .zenodo.json (archive metadata, alternative/supplement to CITATION.cff)
+A `.zenodo.json` file at the repo root lets you control the deposited record's metadata directly, instead of relying only on the GitHub→Zenodo toggle's inference from CITATION.cff. Use it when you need precise control of creators, affiliations, license, or keywords on the archive. Minimal example (replace placeholders):
+```json
+{
+  "title": "<Project / compendium title>",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "<Family>, <Given>",
+      "orcid": "<your-orcid>",
+      "affiliation": "<Your institution>"
+    },
+    {
+      "name": "<Family2>, <Given2>",
+      "orcid": "<coauthor-orcid>",
+      "affiliation": "<Coauthor institution>"
+    }
+  ],
+  "license": "MIT",
+  "keywords": ["reproducible-research", "<topic-keyword>", "<method-keyword>"]
+}
+```
+Note: `.zenodo.json` overrides the metadata Zenodo would otherwise harvest. Keep its `title`, creators, and `license` consistent with CITATION.cff so the archive and the "Cite this repository" widget agree.
+
+## License the code and the data separately
+A compendium ships two different kinds of work that need two different licenses; a single software license does not cleanly cover data, and a data license does not cover code.
+- **Code** (scripts, functions, notebooks): use a software license — **MIT** (permissive, simplest), **Apache-2.0** (permissive + explicit patent grant), or **GPL-3.0** (copyleft). Put it in `LICENSE` at the repo root.
+- **Data** (shipped derived aggregates, lookups): use a data license — **CC-BY-4.0** (attribution required) or **CC0-1.0** (public-domain dedication, no attribution required). Put it in `LICENSE-data` (or a short `data/LICENSE` / note in the data README) and state in the top-level README which license governs which paths.
+- **Why:** software licenses are written around copyright in source code and warranty disclaimers; Creative Commons licenses are written for content/datasets. Mixing them (e.g. MIT on a dataset, or CC-BY on code) creates ambiguity for reusers about what they may legally do. Naming both explicitly removes that ambiguity and satisfies journal "code and data availability" requirements.
+
+## Resources
+- The Turing Way — guide to reproducible, ethical, collaborative research: https://the-turing-way.netlify.app/
+- rrtools — research-compendium structure/convention for R: https://github.com/benmarwick/rrtools
+- Zenodo documentation (GitHub integration, DOIs, metadata): https://help.zenodo.org/
+- Citation File Format (CITATION.cff) spec: https://citation-file-format.github.io/
 
 ## Manuscript pairing (Quarto)
 - **Authors:** structured YAML — a top-level `affiliations:` list with `id`s, each author `- name:` with `orcid`, `email`, `corresponding: true`, and `affiliations: [{ref: …}]`. Reorder authorship by moving whole blocks.
