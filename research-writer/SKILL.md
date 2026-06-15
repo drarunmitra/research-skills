@@ -277,7 +277,7 @@ These patterns apply to any research writing -- thesis, manuscript, or grant. Th
 > Data was collected from various sources. Statistical analysis was performed using appropriate methods. The study was conducted over a period of time in a hospital setting.
 
 **After:**
-> We conducted a retrospective cohort study at AIIMS Bibinagar from January 2021 to December 2023. Electronic medical records of all adult patients (age >=18 years) admitted with acute myocardial infarction (ICD-10: I21) were extracted (n=847). Heart rate variability was analysed using the RHRV package (v4.2.7) in R (v4.3.1). Time-domain (SDNN, RMSSD) and frequency-domain (LF/HF ratio) parameters were computed from 5-minute ECG segments meeting quality criteria (>=95% valid RR intervals).
+> We conducted a retrospective cohort study at a tertiary care hospital from January 2021 to December 2023. Electronic medical records of all adult patients (age >=18 years) admitted with acute myocardial infarction (ICD-10: I21) were extracted (n=847). Heart rate variability was analysed using the RHRV package (v4.2.7) in R (v4.3.1). Time-domain (SDNN, RMSSD) and frequency-domain (LF/HF ratio) parameters were computed from 5-minute ECG segments meeting quality criteria (>=95% valid RR intervals).
 
 **Fix:** A reader should be able to replicate your study using only the Methods section.
 

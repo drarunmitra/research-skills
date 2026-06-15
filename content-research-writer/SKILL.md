@@ -436,7 +436,7 @@ The third mistake would benefit from evidence:
 > "[Add citation]: Studies show teams without regular user contact are 3x more likely to build unused features [needs source]"
 
 ### Flow Improvement
-Consider reordering: Mistake 3 → Mistake 2 → Mistake 1
+Consider reordering: Mistake 3 then Mistake 2 then Mistake 1
 This builds from small to big impact.
 
 Ready for the next section!
@@ -447,9 +447,9 @@ Ready for the next section!
 ### Blog Post Workflow
 1. Outline together
 2. Research key points
-3. Write introduction → get feedback
-4. Write body sections → feedback each
-5. Write conclusion → final review
+3. Write introduction, then get feedback
+4. Write body sections, then feedback each
+5. Write conclusion, then final review
 6. Polish and edit
 
 ### Newsletter Workflow

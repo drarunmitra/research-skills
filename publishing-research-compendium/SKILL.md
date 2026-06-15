@@ -123,7 +123,7 @@ A compendium ships two different kinds of work that need two different licenses;
 - **Why:** software licenses are written around copyright in source code and warranty disclaimers; Creative Commons licenses are written for content/datasets. Mixing them (e.g. MIT on a dataset, or CC-BY on code) creates ambiguity for reusers about what they may legally do. Naming both explicitly removes that ambiguity and satisfies journal "code and data availability" requirements.
 
 ## Resources
-- The Turing Way — guide to reproducible, ethical, collaborative research: https://the-turing-way.netlify.app/
+- The Turing Way — guide to reproducible, ethical, collaborative research: https://book.the-turing-way.org/
 - rrtools — research-compendium structure/convention for R: https://github.com/benmarwick/rrtools
 - Zenodo documentation (GitHub integration, DOIs, metadata): https://help.zenodo.org/
 - Citation File Format (CITATION.cff) spec: https://citation-file-format.github.io/

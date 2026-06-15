@@ -23,8 +23,6 @@ allowed-tools:
   - Grep
   - Glob
   - Bash
-  - WebSearch
-  - WebFetch
 ---
 
 # Time Series
