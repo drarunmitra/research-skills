@@ -2,7 +2,7 @@
 
 Everything here is **native Quarto/Reveal.js** — no custom CSS, no extensions —
 so it is fully on-brand for the house style. Reach for these before ever writing
-a CSS rule. Examples lean on Dr Mitra's teaching domain (epidemiology, public
+a CSS rule. Examples lean on a teaching domain (epidemiology, public
 health, management) but the syntax is general.
 
 Source: <https://quarto.org/docs/presentations/revealjs/> and
@@ -155,14 +155,14 @@ globally (`smaller: true`, `scrollable: true`) but per-slide is usually better.
 
 Use case: section dividers, full-bleed photos, embedded live sites.
 ```markdown
-## {background-color="#1f5560"}                      <!-- solid -->
+## {background-color="#222222"}                      <!-- solid; divider colour - set to taste -->
 ## {background-gradient="linear-gradient(to bottom,#283b95,#17b2c3)"}
 ## {background-image="soho1854.jpg" background-size="cover" background-opacity="0.6"}
 ## {background-video="cholera.mp4" background-video-loop="true" background-video-muted="true"}
 ## {background-iframe="https://ourworldindata.org/..." background-interactive="true"}
 ```
 House note: prefer `.inverse` on dark/coloured dividers so headings stay white:
-`# Section {.inverse background-color="#1f5560"}`.
+`# Section {.inverse background-color="#222222"}` (divider colour - set to taste).
 
 Title-slide background (YAML):
 ```yaml
@@ -204,7 +204,7 @@ Key claim.^[Snow J. *On the Mode of Communication of Cholera.* 1855.]
 WHO Field Epidemiology, 2018
 :::
 ```
-Global: `footer: "..."` and `logo: aiims_bibinagar_logo.png` in YAML.
+Global: `footer: "..."` and `logo: logo.png` in YAML.
 
 ---
 

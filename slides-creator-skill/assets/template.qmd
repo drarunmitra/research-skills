@@ -1,19 +1,18 @@
 ---
 title: "Deck Title"
 subtitle: "Optional one-line subtitle"
-author: "Dr Arun Mitra"
-institute: "Dept of Community and Family Medicine, AIIMS, Bibinagar"
+author: "<Your name>"
+institute: "<Your institution>"
 date: today
 format:
   revealjs:
     slide-number: true
-    logo: aiims_bibinagar_logo.png
+    # logo: logo.png   # optional - add your own logo and uncomment
     css: style.css
-    self-contained: true
     embed-resources: true
 ---
 
-# Learning Objectives {.inverse background-color="#241c12"}
+# Learning Objectives {.inverse background-color="#222222"}  <!-- divider colour - set to taste -->
 
 By the end of this session you should be able to:
 
@@ -25,14 +24,14 @@ By the end of this session you should be able to:
 Competency **CMx.x** · audience / context
 :::
 
-# 1 · Section Divider {.inverse background-color="#1f5560"}
+# 1 · Section Divider {.inverse background-color="#222222"}  <!-- divider colour - set to taste -->
 
 ## A content slide {.smaller}
 
 Plain bullets carry most slides:
 
 - Point one
-- Point two — emphasise the key term with [inline maroon]{.important}
+- Point two — emphasise the key term with [inline accent]{.important}
 
 . . .
 
@@ -78,7 +77,7 @@ Describe option B.
 ## A labelled / stepped slide
 
 ::: {.important}
-Step 1 · Eyebrow label in maroon
+Step 1 · Eyebrow label in the accent colour
 :::
 
 ![](images/step.png){width="56%"}
@@ -105,6 +104,6 @@ flowchart LR
 
 - Author. *Title.* Source; year.
 
-# Questions? {.inverse background-color="#1f5560" -}
+# Questions? {.inverse background-color="#222222" -}  <!-- divider colour - set to taste -->
 
-# Thank You {.inverse background-color="#241c12" -}
+# Thank You {.inverse background-color="#222222" -}  <!-- divider colour - set to taste -->

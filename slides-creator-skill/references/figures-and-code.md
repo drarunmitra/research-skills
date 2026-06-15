@@ -1,7 +1,7 @@
 # Figures & code on slides — sizing, reveals, output placement
 
 For decks that compute things live (R chunks) or need crisp, legible plots.
-Follows Dr Mitra's R conventions: native pipe `|>`, `here::here()` paths,
+Follows sound R conventions: native pipe `|>`, `here::here()` paths,
 `snake_case`, `pak::pak()` installs, tidyverse + ggplot2, and **always seed**
 stochastic data (`set.seed(...)`).
 

@@ -26,7 +26,7 @@ Cases in excess of expected
 :::
 
 ## {auto-animate=true}
-::: {style="margin-top: 200px; font-size: 3em; color: maroon;"}
+::: {style="margin-top: 200px; font-size: 3em; color: #800000;"}  <!-- accent colour - set to taste -->
 Cases in excess of expected
 :::
 ```
@@ -35,11 +35,11 @@ Cases in excess of expected
 should be "the same"):
 ```markdown
 ## {auto-animate=true}
-::: {data-id="box" style="background:#1f5560;width:200px;height:120px;"}
+::: {data-id="box" style="background:#222222;width:200px;height:120px;"}  <!-- colour - set to taste -->
 :::
 
 ## {auto-animate=true}
-::: {data-id="box" style="background:maroon;width:500px;height:300px;"}
+::: {data-id="box" style="background:#800000;width:500px;height:300px;"}  <!-- accent colour - set to taste -->
 :::
 ```
 
@@ -97,7 +97,7 @@ Reveal.on('fragmenthidden', (event) => { /* reverse on back-nav */ });
 ```markdown
 ## Watch the title change
 
-:::: {.fragment .color data-color="maroon"}
+:::: {.fragment .color data-color="#800000"}
 ::::
 ```
 Key API: `Reveal.on('fragmentshown'|'fragmenthidden', cb)`,
@@ -143,7 +143,7 @@ classes (`.vertical`, `.tl-card`, …) exist for styling; defaults are fine.
 Animates SVG elements with [SVG.js], synced to fragments. Built on rajgoel's
 reveal animate plugin. Good for **transmission diagrams, mechanism animations,
 and operations-research visuals** (the example gallery shows Monty Hall, linear
-programming, simplex, branch-and-bound — directly relevant to the *management /
+programming, simplex, branch-and-bound — directly relevant to a *management /
 modern management techniques* deck).
 - Install: `quarto install extension fradav/quarto-revealjs-animate`
 - YAML:
