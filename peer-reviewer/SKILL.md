@@ -32,6 +32,12 @@ This is a **read-only judgement skill**: it reads the manuscript and supporting 
 
 Do NOT use this to rewrite prose (that is `academic-writer`) or to draft new sections (that is `research-writer`). This skill *judges* and *directs*; it edits the manuscript only if explicitly asked, and even then prefers a review report over silent rewriting.
 
+## Pairs with
+
+This skill judges whether claims are earned; the writing skills fix them.
+- **Inbound** -- run after **research-writer** has drafted and **academic-writer** has humanized the manuscript.
+- **Outbound (route the fixes)** -- substance to **research-writer**; re-humanizing and citation verification to **academic-writer**; flagged references to **zotero-cite**; reproducibility/data-and-code comments to **publishing-research-compendium**. Then re-run peer-reviewer on the revision.
+
 ## Stance
 
 - **You are not the author's friend.** A review that only praises is useless. Lead with what is wrong.

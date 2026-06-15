@@ -61,6 +61,15 @@ level, where seasonality, count distributions, denominators, and spatial-tempora
 hierarchy all matter. It is used to make the methods concrete; substitute your own
 series and context.
 
+## Pairs with
+
+This skill produces the analysis, figures, and results; the write-up follows a fixed prose chain:
+- **research-writer** (draft the methods/results) -> **academic-writer** (revise/humanize) -> **peer-reviewer** (pre-submission review).
+- **publishing-research-compendium** -- the terminal step: package the reproducible repo and mint a DOI.
+- **slides-creator-skill** -- present the results as a deck.
+
+(The Reproducibility and write-up sections below mention these handoffs in passing; this block is the canonical map.)
+
 ## The five sources this skill distils
 
 1. **fpp3** (otexts.com/fpp3) — the canonical tidyverts workflow and the spine of this skill: graphics, decomposition, features, the forecaster's toolbox, ETS, ARIMA, dynamic regression, hierarchical reconciliation, evaluation.

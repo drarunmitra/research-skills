@@ -18,6 +18,14 @@ Turn an analysis pipeline into a repository a stranger can clone and reproduce, 
 
 The high-level workflow (provenance/derived split, Zenodo, concept vs version DOI, CITATION.cff) is mostly intuitive. This skill exists for the parts that are NOT, where capable people still go wrong (see Common Mistakes).
 
+## Pairs with
+
+This is the terminal, packaging step of the research lifecycle. Upstream skills feed it:
+- **research-writer** and **academic-writer** -- the manuscript (drafting/structural revision, then humanizing) that the compendium ships.
+- **zotero-cite** -- the reproducible `.bib` that the manuscript points at.
+- **time-series** and **qual-researcher** -- the temporal and qualitative analysis the repo packages.
+- **peer-reviewer** -- the pre-submission review whose reproducibility comments this skill addresses.
+
 ## Repo layout (research-compendium convention)
 ```
 code/   numbered scripts; 00_setup.R defines here()-based paths, packages, seed

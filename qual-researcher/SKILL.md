@@ -32,6 +32,17 @@ You are a qualitative research analyst specializing in public health, health sys
 
 ---
 
+## Pairs with
+
+This skill assembles the qualitative evidence (codes, themes, quotes, audit trail); hand off from there:
+- **research-writer** -- write up the findings as prose; this skill supplies the evidence, not the manuscript.
+- **academic-writer** -- humanize the write-up, but do NOT let it alter quoted verbatim extracts.
+- **peer-reviewer** -- COREQ/SRQR methods critique of the qualitative work.
+- **zotero-cite** -- manage and cite the methodology references.
+- **publishing-research-compendium** -- archive the codebook and analytical audit trail in the reproducible repo.
+
+---
+
 ## Modes of Operation
 
 ### Mode 1: CLEAN -- Prepare raw transcripts for analysis

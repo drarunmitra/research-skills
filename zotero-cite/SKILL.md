@@ -24,6 +24,14 @@ collection (the user's library), export that collection to a `.bib`, and cite it
 `@citekey`. The Zotero collection is the source of truth; the `.bib` is a generated
 artifact the document points at.
 
+## Pairs with
+
+This skill acquires, verifies, persists a reference and exports the `.bib`; pair it with:
+- **academic-writer** -- bidirectional and complementary: zotero-cite acquires/verifies/persists references and exports the `.bib`; academic-writer audits an existing manuscript's citations and style-converts them. (zotero-cite manages, academic-writer audits.)
+- **research-writer** -- cite while drafting, resolving its `[CITE NEEDED]` placeholders into `@citekey`s.
+- **publishing-research-compendium** -- supply the repo's reproducible `.bib`.
+- **deep-research** -- batch-import a found reference set (the section-3 flow below).
+
 ## IRON RULES
 1. Never fabricate bibliographic detail. Verify authors/year/journal/volume/pages/DOI on
    the web (PubMed, Crossref, publisher, PMC) before adding. A DOI must resolve to the

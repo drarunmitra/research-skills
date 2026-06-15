@@ -37,7 +37,15 @@ Trigger on requests such as:
 - "Convert these citations to Vancouver / APA"
 - "Make this abstract sound like a human wrote it"
 
-**Relationship to neighbouring skills.** Use `thesis-writer` to *draft, structure, or critique* whole chapters; use `content-research-writer` for *non-academic* blog/article work; use **academic-writer** to *revise and humanize existing academic text* and police its claim–evidence–citation integrity. They compose well; humanize last, after the argument is settled.
+## Pairs with
+
+This skill is the suite's canonical humanizer; it revises and humanizes existing academic text and polices its claim-evidence-citation integrity. Compose it with:
+- **research-writer** -- drafts and structures whole manuscripts, theses, grants, and reports. Run academic-writer last, after the argument is settled.
+- **zotero-cite** -- finds, adds, and exports references. Division of labour: zotero-cite acquires/verifies/persists a reference and manages the `.bib`; academic-writer audits an existing manuscript's citations, flags problems, and converts citation styles.
+- **peer-reviewer** -- judges the science and whether claims are earned; academic-writer fixes the prose.
+- **content-research-writer** -- for non-academic (blog/article/newsletter) content.
+
+They compose well; humanize last, after the argument is settled.
 
 ## Modes
 

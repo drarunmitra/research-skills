@@ -24,6 +24,10 @@ This skill acts as your writing partner, helping you research, outline, draft, a
 
 Do NOT use for journal manuscripts, theses, grant proposals, abstracts, or research reports. For academic drafting use research-writer; for de-bloating/humanizing academic text and citation verification use academic-writer; for peer review use peer-reviewer; for formal reference management use zotero-cite.
 
+## Pairs with
+
+This is the suite's separate NON-academic track. For anything academic, route to the skills named in "When NOT to Use This Skill" above (research-writer / academic-writer / peer-reviewer / zotero-cite) rather than handling it here.
+
 ## What This Skill Does
 
 1. **Collaborative Outlining**: Helps you structure ideas into coherent outlines
