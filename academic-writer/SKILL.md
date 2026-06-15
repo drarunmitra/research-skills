@@ -211,6 +211,15 @@ Works in Markdown, Quarto/R Markdown (`.qmd`/`.Rmd`), and LaTeX. For citation st
 
 This skill adapts the structure of the **Humanizer** skill by blader (MIT licence: voice calibration, categorised pattern catalogue, multi-pass audit, before/after format) and borrows mode/quality-gate and citation-verification ideas from the **academic-research-skills** suite by Imbad0202 (CC-BY-NC 4.0). The AI-writing tells draw on *Wikipedia: Signs of AI writing*; the academic-integrity layer draws on the EQUATOR Network reporting guidelines (STROBE/CONSORT/PRISMA) and ICMJE statistical-reporting standards. Original content; no source text reproduced verbatim.
 
+## Platform compatibility
+
+- **Class:** Pure-reasoning (runs on any LLM, including browser chat)
+- **Requires:** none (web search optional, for citation verification, available on agent tiers).
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI.
+
 ## Version history
 
 - **1.3.0** (2026-06-10): Added "Section architecture (IMRaD)" with the HARDWIRED four-paragraph Introduction funnel (current situation → problem → prior-work-inadequacy → this-study/objectives), plus Methods (ICMJE three drawers, reproducible-by-a-stranger, mirror order, name design/tests/software+version, guideline-matched) and Results (mirror Methods, participant-flow-first, state-once text/table/figure, complete result = direction+magnitude+precision+exact P) and Discussion discipline. Sourced from the Mitra Manuscript Workshop + ICMJE/EQUATOR.

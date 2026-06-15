@@ -206,6 +206,15 @@ the statistical foundations from R. Peng *Time Series Analysis* (bookdown.org/rd
 and the clinical-ML framing from the van der Schaar Lab's Time Series in Healthcare programme.
 Original content; code idioms follow the public package APIs. No source text reproduced verbatim.
 
+## Platform compatibility
+
+- **Class:** Environment-dependent (needs a CLI/agent with a local shell)
+- **Requires:** R with the tidyverts packages (tsibble/feasts/fable).
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project. Needs Codex/agent mode with a connected environment for the shell steps.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI. Needs the Gemini CLI for the shell steps.
+
 ## Version history
 
 - **1.1.0** (2026-06-11): Added a "Convergence and panel time series" section to `foundations.md` (sigma vs beta-convergence, Galton/regression-to-the-mean and measurement-error bias, small-area shrinkage before inequality/convergence, bootstrap uncertainty for inequality indices). Generalised IRON RULE 5 to require uncertainty on descriptive indices (CV, Theil/Gini, seasonal amplitude, convergence slope), not only forecasts. Prompted by applying the skill to a TB district-notification convergence manuscript.

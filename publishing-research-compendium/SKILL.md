@@ -161,3 +161,12 @@ Creating/pushing to GitHub may be blocked (no `gh`, no token, MCP "Bad credentia
 | Cite the version DOI | Cite the concept (all-versions) DOI. |
 | Cut the release, then enable Zenodo | Toggle Zenodo ON before the release or it isn't archived. |
 | "I'll just push it" | You likely can't authenticate. Set up locally, hand off one command, verify the remote HEAD. |
+
+## Platform compatibility
+
+- **Class:** Environment-dependent (needs a CLI/agent with a local shell)
+- **Requires:** git, quarto, R.
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project. Needs Codex/agent mode with a connected environment for the shell steps.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI. Needs the Gemini CLI for the shell steps.

@@ -49,11 +49,11 @@ This skill assembles the qualitative evidence (codes, themes, quotes, audit trai
 
 **Trigger:** "Clean this transcript", "Prepare transcript", "Format this interview"
 
-**Input formats and ingestion (uses `Bash`):**
-Accept transcripts in `.txt`, `.docx`, `.vtt` (WebVTT), and `.srt` (SubRip). Before any cleaning, convert non-plain-text inputs to clean UTF-8 text using `Bash`:
+**Input formats and ingestion (requires a local shell for non-plain-text inputs):**
+Accept transcripts in `.txt`, `.docx`, `.vtt` (WebVTT), and `.srt` (SubRip). Before any cleaning, convert non-plain-text inputs to clean UTF-8 text by running a shell command (requires a local shell). If no shell is available, the user can paste the transcript text directly and you proceed from the cleaning step:
 - `.docx` -> extract body text (e.g. `pandoc input.docx -t plain -o input.txt`, or unzip + strip XML if pandoc is unavailable).
-- `.vtt` / `.srt` -> strip cue numbers, timestamp lines (e.g. `00:00:12.500 --> 00:00:15.000`), and WebVTT headers/`NOTE` blocks, leaving only the spoken text; collapse caption line-wraps back into sentences. (`grep`/`sed`/`awk` via `Bash` are sufficient.)
-- Use `Glob` to discover transcript files in a folder when the researcher points at a directory rather than a single file (e.g. batch-cleaning all `*.vtt` in an interviews folder).
+- `.vtt` / `.srt` -> strip cue numbers, timestamp lines (e.g. `00:00:12.500 --> 00:00:15.000`), and WebVTT headers/`NOTE` blocks, leaving only the spoken text; collapse caption line-wraps back into sentences. (`grep`/`sed`/`awk` via a shell are sufficient.)
+- Search the provided folder to discover transcript files when the researcher points at a directory rather than a single file (e.g. batch-cleaning all `*.vtt` in an interviews folder).
 After conversion, proceed with the cleaning process below. Note in the cleaning log which source format was ingested and what was stripped during conversion.
 
 **Process:**
@@ -247,7 +247,7 @@ Before processing, check and flag if present:
 
 **Note:** If facility or geographic identifiers are part of the study design (e.g. a multi-site comparison), ask the researcher whether to retain them; otherwise de-identify them. Individual patient/staff names should be removed regardless.
 
-**De-identification / locale decision (use `AskUserQuestion`):** Before stripping facility or geographic identifiers, use `AskUserQuestion` to ask the researcher whether facility/geographic identifiers are part of the study design. Offer options such as: (a) retain facility and place names (multi-site comparison where site is an analytic variable); (b) de-identify all facility/place names to generic labels; (c) pseudonymise sites consistently (e.g. "Site A", "Site B"). This is a design decision the researcher must own, not an AI default. Individual patient/staff personal names are removed regardless of the answer.
+**De-identification / locale decision (ask the user):** Before stripping facility or geographic identifiers, ask the researcher whether facility/geographic identifiers are part of the study design. Offer options such as: (a) retain facility and place names (multi-site comparison where site is an analytic variable); (b) de-identify all facility/place names to generic labels; (c) pseudonymise sites consistently (e.g. "Site A", "Site B"). This is a design decision the researcher must own, not an AI default. Individual patient/staff personal names are removed regardless of the answer.
 
 ---
 
@@ -401,3 +401,12 @@ This skill draws on:
 - Northeastern University (2025). "AI for Qualitative Research: A Hands-On Guide" -- Ethical framework
 - Braun & Clarke (2006, 2019). Reflexive thematic analysis methodology
 - WHO Health Systems Building Blocks framework
+
+## Platform compatibility
+
+- **Class:** Pure-reasoning (runs on any LLM, including browser chat)
+- **Requires:** none for core analysis (optional local shell only for .docx/.vtt/.srt ingestion).
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI.

@@ -42,7 +42,7 @@ This is the suite's separate NON-academic track. For anything academic, route to
 
 ### Setup Your Writing Environment
 
-Create a folder for your piece and a draft file in it. Open Claude Code from that directory and start writing.
+Create a folder for your piece and a draft file in it (or, in a browser chat, just keep the draft in the conversation). Point your AI assistant at that draft and start writing.
 
 ### Basic Workflow
 
@@ -534,4 +534,13 @@ Recommended structure for writing projects:
 - Creating presentation content
 - Writing case studies
 - Developing course outlines
+
+## Platform compatibility
+
+- **Class:** Pure-reasoning (runs on any LLM, including browser chat)
+- **Requires:** none (web search optional for research).
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI.
 

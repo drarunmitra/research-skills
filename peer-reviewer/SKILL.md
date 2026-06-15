@@ -20,7 +20,7 @@ description: >
 
 Read a manuscript the way a busy section editor and two reviewers would, and write the review they would write. The goal is to find the things that get a paper rejected or sent back, while it can still be fixed, and to say exactly how to fix them. Be specific, be fair, and do not flatter.
 
-This is a **read-only judgement skill**: it reads the manuscript and supporting files and produces a review report. It does not edit the manuscript or run analyses; tools are limited to Read, Grep, and Glob.
+This is a **read-only judgement skill**: it reads/searches the provided manuscript and supporting files and produces a review report. It does not write or update the manuscript and does not run analyses; it only reads and searches.
 
 ## When to use
 
@@ -237,3 +237,12 @@ The bar: roughly 3 majors and 2 minors for a short abstract of this kind, each t
 ## Sources & basis
 
 Draws on EQUATOR Network reporting guidelines (STROBE, RECORD, CONSORT, SPIRIT, PRISMA, PRISMA-ScR, TRIPOD, TRIPOD+AI, STARD, QUADAS-2, SAMPL, AGREE II, CARE, ARRIVE, SRQR, COREQ, CHEERS), the GRADE approach, ICMJE recommendations, and common editorial triage practice. Original content; no source text reproduced.
+
+## Platform compatibility
+
+- **Class:** Pure-reasoning (runs on any LLM, including browser chat)
+- **Requires:** none.
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI.

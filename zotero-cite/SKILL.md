@@ -67,8 +67,8 @@ This skill acquires, verifies, persists a reference and exports the `.bib`; pair
 ## Workflow
 
 ### 1. Verify (always)
-For each reference, confirm it exists and collect full metadata + DOI (use WebSearch /
-WebFetch; resolve PMCID/PMID/DOI). Run academic-writer's citation-check discipline. Mark
+For each reference, confirm it exists and collect full metadata + DOI (search the web /
+fetch the page; resolve PMCID/PMID/DOI). Run academic-writer's citation-check discipline. Mark
 anything unconfirmable and ask before adding.
 
 ### 2. Make the collection and add items
@@ -142,6 +142,15 @@ API collection key.)
 - Attachments/PDFs: add via the connector (`/connector/saveItems`) or manually; metadata
   alone is enough for citing.
 - Always render the document after wiring citations and report any unresolved `@key`.
+
+## Platform compatibility
+
+- **Class:** Environment-dependent (needs a CLI/agent with a local shell)
+- **Requires:** a local shell, plus Zotero running with Better BibTeX (local API on port 23119).
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project. Needs Codex/agent mode with a connected environment for the shell steps.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI. Needs the Gemini CLI for the shell steps.
 
 ## Version history
 - 1.1.0 (2026-06-11): Added the `Zotero-Allowed-Request: true` header (required on current connector

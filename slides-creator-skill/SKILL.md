@@ -160,3 +160,12 @@ are teaching-oriented and, unless flagged, pure-native = on-brand):
 - `assets/style.css` — the complete house stylesheet. Copy as-is.
 - `assets/template.qmd` — a minimal skeleton deck demonstrating every
   approved native construct. Start here and replace the content.
+
+## Platform compatibility
+
+- **Class:** Environment-dependent (needs a CLI/agent with a local shell)
+- **Requires:** quarto, and git for publishing.
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project. Needs Codex/agent mode with a connected environment for the shell steps.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI. Needs the Gemini CLI for the shell steps.

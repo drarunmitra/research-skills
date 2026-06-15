@@ -691,3 +691,12 @@ This skill draws on:
 - The STROBE, CONSORT, and PRISMA reporting guidelines
 - Statistical reporting standards from the ICMJE and EQUATOR Network
 - Wikipedia's "Signs of AI writing" guide (for Pattern 20)
+
+## Platform compatibility
+
+- **Class:** Pure-reasoning (runs on any LLM, including browser chat)
+- **Requires:** none.
+- **Load it on:**
+  - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
+  - ChatGPT: paste this body into a Custom GPT or Project.
+  - Gemini: create a Gem from this body, or place it under the Gemini CLI.
