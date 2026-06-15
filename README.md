@@ -2,6 +2,8 @@
 
 A collection of research-workflow skills for Claude, ChatGPT, and Gemini, focused on public-health and academic research. The suite spans the full lifecycle: data analysis, drafting and revising academic writing, peer review, citation management, reproducibility and archiving, teaching slides, and a separate track for non-academic content. Each skill is a portable Markdown brief (a SKILL.md) that you load into an assistant; some are pure reasoning and run on any chat model, while others drive local command-line tools and need an agent or CLI tier.
 
+Guide and how-to: https://drarunmitra.github.io/research-skills/
+
 ## The research lifecycle
 
 ```
