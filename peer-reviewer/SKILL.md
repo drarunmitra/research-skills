@@ -79,12 +79,12 @@ State the recommendation AND the two or three things that drive it.
 
 #### Common epidemiological pitfalls to check
 
-- **Immortal-time bias** — flag if exposure status is defined by a post-baseline event (e.g., receiving a drug, surviving to a landmark) so exposed person-time includes a stretch in which the outcome could not occur. Ask for a landmark or time-varying analysis.
-- **Collider bias / Table 2 fallacy** — flag if adjusting for a variable on the causal pathway or a common effect of exposure and outcome (over-adjustment), or if all covariate coefficients in one model are interpreted as causal effects. Each estimate needs its own confounding logic.
-- **Competing risks** — flag if a time-to-event analysis treats a competing event (e.g., death from another cause) as censoring rather than using cumulative-incidence / Fine-Gray methods; standard Kaplan-Meier overstates risk.
-- **Ecological fallacy** — flag if associations measured at the group/area level are interpreted as individual-level effects (common in spatial/aggregate studies).
-- **Regression to the mean** — flag if subjects are selected on an extreme baseline value and "improvement" at follow-up is claimed without a control group or appropriate adjustment.
-- **Interrupted-time-series / autocorrelation issues** — flag if a before/after or ITS design ignores serial autocorrelation, underlying trend, or seasonality, or uses too few pre-intervention points to estimate the counterfactual trend.
+- **Immortal-time bias:** flag if exposure status is defined by a post-baseline event (e.g., receiving a drug, surviving to a landmark) so exposed person-time includes a stretch in which the outcome could not occur. Ask for a landmark or time-varying analysis.
+- **Collider bias / Table 2 fallacy:** flag if adjusting for a variable on the causal pathway or a common effect of exposure and outcome (over-adjustment), or if all covariate coefficients in one model are interpreted as causal effects. Each estimate needs its own confounding logic.
+- **Competing risks:** flag if a time-to-event analysis treats a competing event (e.g., death from another cause) as censoring rather than using cumulative-incidence / Fine-Gray methods; standard Kaplan-Meier overstates risk.
+- **Ecological fallacy:** flag if associations measured at the group/area level are interpreted as individual-level effects (common in spatial/aggregate studies).
+- **Regression to the mean:** flag if subjects are selected on an extreme baseline value and "improvement" at follow-up is claimed without a control group or appropriate adjustment.
+- **Interrupted-time-series / autocorrelation issues:** flag if a before/after or ITS design ignores serial autocorrelation, underlying trend, or seasonality, or uses too few pre-intervention points to estimate the counterfactual trend.
 
 ### C. Statistics & reporting
 - Is the model appropriate for the outcome and design (clustering, survey weights, repeated measures)?
@@ -95,7 +95,7 @@ State the recommendation AND the two or three things that drive it.
 - For latent-variable / clustering / network papers: how was the number of classes/structure chosen, is it stable, is it reproducible, and is it driven by one dominant indicator?
 - Does the analysis match the reporting guideline checklist? Flag missing items.
 
-#### Reporting guidelines — pick the one(s) that fit the design
+#### Reporting guidelines: pick the one(s) that fit the design
 
 | Guideline | Applies to |
 |---|---|
@@ -181,9 +181,9 @@ When given a set of review comments **plus** a revised (or to-be-revised) manusc
 Tone: courteous, concrete, non-defensive. Open with a brief thank-you and a one-line summary of the main changes; then the numbered responses, grouped by reviewer.
 
 **(b) Re-review the revision against the prior comments.** For each prior comment, check the revised manuscript and mark one of:
-- **Resolved** — the change fully addresses the concern; name where.
-- **Partially addressed** — some movement but the core issue remains; say what is still missing and the minimal further step.
-- **Unaddressed** — not changed, or the response letter claims a change the manuscript does not contain (call this out explicitly).
+- **Resolved.** The change fully addresses the concern; name where.
+- **Partially addressed.** Some movement but the core issue remains; say what is still missing and the minimal further step.
+- **Unaddressed.** Not changed, or the response letter claims a change the manuscript does not contain (call this out explicitly).
 
 Then give an updated editorial recommendation (e.g., major → minor → accept) justified by the residual Major-level items only.
 
@@ -197,7 +197,7 @@ Prior recommendation: ... | Updated recommendation: ...
 Tally: Resolved X / Partially Y / Unaddressed Z (of N comments).
 
 ## Point-by-point
-**Reviewer 1, comment 1** — Status: Resolved | Partially addressed | Unaddressed
+**Reviewer 1, comment 1.** Status: Resolved | Partially addressed | Unaddressed
 > reviewer comment
 Author response (drafted): ...
 Re-review verdict: where it was addressed / what is still missing.
@@ -232,7 +232,7 @@ This anchors the expected harshness and quantity. A two-sentence mock abstract, 
 - **m1.** Report the effect size with a 95% CI and the exposure metric (hours/day, how measured), not significance alone; PHQ-9 handled as continuous vs categorical should be stated.
 - **m2.** State the reporting guideline (STROBE) and include the checklist; the abstract omits the measure of association and the sample's response rate.
 
-The bar: roughly 3 majors and 2 minors for a short abstract of this kind, each tied to a specific flaw with a concrete fix — not padded with cosmetic minors to soften the headline judgement.
+The bar: roughly 3 majors and 2 minors for a short abstract of this kind, each tied to a specific flaw with a concrete fix, not padded with cosmetic minors to soften the headline judgement.
 
 ## Sources & basis
 

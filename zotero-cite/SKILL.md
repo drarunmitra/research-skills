@@ -30,7 +30,7 @@ This skill acquires, verifies, persists a reference and exports the `.bib`; pair
 - **academic-writer** -- bidirectional and complementary: zotero-cite acquires/verifies/persists references and exports the `.bib`; academic-writer audits an existing manuscript's citations and style-converts them. (zotero-cite manages, academic-writer audits.)
 - **research-writer** -- cite while drafting, resolving its `[CITE NEEDED]` placeholders into `@citekey`s.
 - **publishing-research-compendium** -- supply the repo's reproducible `.bib`.
-- **deep-research** -- batch-import a found reference set (the section-3 flow below).
+- **any deep-research / multi-source tool** -- batch-import a found reference set (the section-3 flow below).
 
 ## IRON RULES
 1. Never fabricate bibliographic detail. Verify authors/year/journal/volume/pages/DOI on
@@ -74,7 +74,7 @@ anything unconfirmable and ask before adding.
 ### 2. Make the collection and add items
 The local API cannot write, so use one of:
 
-- **Local (connector/import)** — simplest, no API key. For collection placement, have the user create the
+- **Local (connector/import):** simplest, no API key. For collection placement, have the user create the
   target collection in the Zotero UI and click it (so it is the selected collection), then import the
   verified BibTeX:
   ```
@@ -84,7 +84,7 @@ The local API cannot write, so use one of:
   The `Zotero-Allowed-Request: true` header is REQUIRED on current builds. Items land in the selected
   collection (else My Library); collection placement is by UI selection, not controllable from the request.
   Then proceed to step 4 to export the canonical `.bib`.
-- **Web API** — full control, needs an API key. Create the collection, capture its key, then post items:
+- **Web API:** full control, needs an API key. Create the collection, capture its key, then post items:
   ```
   curl -s -X POST "https://api.zotero.org/users/<ID>/collections" -H "Zotero-API-Key: <KEY>" \
     -H "Content-Type: application/json" -d '[{"name":"<NAME>"}]'        # -> successful.0.key
@@ -95,7 +95,7 @@ The local API cannot write, so use one of:
   ```
   creators use `{"creatorType":"author","firstName":"...","lastName":"..."}`; check `successful`/`failed`.
 
-### 3. Tags and batch-loading a found reference set (e.g. a deep-research output)
+### 3. Tags and batch-loading a found reference set (e.g. output from any deep-research / multi-source tool)
 When the task is to load a *set* of found/verified references into the library so the user can manage
 them later, tags are the robust mechanism (no API key, survives whether or not a collection is used):
 
@@ -156,7 +156,7 @@ API collection key.)
 - 1.1.0 (2026-06-11): Added the `Zotero-Allowed-Request: true` header (required on current connector
   builds) to all connector/import examples; added tagging via the BibTeX `keywords` field (maps to Zotero
   tags, no API key needed); added section 3 "Tags and batch-loading a found reference set" (the
-  deep-research -> Zotero flow: verify -> tagged multi-entry .bib -> one batch import -> dedup + count
+  deep-research / multi-source tool -> Zotero flow: verify -> tagged multi-entry .bib -> one batch import -> dedup + count
   confirmation). Prompted by loading a verified literature-review set into the library with per-theme tags.
 - 1.0.0 (2026-06-10): Initial release. Local-API workflow (verify → collection → item →
   biblatex export → cite), BBT detection, citation-key guidance, integrity rules.

@@ -4,7 +4,7 @@ version: 1.0.0
 description: |
   Builds and publishes teaching slide decks as Quarto
   Reveal.js presentations in a minimal house style: stock Quarto defaults plus a
-  tiny style.css — NEVER imported display fonts, colour-variable palettes,
+  tiny style.css: NEVER imported display fonts, colour-variable palettes,
   custom themes, gradient boxes, or bordered headings. Structure comes from
   native Quarto constructs (callouts, columns, panel-tabset, .smaller,
   fragments, .important). Use when asked to create, draft, restyle, or
@@ -34,7 +34,7 @@ gold-underlined headings, and gradient `.ask`/`.park` boxes was rejected as too
 
 - "Make slides / a deck / a presentation for <topic>"
 - "Create a Quarto Reveal.js lecture / seminar / CME"
-- "This deck looks too fancy — match my usual style"
+- "This deck looks too fancy, match my usual style"
 - "Render and publish these slides to GitHub Pages"
 
 ## Pairs with
@@ -44,17 +44,17 @@ This skill presents work the rest of the suite produced:
 - **zotero-cite** -- supply `@citekey`s and a `.bib` for the references slide.
 - **publishing-research-compendium** -- reuse pre-rendered figures from the compendium rather than regenerating them.
 
-## The house style — non-negotiable
+## The house style: non-negotiable
 
 **DO**
-- Start from stock Quarto `revealjs` (the default theme — do not set `theme:`).
+- Start from stock Quarto `revealjs` (the default theme; do not set `theme:`).
 - Keep the front matter minimal (see template below).
 - Use a **tiny `style.css`**: logo placement + `.important` (accent colour) +
   `.inverse` headings (white). That's the whole sheet. Copy
   `assets/style.css` from this skill verbatim.
 - Build structure with **native Quarto**:
   - `::: {.callout-note}` / `.callout-tip` / `.callout-important` /
-    `.callout-warning` — for answers, asides, key points, "ask the class"
+    `.callout-warning`: for answers, asides, key points, "ask the class"
     prompts (use `appearance="simple"` for an understated look).
   - `:::: {.columns}` + `::: {.column width="50%"}` for two-up layouts.
   - `::: {.panel-tabset}` with `###` tabs for compare/contrast.
@@ -73,7 +73,7 @@ This skill presents work the rest of the suite produced:
 - No `@import url(...fonts...)` / Google Fonts / display typefaces.
 - No `:root { --custom: ... }` colour-variable palettes.
 - No `theme: simple` (or any non-default theme) unless explicitly asked.
-- No gradient/border "boxes" — use native callouts instead.
+- No gradient/border "boxes"; use native callouts instead.
 - No bordered/underlined headings, custom `transition:`, etc.
 - Don't invent bespoke classes (`.ask`, `.park`, `.stat-box`, …). If you
   catch yourself writing a new CSS class, replace it with a native callout
@@ -111,20 +111,20 @@ If you want a logo, drop a `logo.png` into the deck folder and uncomment the
 2. **Draft** content from the standard front matter + `assets/template.qmd` as
    a starting skeleton. One idea per slide; lean on callouts/columns/tabsets.
 3. **Figures**: prefer pre-rendered PNGs in `images/`, or generate them in R
-   following good conventions — native pipe `|>`, `here::here()` paths,
+   following good conventions: native pipe `|>`, `here::here()` paths,
    `snake_case`, `pak::pak()` installs, tidyverse + ggplot2, and **seed all
    stochastic data** (`set.seed(...)`) for reproducibility.
 4. **Render**: `quarto render <file>.qmd` (produces a self-contained `.html`).
    No R is needed if the deck only uses mermaid + pre-made images.
-5. **Review** against the DO/DON'T list — grep the rendered `.html` to confirm
+5. **Review** against the DO/DON'T list, then grep the rendered `.html` to confirm
    no font imports leaked in: `grep -c "Playfair\|Spectral\|@import" file.html`.
 
 ## Publishing to GitHub Pages (optional)
 
 When asked to publish (use an example deploy as the worked example):
-- The repo holds **HTML only** — `index.html` (the deck) + any extra pages +
+- The repo holds **HTML only**: `index.html` (the deck) + any extra pages +
   a `.nojekyll` file. Source qmd/css/images stay out of the Pages repo.
-- If `gh` is not authenticated, push with **git over HTTPS** — your git
+- If `gh` is not authenticated, push with **git over HTTPS**; your git
   credential helper supplies the token.
 - Stage in a temp dir **outside any synced folder (Dropbox/OneDrive/etc.)** so
   no `.git` syncs into the teaching folder (e.g. `$(mktemp -d)` on macOS/Linux
@@ -141,24 +141,24 @@ When asked to publish (use an example deploy as the worked example):
 When a slide needs more than the basics, consult these cookbooks (all examples
 are teaching-oriented and, unless flagged, pure-native = on-brand):
 
-- `references/revealjs-cookbook.md` — native features by use case: step reveals
+- `references/revealjs-cookbook.md`: native features by use case: step reveals
   & fragments, building a figure in layers with `.r-stack` (e.g. the Snow spot
   map), columns, fit/stretch/absolute layout, overflow, backgrounds, speaker
   notes, vertical navigation, transitions, and built-in plugins (chalkboard,
   menu). **Start here.**
-- `references/figures-and-code.md` — sizing R/ggplot plots for legibility
+- `references/figures-and-code.md`: sizing R/ggplot plots for legibility
   (`fig-width`/`fig-asp`/`auto-stretch`), progressive code reveals
   (`code-line-numbers`), and output placement (`output-location:
   fragment/slide/column`). For analytic slides (attack-rate tables, RR, curves).
-- `references/advanced-and-extensions.md` — auto-animate (morph state→state),
+- `references/advanced-and-extensions.md`: auto-animate (morph state→state),
   fragment-triggered JavaScript, and opt-in extensions (quarto-timeline,
   quarto-revealjs-animate for SVG/OR visuals, quarto-revealjs-editable for live
-  editing). Extensions need `quarto add` — confirm with the user first.
+  editing). Extensions need `quarto add`; confirm with the user first.
 
 ## Assets in this skill
 
-- `assets/style.css` — the complete house stylesheet. Copy as-is.
-- `assets/template.qmd` — a minimal skeleton deck demonstrating every
+- `assets/style.css`: the complete house stylesheet. Copy as-is.
+- `assets/template.qmd`: a minimal skeleton deck demonstrating every
   approved native construct. Start here and replace the content.
 
 ## Platform compatibility

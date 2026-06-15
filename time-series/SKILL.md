@@ -72,11 +72,11 @@ This skill produces the analysis, figures, and results; the write-up follows a f
 
 ## The five sources this skill distils
 
-1. **fpp3** (otexts.com/fpp3) — the canonical tidyverts workflow and the spine of this skill: graphics, decomposition, features, the forecaster's toolbox, ETS, ARIMA, dynamic regression, hierarchical reconciliation, evaluation.
-2. **fable.tidyverts.org** — package-level API for model specification, `forecast()`, `accuracy()`, `reconcile()`, distributional forecasts.
-3. **rleripio / R for Economic Research** (book.rleripio.com) — applied, workflow-first philosophy: reproducible pipeline (`renv`), rolling/lagged transforms, seasonal adjustment, HP filter, scenario and analogy forecasting, state-space (time-varying coefficients, dynamic factor, mixed frequency). The guiding line: traditional statistical methods, well-validated, usually beat exotic ones.
-4. **Peng, *Time Series Analysis*** (bookdown.org/rdpeng/timeseriesbook) — the statistical-foundations layer: temporal data structure, stationarity, frequency/spectral analysis (Fourier, FFT, filters), time-series regression and temporal confounding, state-space and the Kalman filter, MLE for AR models, point processes (Poisson, conditional intensity). Biomedical/public-health framing throughout.
-5. **van der Schaar Lab, Time Series in Healthcare** — the clinical-ML layer: disease-trajectory forecasting from sparse irregular data, longitudinal survival with competing risks (Dynamic-DeepHit), attentive state-space phenotyping, active sensing (Deep Sensing), synthetic generation (TimeGAN), explainability (DynaMask). The core lesson: in clinical series, *missingness is informative* and true states are unobserved, so static modelling assumptions break.
+1. **fpp3** (otexts.com/fpp3): the canonical tidyverts workflow and the spine of this skill: graphics, decomposition, features, the forecaster's toolbox, ETS, ARIMA, dynamic regression, hierarchical reconciliation, evaluation.
+2. **fable.tidyverts.org**: package-level API for model specification, `forecast()`, `accuracy()`, `reconcile()`, distributional forecasts.
+3. **rleripio / R for Economic Research** (book.rleripio.com): applied, workflow-first philosophy: reproducible pipeline (`renv`), rolling/lagged transforms, seasonal adjustment, HP filter, scenario and analogy forecasting, state-space (time-varying coefficients, dynamic factor, mixed frequency). The guiding line: traditional statistical methods, well-validated, usually beat exotic ones.
+4. **Peng, *Time Series Analysis*** (bookdown.org/rdpeng/timeseriesbook): the statistical-foundations layer: temporal data structure, stationarity, frequency/spectral analysis (Fourier, FFT, filters), time-series regression and temporal confounding, state-space and the Kalman filter, MLE for AR models, point processes (Poisson, conditional intensity). Biomedical/public-health framing throughout.
+5. **van der Schaar Lab, Time Series in Healthcare**: the clinical-ML layer: disease-trajectory forecasting from sparse irregular data, longitudinal survival with competing risks (Dynamic-DeepHit), attentive state-space phenotyping, active sensing (Deep Sensing), synthetic generation (TimeGAN), explainability (DynaMask). The core lesson: in clinical series, *missingness is informative* and true states are unobserved, so static modelling assumptions break.
 
 ## Core workflow (tidyverts)
 
@@ -190,12 +190,12 @@ draft to `academic-writer` for the final humanizing pass.
 
 Load the relevant file before doing substantial work in that mode:
 
-- `references/workflow-fable.md` — full tidyverts recipe: tsibble construction, gaps, transforms, exploratory graphics, `model()`/`forecast()`/`accuracy()`, `stretch_tsibble` CV, `report`/`tidy`/`glance`/`augment`, intervals via `hilo()`.
-- `references/models.md` — model catalogue and decision guide: baselines, ETS taxonomy, ARIMA (stationarity, differencing, orders), dynamic regression & harmonic regression, TSLM, Prophet, NNETAR, VAR, combinations, and hierarchical/grouped reconciliation.
-- `references/evaluation.md` — splitting, time-series cross-validation, point accuracy (MAE/RMSE/MASE/MAPE and why MASE), distributional accuracy (CRPS, Winkler, pinball, coverage), residual diagnostics, model comparison pitfalls.
-- `references/epi-surveillance.md` — public-health methods: count-data models, aberration/outbreak detection (EARS C1-C3, Farrington, CUSUM, `surveillance` pkg), interrupted time series, seasonality quantification, Rt estimation, nowcasting, working with rates and denominators.
-- `references/healthcare-ml.md` — clinical time series: irregular sampling and informative missingness, imputation, longitudinal survival (Dynamic-DeepHit), attentive state-space phenotyping, treatment effects over time, when to leave fable for Python/specialised tooling.
-- `references/foundations.md` — Peng-style theory: temporal data structure and stationarity, ACF/PACF, frequency/spectral analysis (Fourier, FFT, filters, HP filter), time-series regression and temporal confounding, state-space and the Kalman filter, MLE for AR models, point processes, and convergence / panel time series (sigma vs beta, Galton/regression-to-the-mean bias, inequality-over-time with bootstrap uncertainty).
+- `references/workflow-fable.md`: full tidyverts recipe: tsibble construction, gaps, transforms, exploratory graphics, `model()`/`forecast()`/`accuracy()`, `stretch_tsibble` CV, `report`/`tidy`/`glance`/`augment`, intervals via `hilo()`.
+- `references/models.md`: model catalogue and decision guide: baselines, ETS taxonomy, ARIMA (stationarity, differencing, orders), dynamic regression & harmonic regression, TSLM, Prophet, NNETAR, VAR, combinations, and hierarchical/grouped reconciliation.
+- `references/evaluation.md`: splitting, time-series cross-validation, point accuracy (MAE/RMSE/MASE/MAPE and why MASE), distributional accuracy (CRPS, Winkler, pinball, coverage), residual diagnostics, model comparison pitfalls.
+- `references/epi-surveillance.md`: public-health methods: count-data models, aberration/outbreak detection (EARS C1-C3, Farrington, CUSUM, `surveillance` pkg), interrupted time series, seasonality quantification, Rt estimation, nowcasting, working with rates and denominators.
+- `references/healthcare-ml.md`: clinical time series: irregular sampling and informative missingness, imputation, longitudinal survival (Dynamic-DeepHit), attentive state-space phenotyping, treatment effects over time, when to leave fable for Python/specialised tooling.
+- `references/foundations.md`: Peng-style theory: temporal data structure and stationarity, ACF/PACF, frequency/spectral analysis (Fourier, FFT, filters, HP filter), time-series regression and temporal confounding, state-space and the Kalman filter, MLE for AR models, point processes, and convergence / panel time series (sigma vs beta, Galton/regression-to-the-mean bias, inequality-over-time with bootstrap uncertainty).
 
 ## Sources & attribution
 
