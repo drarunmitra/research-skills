@@ -18,7 +18,6 @@ allowed-tools:
   - Glob
   - Bash
   - AskUserQuestion
-  - Agent
 ---
 
 # Research Writer: Academic Writing for Public Health & Medical Research
@@ -54,7 +53,7 @@ User says: "Review this chapter", "Review this manuscript", "Improve this sectio
 
 **Process:**
 1. Read the existing text
-2. Identify problems using the 20 patterns below
+2. Identify problems using the 23 patterns below
 3. Rewrite problematic sections
 4. Run the quality audit
 5. Present tracked changes with explanations
@@ -459,7 +458,7 @@ These patterns apply to any research writing -- thesis, manuscript, or grant. Th
 
 #### 20. AI-Generated Bloat
 
-**Problem:** Text inflated with significance language, vague attributions, and filler from AI assistance. (See Humanizer patterns 1-25 for the full list.)
+**Problem:** Text inflated with significance language, vague attributions, and filler from AI assistance. (See Pattern 21 for the em-dash hard rule.)
 
 **Words to watch:** pivotal, crucial, vital, landscape, tapestry, underscores, highlights, fosters, delve into, it is important to note, plays a key role, has garnered significant attention
 
@@ -622,13 +621,13 @@ For every piece of research writing you write or revise:
 4. **Citation placement scan** (MANDATORY): Search all output for `[@` that does NOT appear at the end of a sentence (i.e., not followed by `.` or `]` then `.`). Move every mid-sentence citation to the end of its sentence. Zero mid-sentence citations is the target.
 5. **Table format check** (MANDATORY): For every table, apply Pattern 23: plain tables use raw LaTeX (booktabs + tabularx); colour-coded tables use `gt` PNG. Never use Markdown pipe tables for PDF output.
 6. **Verify** the argument thread: Does each paragraph advance the thesis?
-5. **Audit** with the examiner test: Read it as a hostile but fair examiner and ask:
+7. **Audit** with the examiner test: Read it as a hostile but fair examiner and ask:
    - "What is the weakest point in this argument?"
    - "What question would I ask in the viva about this paragraph?"
    - "Is there a simpler explanation for this finding that the candidate hasn't considered?"
-6. **Revise** based on the audit
-7. **Final em-dash sweep**: One last check. If any em-dashes remain, fix them before presenting.
-8. **Present** the final version with a brief note on changes made
+8. **Revise** based on the audit
+9. **Final em-dash sweep**: One last check. If any em-dashes remain, fix them before presenting.
+10. **Present** the final version with a brief note on changes made
 
 ## OUTPUT FORMAT
 
@@ -640,7 +639,7 @@ For every piece of research writing you write or revise:
 
 ### For REVISE mode:
 1. Revised text
-2. List of problems found (keyed to the 20 patterns above)
+2. List of problems found (keyed to the 23 patterns above)
 3. Examiner question for the revised version
 4. Optional: Side-by-side comparison for heavily changed paragraphs
 
@@ -663,9 +662,9 @@ For every piece of research writing you write or revise:
 
 **Draft:**
 
-> The primary finding of this study -- that women delivering in private facilities had 3.4 times the odds of undergoing caesarean section compared to those in public facilities (95% CI: 2.1-5.5) -- adds to growing evidence that facility ownership is among the strongest predictors of surgical delivery in India. This disparity is not explained by differences in obstetric risk: after adjusting for maternal age, parity, previous caesarean section, and pregnancy complications, the odds ratio remained above three. The magnitude of this association exceeds that reported in multi-country analyses by Betrán et al. (2016), who found a pooled odds ratio of 2.1 across low- and middle-income countries, and is consistent with the higher end of estimates from Indian studies conducted in southern states (Neuman et al., 2014; Singh et al., 2020).
+> This study's primary finding adds to growing evidence that facility ownership is among the strongest predictors of surgical delivery in India: women delivering in private facilities had 3.4 times the odds of undergoing caesarean section compared to those in public facilities (95% CI: 2.1-5.5). This disparity is not explained by differences in obstetric risk: after adjusting for maternal age, parity, previous caesarean section, and pregnancy complications, the odds ratio remained above three. The magnitude of this association exceeds that reported in multi-country analyses by Betrán et al. (2016), who found a pooled odds ratio of 2.1 across low- and middle-income countries, and is consistent with the higher end of estimates from Indian studies conducted in southern states (Neuman et al., 2014; Singh et al., 2020).
 >
-> Two mechanisms may explain this pattern. First, fee-for-service reimbursement in private facilities creates direct financial incentives for operative delivery. In Telangana, private hospitals receive approximately INR 25,000 for a caesarean delivery under the Aarogyasri scheme, compared to INR 9,000 for a normal delivery -- a differential that exceeds the additional theatre and staffing costs [CITE: Aarogyasri schedule]. Second, patient expectations may differ: women choosing private care may be more likely to request elective caesarean section, although our data do not distinguish provider-initiated from patient-requested procedures [DATA: Table showing indications for CS by facility type, if available].
+> Two mechanisms may explain this pattern. First, fee-for-service reimbursement in private facilities creates direct financial incentives for operative delivery. In Telangana, private hospitals receive approximately INR 25,000 for a caesarean delivery under the Aarogyasri scheme, compared to INR 9,000 for a normal delivery. This differential exceeds the additional theatre and staffing costs [CITE: Aarogyasri schedule]. Second, patient expectations may differ: women choosing private care may be more likely to request elective caesarean section, although our data do not distinguish provider-initiated from patient-requested procedures [DATA: Table showing indications for CS by facility type, if available].
 
 **Examiner question:** "You attribute the higher caesarean rate in private hospitals to financial incentives, but couldn't it simply be that complicated cases are referred to private facilities? How do you rule out confounding by indication?"
 
