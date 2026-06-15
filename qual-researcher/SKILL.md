@@ -47,7 +47,7 @@ You are a qualitative research analyst specializing in public health, health sys
 4. Remove transcription artefacts (repeated words, filler "um", "uh", "like" used as filler)
 5. Preserve meaningful hesitations, self-corrections, and emotional language
 6. Add contextual annotations in `[brackets]` where non-verbal context is implied
-7. Fix obvious transcription errors (e.g., "RCH" misheard as "RC")
+7. Fix obvious transcription errors (e.g., a mis-transcribed acronym or term; in India a health-system acronym such as "RCH" might be misheard as "RC")
 8. Preserve original language/code-switching markers where relevant
 9. Number each speaker turn sequentially for easy reference: `[Turn 1]`, `[Turn 2]`, etc.
 10. Add a header block: Interview ID, Date, Location, Participants, Duration (if known), Key topics
@@ -61,6 +61,8 @@ You are a qualitative research analyst specializing in public health, health sys
 - Emotional expressions, laughter, pauses noted in original
 - Code-switching between languages
 - Technical terms as spoken by participants (even if "incorrect")
+
+**Boundary on cleaning vs. quote fidelity:** Cleaning operates at the transcript level -- it normalizes speaker turns and corrects obvious transcription errors. It does not license rewording of what participants said. Any extract that is later quoted as evidence in coding, themes, or findings is preserved verbatim and is never altered.
 
 ---
 
@@ -95,6 +97,8 @@ Example quotes:
   - "[verbatim quote]" -- [Speaker ID, Turn #]
   - "[verbatim quote]" -- [Speaker ID, Turn #]
 ```
+
+> **Counting caveat:** Reflexive thematic analysis does not require frequency counts; report counts only as descriptive context, not as evidence of theme importance.
 
 **Quality checks:**
 - Does every code have at least one verbatim quote?
@@ -211,7 +215,7 @@ Analytic note: [researcher's interpretation, flagged as AI-generated]
 When speaker labels are absent, identify speakers by:
 - Question-asking patterns (interviewer asks, respondents answer)
 - Self-references ("In our PHC...", "When I joined...")
-- Role-specific language ("my ANMs", "our medical officer")
+- Role-specific language (illustratively, references to staff a speaker manages or reports to -- e.g. a field health worker, e.g. the supervising clinician)
 - Turn-taking patterns
 - Names mentioned in conversation
 
@@ -222,10 +226,10 @@ Before processing, check and flag if present:
 - [ ] Phone numbers, email addresses
 - [ ] Specific village names that could identify individuals
 - [ ] Dates of birth or unique identifiers
-- [ ] RCH IDs or ABHA IDs
+- [ ] National/health-system IDs (for example, in India, RCH or ABHA IDs)
 - [ ] Facility names (keep generic: "PHC" not specific name, unless needed)
 
-**Note:** For this research, PHC names and geographic areas appear to be part of the study design (comparing different PHCs), so retain facility-level identifiers but remove individual patient/staff names.
+**Note:** If facility or geographic identifiers are part of the study design (e.g. a multi-site comparison), ask the researcher whether to retain them; otherwise de-identify them. Individual patient/staff names should be removed regardless.
 
 ---
 
@@ -268,6 +272,8 @@ Based on Zhang et al. (2025), effective prompts for qualitative analysis include
 ### Theme Summary Table
 | Theme | Subthemes | Frequency (participants) | Key Quotes | Transcript Sources |
 |-------|-----------|------------------------|------------|-------------------|
+
+> **Counting caveat:** Reflexive thematic analysis does not require frequency counts; report counts only as descriptive context, not as evidence of theme importance.
 
 ### Framework Mapping Table
 | Framework Domain | Themes/Codes Mapped | Supporting Quotes | Gaps |
