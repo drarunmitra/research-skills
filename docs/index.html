@@ -200,6 +200,17 @@
 
   .house{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
   .house span{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);border:1px solid var(--line);padding:6px 11px;border-radius:2px}
+
+  /* ---------- where to start next ---------- */
+  .next-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px}
+  .ncard{border:1px solid var(--line);padding:22px;background:var(--paper-2)}
+  .nk{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:9px}
+  .ncard p{font-size:15px;color:var(--ink);line-height:1.55}
+  .next-do{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .next-do>div{border:1px solid var(--line);border-left:3px solid var(--rust);padding:22px;background:var(--paper)}
+  .next-do p{font-size:15px;color:var(--ink);margin-top:4px;line-height:1.55}
+  .next-foot{margin-top:26px;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);line-height:1.8}
+  @media(max-width:640px){.next-grid,.next-do{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -212,6 +223,7 @@
       <a href="#skills">Skills</a>
       <a href="#compat">Compatibility</a>
       <a href="#install">Install</a>
+      <a href="#next">Next</a>
       <a href="https://github.com/drarunmitra/research-skills">GitHub ↗</a>
     </nav>
   </div>
@@ -458,6 +470,48 @@ ln -s "$PWD/research-skills/research-writer" ~/.claude/skills/research-writer</p
       <span>claims matched to evidence</span>
       <span>every skill cross-links its siblings</span>
     </div>
+  </div>
+</section>
+
+<section id="next">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="idx">05</span>
+      <h2 class="sec-title">Where to start next</h2>
+      <span class="note">A field note on how this kit is wired, and how to pick it back up or extend it.</span>
+    </div>
+
+    <div class="next-grid rv">
+      <div class="ncard">
+        <div class="nk">Source of truth</div>
+        <p>The git repo at <span class="mono">~/code/research-skills</span> is canonical. Edit there, commit, push.</p>
+      </div>
+      <div class="ncard">
+        <div class="nk">Runtime</div>
+        <p>The nine public skills are symlinked into <span class="mono">~/.claude/skills</span>, so the assistant uses the same files. Private skills stay as real folders there and never enter the repo.</p>
+      </div>
+      <div class="ncard">
+        <div class="nk">This site</div>
+        <p>Served from <span class="mono">main</span> branch <span class="mono">/docs</span>. Edit <span class="mono">docs/index.html</span>, push, and Pages rebuilds itself.</p>
+      </div>
+      <div class="ncard">
+        <div class="nk">Admin</div>
+        <p>Publishing and repo admin use the <span class="mono">gh</span> CLI. The old <span class="mono">claude-skills</span> and <span class="mono">research-writer</span> repos are archived.</p>
+      </div>
+    </div>
+
+    <div class="next-do rv">
+      <div>
+        <div class="nk">To add a public skill</div>
+        <p>Create the folder in <span class="mono">~/code/research-skills</span> with a SKILL.md (frontmatter, portable body, a "Pairs with" block, a "Platform compatibility" block), commit, push, then symlink it into <span class="mono">~/.claude/skills</span>.</p>
+      </div>
+      <div>
+        <div class="nk">To add a private skill</div>
+        <p>Drop a real folder into <span class="mono">~/.claude/skills</span>. It stays local and never touches the repo.</p>
+      </div>
+    </div>
+
+    <p class="next-foot rv">House style across every skill and this page: no em dashes, no emoji, no bold-in-prose, claims matched to evidence. A pre-migration backup is kept at <span class="mono">~/.claude/skills-backup-2026-06-15</span> and is safe to delete once you are satisfied.</p>
   </div>
 </section>
 
