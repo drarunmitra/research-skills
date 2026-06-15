@@ -36,7 +36,7 @@ Do NOT use this to rewrite prose (that is `academic-writer`) or to draft new sec
 
 This skill judges whether claims are earned; the writing skills fix them.
 - **Inbound** -- run after **research-writer** has drafted and **academic-writer** has humanized the manuscript.
-- **Outbound (route the fixes)** -- substance to **research-writer**; re-humanizing and citation verification to **academic-writer**; flagged references to **zotero-cite**; reproducibility/data-and-code comments to **publishing-research-compendium**. Then re-run peer-reviewer on the revision.
+- **Outbound (route the fixes)** -- substance to **research-writer**; re-humanizing and citation verification to **academic-writer**; flagged references to **zotero-cite**; reproducibility/data-and-code comments to **reproducible-repo**. Then re-run peer-reviewer on the revision.
 
 ## Stance
 

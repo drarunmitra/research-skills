@@ -29,7 +29,7 @@ artifact the document points at.
 This skill acquires, verifies, persists a reference and exports the `.bib`; pair it with:
 - **academic-writer** -- bidirectional and complementary: zotero-cite acquires/verifies/persists references and exports the `.bib`; academic-writer audits an existing manuscript's citations and style-converts them. (zotero-cite manages, academic-writer audits.)
 - **research-writer** -- cite while drafting, resolving its `[CITE NEEDED]` placeholders into `@citekey`s.
-- **publishing-research-compendium** -- supply the repo's reproducible `.bib`.
+- **reproducible-repo** -- supply the repo's reproducible `.bib`.
 - **any deep-research / multi-source tool** -- batch-import a found reference set (the section-3 flow below).
 
 ## IRON RULES

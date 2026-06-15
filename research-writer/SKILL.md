@@ -85,13 +85,13 @@ This skill drafts and structurally revises the manuscript; hand off the rest of 
 - **zotero-cite** -- resolve every `[CITE NEEDED]` placeholder into a verified `@citekey` with an exported `.bib`.
 - **peer-reviewer** -- formal pre-submission review of substance. CRITIQUE mode here is a fast in-house check, not a replacement for that judgement.
 - **qual-researcher** and **time-series** -- source the qualitative and temporal analysis this skill writes up as prose.
-- **publishing-research-compendium** -- package the repo and get a Zenodo DOI once the manuscript is final.
+- **reproducible-repo** -- package the repo and get a Zenodo DOI once the manuscript is final.
 
 ---
 
 ## Related skill -- the submission & archiving stage
 
-This skill covers the *writing*. When the manuscript is written and moves to **submission, reproducibility, and archiving**, use the **publishing-research-compendium** skill. It covers what this one does not: building the public, reproducible code/data repository, the Quarto author/affiliation YAML, the data/code-availability and ethics statements, the medRxiv/preprint PDF, `CITATION.cff`, and getting a Zenodo DOI to cite. Triggers: "set up a repo for this paper", "make this reproducible", "code and data availability", "get a DOI", "prepare for medRxiv".
+This skill covers the *writing*. When the manuscript is written and moves to **submission, reproducibility, and archiving**, use the **reproducible-repo** skill. It covers what this one does not: building the public, reproducible code/data repository, the Quarto author/affiliation YAML, the data/code-availability and ethics statements, the medRxiv/preprint PDF, `CITATION.cff`, and getting a Zenodo DOI to cite. Triggers: "set up a repo for this paper", "make this reproducible", "code and data availability", "get a DOI", "prepare for medRxiv".
 
 ---
 

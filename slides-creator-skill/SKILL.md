@@ -42,7 +42,7 @@ gold-underlined headings, and gradient `.ask`/`.park` boxes was rejected as too
 This skill presents work the rest of the suite produced:
 - **time-series**, **qual-researcher**, and **research-writer** -- accept their figures and results to put on slides.
 - **zotero-cite** -- supply `@citekey`s and a `.bib` for the references slide.
-- **publishing-research-compendium** -- reuse pre-rendered figures from the compendium rather than regenerating them.
+- **reproducible-repo** -- reuse pre-rendered figures from the compendium rather than regenerating them.
 
 ## The house style: non-negotiable
 

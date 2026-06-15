@@ -39,7 +39,7 @@ This skill assembles the qualitative evidence (codes, themes, quotes, audit trai
 - **academic-writer** -- humanize the write-up, but do NOT let it alter quoted verbatim extracts.
 - **peer-reviewer** -- COREQ/SRQR methods critique of the qualitative work.
 - **zotero-cite** -- manage and cite the methodology references.
-- **publishing-research-compendium** -- archive the codebook and analytical audit trail in the reproducible repo.
+- **reproducible-repo** -- archive the codebook and analytical audit trail in the reproducible repo.
 
 ---
 

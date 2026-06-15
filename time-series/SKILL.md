@@ -65,7 +65,7 @@ series and context.
 
 This skill produces the analysis, figures, and results; the write-up follows a fixed prose chain:
 - **research-writer** (draft the methods/results) -> **academic-writer** (revise/humanize) -> **peer-reviewer** (pre-submission review).
-- **publishing-research-compendium** -- the terminal step: package the reproducible repo and mint a DOI.
+- **reproducible-repo** -- the terminal step: package the reproducible repo and mint a DOI.
 - **slides-creator-skill** -- present the results as a deck.
 
 (The Reproducibility and write-up sections below mention these handoffs in passing; this block is the canonical map.)

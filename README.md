@@ -11,7 +11,7 @@ A collection of research-workflow skills for Claude, ChatGPT, and Gemini, focuse
                             ▲                                               │
                             └─────────────── revise loop ◄─────────────────┘
   zotero-cite ........... citations throughout (acquire / verify / export .bib)
-  publishing-research-compendium ........ package + Zenodo DOI
+  reproducible-repo ..................... package + Zenodo DOI
   slides-creator-skill .................. present results
   content-research-writer ............... separate non-academic track
 ```
@@ -29,7 +29,7 @@ A collection of research-workflow skills for Claude, ChatGPT, and Gemini, focuse
 
 ### Citations and reproducibility
 - zotero-cite: find and verify references, manage Zotero, export a .bib, and cite with @citekey.
-- publishing-research-compendium: package code, data, and manuscript into a reproducible repository with a Zenodo DOI.
+- reproducible-repo: package code, data, and manuscript into a reproducible repository with a Zenodo DOI.
 
 ### Teaching
 - slides-creator-skill: build minimal Quarto Reveal.js teaching decks.
@@ -49,7 +49,7 @@ Skills fall into two classes. Pure-reasoning skills run on any LLM, including br
 | peer-reviewer | Pure-reasoning | Yes | Yes | Yes | none |
 | qual-researcher | Pure-reasoning | Yes | Yes | Yes | none |
 | time-series | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | R with tidyverts (tsibble, feasts, fable) |
-| publishing-research-compendium | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | git, Quarto, R |
+| reproducible-repo | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | git, Quarto, R |
 | zotero-cite | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | shell, Zotero with Better BibTeX on local API port 23119 |
 | slides-creator-skill | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | Quarto, git |
 

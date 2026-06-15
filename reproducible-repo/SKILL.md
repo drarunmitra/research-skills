@@ -1,5 +1,5 @@
 ---
-name: publishing-research-compendium
+name: reproducible-repo
 description: >
   Use when packaging a finished analysis (code + data + manuscript) into a
   public, citable, reproducible repository and archiving it for a DOI, e.g.
