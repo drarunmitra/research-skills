@@ -263,21 +263,21 @@ When a user requests writing assistance:
    
    **Inline Citations**:
    ```markdown
-   Studies show 40% productivity improvement (McKinsey, 2024).
+   A 2024 industry survey reported a notable productivity improvement ([Source, year]).
    ```
    
    **Numbered References**:
    ```markdown
-   Studies show 40% productivity improvement [1].
+   A 2024 industry survey reported a notable productivity improvement [1].
    
-   [1] McKinsey Global Institute. (2024)...
+   [1] [Author/Org. (Year). "Title". Publication.]
    ```
    
    **Footnote Style**:
    ```markdown
-   Studies show 40% productivity improvement^1
+   A 2024 industry survey reported a notable productivity improvement^1
    
-   ^1: McKinsey Global Institute. (2024)...
+   ^1: [Author/Org. (Year). "Title". Publication.]
    ```
    
    Maintain a running citations list:
