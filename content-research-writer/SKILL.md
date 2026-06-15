@@ -1,6 +1,8 @@
 ---
 name: content-research-writer
-description: Assists in writing high-quality content by conducting research, adding citations, improving hooks, iterating on outlines, and providing real-time feedback on each section. Transforms your writing process from solo effort to collaborative partnership.
+description: Assists in writing high-quality NON-academic content (blogs, newsletters, articles, thought leadership) by conducting research, adding citations, improving hooks, iterating on outlines, and providing section-by-section feedback while preserving your voice.
+version: 1.0.0
+allowed-tools: Read, Write, Edit, WebSearch, WebFetch
 ---
 
 # Content Research Writer
@@ -18,6 +20,10 @@ This skill acts as your writing partner, helping you research, outline, draft, a
 - Improving hooks and introductions
 - Getting section-by-section feedback while writing
 
+## When NOT to Use This Skill
+
+Do NOT use for journal manuscripts, theses, grant proposals, abstracts, or research reports. For academic drafting use research-writer; for de-bloating/humanizing academic text and citation verification use academic-writer; for peer review use peer-reviewer; for formal reference management use zotero-cite.
+
 ## What This Skill Does
 
 1. **Collaborative Outlining**: Helps you structure ideas into coherent outlines
@@ -32,18 +38,7 @@ This skill acts as your writing partner, helping you research, outline, draft, a
 
 ### Setup Your Writing Environment
 
-Create a dedicated folder for your article:
-```
-mkdir ~/writing/my-article-title
-cd ~/writing/my-article-title
-```
-
-Create your draft file:
-```
-touch article-draft.md
-```
-
-Open Claude Code from this directory and start writing.
+Create a folder for your piece and a draft file in it. Open Claude Code from that directory and start writing.
 
 ### Basic Workflow
 
@@ -146,26 +141,27 @@ When a user requests writing assistance:
    - Extract key facts, quotes, and data
    - Add citations in requested format
    
+   Never invent statistics, sources, or quotes. Search and verify, or mark `[citation needed]`.
+   
    Example output:
    ```markdown
    ## Research: AI Impact on Productivity
    
    Key Findings:
    
-   1. **Productivity Gains**: Studies show 40% time savings for 
-      content creation tasks [1]
+   1. Productivity gains: [a 2024 industry survey reported X% time
+      savings for content creation tasks] [1]
    
-   2. **Adoption Rates**: 67% of knowledge workers use AI tools 
-      weekly [2]
+   2. Adoption rates: [a recent workforce survey found Y% of knowledge
+      workers use AI tools weekly] [2]
    
-   3. **Expert Quote**: "AI augments rather than replaces human 
-      creativity" - Dr. Jane Smith, MIT [3]
+   3. Expert quote: ["AI augments rather than replaces human
+      creativity", attributed to a named researcher] [3]
    
    Citations:
-   [1] McKinsey Global Institute. (2024). "The Economic Potential 
-       of Generative AI"
-   [2] Stack Overflow Developer Survey (2024)
-   [3] Smith, J. (2024). MIT Technology Review interview
+   [1] [Source name, year, title] [citation needed]
+   [2] [Source name, year, title] [citation needed]
+   [3] [Source name, year, interview/title] [citation needed]
    
    Added to outline under Section 2.
    ```
@@ -206,7 +202,7 @@ When a user requests writing assistance:
    ```markdown
    # Feedback: [Section Name]
    
-   ## What Works Well ✓
+   ## What works well
    - [Strength 1]
    - [Strength 2]
    - [Strength 3]
@@ -214,20 +210,20 @@ When a user requests writing assistance:
    ## Suggestions for Improvement
    
    ### Clarity
-   - [Specific issue] → [Suggested fix]
-   - [Complex sentence] → [Simpler alternative]
+   - [Specific issue] to [Suggested fix]
+   - [Complex sentence] to [Simpler alternative]
    
    ### Flow
-   - [Transition issue] → [Better connection]
-   - [Paragraph order] → [Suggested reordering]
+   - [Transition issue] to [Better connection]
+   - [Paragraph order] to [Suggested reordering]
    
    ### Evidence
-   - [Claim needing support] → [Add citation or example]
-   - [Generic statement] → [Make more specific]
+   - [Claim needing support] to [Add citation or example]
+   - [Generic statement] to [Make more specific]
    
    ### Style
-   - [Tone inconsistency] → [Match your voice better]
-   - [Word choice] → [Stronger alternative]
+   - [Tone inconsistency] to [Match your voice better]
+   - [Word choice] to [Stronger alternative]
    
    ## Specific Line Edits
    
@@ -344,12 +340,12 @@ When a user requests writing assistance:
    - [ ] Call to action present
    - [ ] Proofread for typos
    
-   Ready to publish! 🚀
+   Ready to publish.
    ```
 
 ## Examples
 
-### Example 1: Teresa Torres's Workflow
+### Example 1: Collaborative Workflow
 
 **User**: "I'm writing an article about continuous discovery. Help me create an outline."
 
@@ -364,7 +360,7 @@ When a user requests writing assistance:
 8. Final review of complete draft
 9. Polish and prep for publishing
 
-**Result**: Well-researched, properly cited article written in Teresa's voice with strong structure and flow.
+**Result**: Well-researched, properly cited article written in the author's voice with strong structure and flow.
 
 ### Example 2: Research-Heavy Article
 
@@ -375,22 +371,22 @@ When a user requests writing assistance:
 ## Research Compiled
 
 ### Recent Data
-- Gartner: 80% of PMs will use AI tools by 2025 [1]
-- Survey: 45% report faster feature shipping [2]
-- Case study: Airbnb's AI-assisted prioritization [3]
+- [a 2024 industry survey reported X% of PMs expect to use AI tools] [1]
+- [a recent survey found Y% report faster feature shipping] [2]
+- [a published case study on AI-assisted prioritization] [3]
 
 ### Expert Quotes
-- "AI amplifies PM judgment, not replaces it" - Marty Cagan
-- [Additional quotes with citations]
+- ["AI amplifies PM judgment, not replaces it", attributed to a product leader] [citation needed]
+- [Additional quotes, each verified with a citation]
 
 ### Real Examples
-1. **Company A**: Used AI for user research synthesis
-   - Result: 60% time savings
-   - Source: [citation]
+1. Company A: used AI for user research synthesis
+   - Result: [reported time savings]
+   - Source: [citation needed]
 
-2. **Company B**: AI-powered roadmap analysis
-   - Result: Better stakeholder alignment
-   - Source: [citation]
+2. Company B: AI-powered roadmap analysis
+   - Result: better stakeholder alignment
+   - Source: [citation needed]
 
 All added to your outline with proper citations.
 ```
@@ -406,7 +402,7 @@ All added to your outline with proper citations.
 > "Last month, I asked AI to analyze 500 customer interviews. It took 30 minutes instead of 3 weeks. Product management will never be the same."
 
 **Option 2 (Question)**:
-> "What if you could talk to every customer, read every review, and analyze every support ticket—all before your morning coffee?"
+> "What if you could talk to every customer, read every review, and analyze every support ticket, all before your morning coffee?"
 
 **Option 3 (Story)**:
 > "Sarah spent two weeks building the wrong feature. Not because she didn't understand her users, but because she couldn't process the hundreds of interviews fast enough to spot the pattern."
@@ -419,8 +415,8 @@ All added to your outline with proper citations.
 ```markdown
 # Feedback: Common Mistakes Section
 
-## What Works Well ✓
-- Strong examples (the Slack notification story)
+## What works well
+- Strong examples (the notification story)
 - Clear structure (3 mistakes, clean layout)
 - Practical advice for each mistake
 
@@ -481,13 +477,12 @@ Ready for the next section!
 
 ## Pro Tips
 
-1. **Work in VS Code**: Better than web Claude for long-form writing
-2. **One section at a time**: Get feedback incrementally
-3. **Save research separately**: Keep a research.md file
-4. **Version your drafts**: article-v1.md, article-v2.md, etc.
-5. **Read aloud**: Use feedback to identify clunky sentences
-6. **Set deadlines**: "I want to finish the draft today"
-7. **Take breaks**: Write, get feedback, pause, revise
+1. **One section at a time**: Get feedback incrementally
+2. **Save research separately**: Keep a research.md file
+3. **Version your drafts**: article-v1.md, article-v2.md, etc.
+4. **Read aloud**: Use feedback to identify clunky sentences
+5. **Set deadlines**: "I want to finish the draft today"
+6. **Take breaks**: Write, get feedback, pause, revise
 
 ## File Organization
 
