@@ -1,0 +1,21 @@
+/* AIIMS Bibinagar teaching-deck house stylesheet — keep it this small.
+   Logo placement + maroon emphasis + white headings on dark slides.
+   Do NOT add font imports, colour palettes, themes, or gradient boxes. */
+
+/* logo top-left */
+.reveal .slide-logo {
+  display: block;
+  position: fixed;
+  bottom: unset !important;
+  right: unset !important;
+  top: 5px;
+  left: 12px;
+  height: 100px !important;
+  width: auto !important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.important { color: maroon; }
+
+.inverse h1, .inverse h2, .inverse p, .inverse li { color: white; }

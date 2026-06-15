@@ -1,0 +1,14 @@
+# Private / unpublished skills (kept locally, not shared)
+graphify/
+thesis-writer/
+playwright-cli/
+
+# Per-skill local VCS noise (backstop)
+*/.git/
+
+# Planning / backup artifacts
+skills-backup-*/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,110 @@
+---
+title: "Deck Title"
+subtitle: "Optional one-line subtitle"
+author: "Dr Arun Mitra"
+institute: "Dept of Community and Family Medicine, AIIMS, Bibinagar"
+date: today
+format:
+  revealjs:
+    slide-number: true
+    logo: aiims_bibinagar_logo.png
+    css: style.css
+    self-contained: true
+    embed-resources: true
+---
+
+# Learning Objectives {.inverse background-color="#241c12"}
+
+By the end of this session you should be able to:
+
+- **Objective one**
+- **Objective two**
+- **Objective three**
+
+::: {.callout-note}
+Competency **CMx.x** · audience / context
+:::
+
+# 1 · Section Divider {.inverse background-color="#1f5560"}
+
+## A content slide {.smaller}
+
+Plain bullets carry most slides:
+
+- Point one
+- Point two — emphasise the key term with [inline maroon]{.important}
+
+. . .
+
+::: {.callout-important}
+A key takeaway revealed after the bullets.
+:::
+
+## Two-column layout
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Left-hand points
+- Keep them short
+:::
+
+::: {.column width="50%"}
+![](images/example.png){width="100%"}
+:::
+
+::::
+
+## Compare and contrast {.smaller}
+
+::: {.panel-tabset}
+
+### Option A
+Describe option A.
+
+### Option B
+Describe option B.
+
+:::
+
+## Ask the class
+
+![](images/figure.png){width="60%"}
+
+::: {.callout-tip appearance="simple"}
+<b>Ask:</b> Pose the discussion question here.
+:::
+
+## A labelled / stepped slide
+
+::: {.important}
+Step 1 · Eyebrow label in maroon
+:::
+
+![](images/step.png){width="56%"}
+
+Explanatory text for this step.
+
+## A diagram, drawn natively
+
+```{mermaid}
+%%| fig-width: 11
+%%| fig-height: 2.4
+flowchart LR
+  A[Start] --> B[Middle] --> C[End]
+```
+
+## A data table {.smaller}
+
+| Column | Value | Notes |
+|:--|:--:|:--|
+| Row one | 1 | … |
+| Row two | 2 | … |
+
+# References {.smaller}
+
+- Author. *Title.* Source; year.
+
+# Questions? {.inverse background-color="#1f5560" -}
+
+# Thank You {.inverse background-color="#241c12" -}
