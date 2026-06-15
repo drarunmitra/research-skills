@@ -1,6 +1,6 @@
 ---
 name: zotero-cite
-version: 1.0.0
+version: 1.1.0
 description: |
   Find/verify a reference, add it to a Zotero collection via the Zotero local
   API, export the collection to a BibTeX/BibLaTeX file, and cite it from a
@@ -36,9 +36,10 @@ artifact the document points at.
 
 ## Preconditions
 - Zotero 7+ running. Probe: `curl -s -m5 http://127.0.0.1:23119/connector/ping` (HTTP 200).
-- The **local API is READ-ONLY** on current builds: `GET http://127.0.0.1:23119/api/users/0/collections`
-  lists collections and `GET .../collections/<key>/items?format=biblatex` exports, but `POST` to it
-  returns "Endpoint does not support method". So use it to READ and EXPORT, not to write.
+- Use the **local API** to READ and EXPORT: `GET http://127.0.0.1:23119/api/users/0/collections`
+  lists collections and `GET .../collections/<key>/items?format=biblatex` exports. Zotero 7+ adds
+  local-API write support, but on older builds a `POST` to the local API returns "Endpoint does not
+  support method", so the **connector import endpoint is the documented default write path** here.
 - **Writes** go through the **connector** server (same port) or the **Web API**:
   - `POST http://127.0.0.1:23119/connector/import` with `Content-Type: text/plain` and a BibTeX/RIS body
     creates items in the user's library (in the collection currently selected in the Zotero UI, else
@@ -98,21 +99,21 @@ them later, tags are the robust mechanism (no API key, survives whether or not a
    select it before import; or they supply a Web API key and you create it (step 2, Web API) and post
    items with `"collections":["<KEY>"]`. If neither, rely on the tags alone, the user can drag the
    tagged set into a collection later.
-4. Import the whole file in one connector call (with the `Zotero-Allowed-Request: true` header above).
-5. Confirm: re-query the local API and count items carrying the project tag
+4. Dedup first (IRON RULE 2): for each candidate, `GET /api/users/<LIBID>/items?q=<DOI or title>` and skip
+   if already present, so re-running the load does not create duplicates.
+5. Import the whole file in one connector call (with the `Zotero-Allowed-Request: true` header above).
+6. Confirm: re-query the local API and count items carrying the project tag
    (`GET /api/users/<LIBID>/items/top?tag=<projecttag>&format=json&limit=100`), and report added vs
    skipped-duplicate vs failed-to-verify.
-
-Dedup first (IRON RULE 2): for each candidate, `GET /api/users/<LIBID>/items?q=<DOI or title>` and skip
-if already present, so re-running the load does not create duplicates.
 
 ### 4. Export the collection to .bib
 ```
 curl -s "http://127.0.0.1:23119/api/users/<LIBID>/collections/<COLLKEY>/items?format=biblatex&limit=100" \
   -o references.bib
 ```
-(BBT alternative: `http://127.0.0.1:23119/better-bibtex/export/collection?/<libid>/<collkey>.biblatex`,
-which gives clean BBT keys and can auto-update.)
+(BBT alternative: `http://127.0.0.1:23119/better-bibtex/export/collection?/<libid>/<collname>.biblatex`,
+which gives clean BBT keys and can auto-update. Note: `<collname>` is the BBT collection slug, not the
+API collection key.)
 
 ### 5. Cite in the document
 - Quarto/R Markdown: set `bibliography: references.bib` in the YAML; cite with `@key`,
@@ -128,8 +129,8 @@ which gives clean BBT keys and can auto-update.)
   auto-export). State which mode is in use. Recommend installing BBT for the (a) workflow.
 
 ## Notes
-- The local API mirrors the Zotero Web API schema (write support added in Zotero 7); the
-  same JSON works against api.zotear.org with an API key for headless/cloud runs.
+- The local API mirrors the Zotero Web API schema; the same JSON works against api.zotero.org
+  with an API key for headless/cloud runs.
 - Attachments/PDFs: add via the connector (`/connector/saveItems`) or manually; metadata
   alone is enough for citing.
 - Always render the document after wiring citations and report any unresolved `@key`.
