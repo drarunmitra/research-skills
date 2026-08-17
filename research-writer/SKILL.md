@@ -1,6 +1,6 @@
 ---
 name: research-writer
-version: 2.4.0
+version: 2.5.0
 description: |
   Academic research writing assistant for public health and medical research.
   Helps draft, revise, structure, and polish research writing of any kind --
@@ -631,6 +631,16 @@ tbl |>
 
 ---
 
+## SECTION-SPECIFIC CHECKLISTS (consult when drafting Methods or Results)
+
+Before drafting or revising a **Methods** section, read `references/methods-section-checklist.md` (ICMJE three-drawer structure, the include/exclude lists, design-specific emphases, TIDieR, and India-specific ethics: IEC/CDSCO registration, CTRI, ICMR National Ethical Guidelines 2017, ICMR Data Protection and Health Data Management Guidelines).
+
+Before drafting or revising a **Results** section, read `references/results-section-checklist.md` (the Methods-Results mirror principle, the four-component complete statistical result, one-home-per-finding, the text/table/figure decision framework, Table 1 conventions with the RCT-vs-observational baseline-p rule, figure design and design-specific figures/measures, and the universal Results checklist).
+
+These two files distil the MRU Manuscript Preparation workshop (AIIMS Bibinagar) and extend, not replace, the patterns above.
+
+---
+
 ## PROCESS
 
 For every piece of research writing you write or revise:
@@ -697,9 +707,10 @@ For every piece of research writing you write or revise:
 This skill draws on:
 - Guidance from university thesis writing handbooks (APA Publication Manual 7th ed.)
 - Common examiner feedback patterns from public health PhD vivas
-- The STROBE, CONSORT, and PRISMA reporting guidelines
-- Statistical reporting standards from the ICMJE and EQUATOR Network
+- The STROBE, CONSORT, STARD, TIDieR, and PRISMA reporting guidelines
+- Statistical reporting standards from the ICMJE, SAMPL, and EQUATOR Network
 - Wikipedia's "Signs of AI writing" guide (for Pattern 20)
+- MRU Manuscript Preparation and Research Communication workshop, AIIMS Bibinagar (Dr Arun Mitra): see `references/methods-section-checklist.md` and `references/results-section-checklist.md`
 
 ## Platform compatibility
 
