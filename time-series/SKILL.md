@@ -1,6 +1,6 @@
 ---
 name: time-series
-version: 1.1.0
+version: 1.2.0
 description: |
   Analyse and forecast time series in R using the tidyverts ecosystem
   (tsibble, feasts, fable). Covers the full workflow: indexing and gap-filling,
@@ -39,6 +39,15 @@ This is an *analysis* skill, not just a code generator. It enforces a
 disciplined workflow (look at the data first, hold out a test set, evaluate
 distributions not just point forecasts, check residuals) and matches the
 method to the data-generating process rather than reaching for one model.
+
+**Every number you report must come from output you actually ran.** Do not
+state a coefficient, RMSE, MAPE, p-value, selected ARIMA order, changepoint
+date, or forecast value that you have not seen printed by R. If the code has
+not been run, present it as code to run and say the results are pending. If a
+run failed or the data are not available, say so; a described-but-unverified
+result is worse than no result, because it looks checked. When summarising a
+long console output or results file, quote the exact lines you are reading
+from before interpreting them.
 
 ## When to use
 
@@ -217,5 +226,6 @@ Original content; code idioms follow the public package APIs. No source text rep
 
 ## Version history
 
+- **1.2.0** (2026-08-17): Added a results-honesty rule at the top of the skill: every reported coefficient, accuracy metric, selected model order, changepoint, or forecast value must come from R output that was actually run, with unrun code presented as pending and failed runs reported as failures. Follows Anthropic's hallucination-reduction guidance (ground claims in the real artefact; allow "not available" as an answer).
 - **1.1.0** (2026-06-11): Added a "Convergence and panel time series" section to `foundations.md` (sigma vs beta-convergence, Galton/regression-to-the-mean and measurement-error bias, small-area shrinkage before inequality/convergence, bootstrap uncertainty for inequality indices). Generalised IRON RULE 5 to require uncertainty on descriptive indices (CV, Theil/Gini, seasonal amplitude, convergence slope), not only forecasts. Prompted by applying the skill to a TB district-notification convergence manuscript.
 - **1.0.0** (2026-06-11): Initial release. tidyverts-first workflow, 8 task modes, model decision guide, 8 IRON RULES, and six reference files (workflow, models, evaluation, epi-surveillance, healthcare-ML, foundations).

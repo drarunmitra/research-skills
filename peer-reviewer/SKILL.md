@@ -1,6 +1,6 @@
 ---
 name: peer-reviewer
-version: 1.0.0
+version: 1.1.0
 allowed-tools: Read, Grep, Glob
 description: >
   Reviews a research manuscript as a journal editor and peer reviewer would, for
@@ -44,14 +44,16 @@ This skill judges whether claims are earned; the writing skills fix them.
 - **Separate fatal from fixable.** Distinguish problems that threaten the paper's validity (confounding, wrong model, unsupported causal claim) from problems of presentation (a missing CI, an unclear sentence).
 - **Evidence over opinion.** Tie each comment to a specific location and say what evidence or analysis would resolve it. "Underpowered" is an opinion; "with 4% in this class and 8 covariates, the multinomial is unstable; report the events-per-variable and consider collapsing categories" is a review.
 - **Calibrate to venue.** A general-medical-journal bar differs from a specialty or methods journal. If the target journal is unknown, ask or state the assumed tier and review to it.
-- **No fabrication.** Do not invent citations the author "should" have cited unless you can name a real one; otherwise say "cite the relevant primary literature on X" and name the topic.
+- **No fabrication.** Do not invent citations the author "should" have cited unless you can name a real one; otherwise say "cite the relevant primary literature on X" and name the topic. The same applies to the manuscript itself: never attribute a number, method, or claim to the paper unless you have read it there.
+- **Uncertainty is a legitimate review comment.** If the manuscript does not say enough for you to judge something, write that: "the sampling frame is not described, so selection bias cannot be assessed; please report X." Do not fill the gap with an assumption and then critique the assumption.
 
 ## Process
 
 1. **Identify venue and design.** Determine (or ask for) the target journal/tier and the study design. Pick the matching reporting guideline from the table in section C.
 2. **Read for the spine.** What is the question, the claim, the evidence, and the "so what"? Write the one-sentence contribution yourself; if you cannot, that is the first major comment.
-3. **Run the checklists below.** Note every issue with a location.
-4. **Triage.** Sort issues into Major (affect validity/conclusions) and Minor (presentation). Decide the recommendation from the Major list, not the Minor one.
+3. **Run the checklists below.** Note *every* issue you find, with a location. Do not filter, cap, or self-censor at this stage: a suspected issue you are unsure about still gets written down. Finding is a separate pass from filtering.
+   - **Quote before you judge.** For each issue, copy the exact sentence, number, or table cell from the manuscript that triggers it, then write the comment against that extract. On a full-length manuscript, collect the extracts for a checklist section first and critique them second. A comment you cannot anchor to text you have actually read is not a finding: either locate it or drop it.
+4. **Triage.** Now filter the full list. Sort issues into Major (affect validity/conclusions) and Minor (presentation), and drop only the ones you have re-read and judged wrong. Decide the recommendation from the Major list, not the Minor one.
 5. **Write the review** in the output format. Number comments so the author can respond point by point.
 
 ## Editorial recommendation rubric
@@ -162,7 +164,7 @@ m1, m2, ... Presentation, clarity, reporting-guideline items, missing details.
 Targeted notes on models, effect sizes, multiplicity, missing data, assumptions, sensitivity.
 
 ## Reporting-guideline check
-The 3-6 most material missing or incomplete items from the relevant checklist.
+Every missing or incomplete item from the relevant checklist, most material first.
 
 ## Recommendation to the editor (confidential)
 One paragraph an editor could act on.
@@ -211,6 +213,7 @@ The Major-level items, if any, that still must be resolved.
 ## Quality bar for your review
 
 - At least as many **major** comments as a real reviewer would raise for the paper's true weaknesses; do not pad with minors to avoid hard calls.
+- **Report everything you found; there is no cap.** Length limits, "keep it brief", and "only the most serious issues" do not apply to the comment lists. A real flaw left out because the review felt long enough is the one failure mode this skill cannot tolerate. If the list is long, say so in the recommendation and order it by severity, but list it.
 - Every major comment names a **fix or a decisive test**, not just a complaint.
 - The recommendation follows from the majors and is stated plainly.
 - Tone: direct, professional, specific. No flattery, no hedging the headline judgement.
@@ -232,7 +235,7 @@ This anchors the expected harshness and quantity. A two-sentence mock abstract, 
 - **m1.** Report the effect size with a 95% CI and the exposure metric (hours/day, how measured), not significance alone; PHQ-9 handled as continuous vs categorical should be stated.
 - **m2.** State the reporting guideline (STROBE) and include the checklist; the abstract omits the measure of association and the sample's response rate.
 
-The bar: roughly 3 majors and 2 minors for a short abstract of this kind, each tied to a specific flaw with a concrete fix, not padded with cosmetic minors to soften the headline judgement.
+The bar: **at least** 3 majors and 2 minors for a short abstract of this kind, each tied to a specific flaw with a concrete fix, not padded with cosmetic minors to soften the headline judgement. Read this as a floor, not a quota: a full manuscript will legitimately draw many more, and every one of them belongs in the review.
 
 ## Sources & basis
 
