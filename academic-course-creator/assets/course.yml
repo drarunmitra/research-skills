@@ -1,0 +1,142 @@
+# ---------------------------------------------------------------------------
+# Course manifest. The single source of truth.
+#
+# Quarto does not read this file. The assistant does, and generates from it:
+#   _quarto.yml navbar and sidebars, schedule.qmd, every unit index arc table,
+#   the .session-meta strip on every session page, deck front matter, and every
+#   site URL in the LMS kit and the participant emails.
+#
+# Rule: if a fact appears in more than one file, it lives here and nowhere else.
+# Editing a derived file by hand is undone by the next generation.
+#
+# Anything not yet decided becomes {{UPPER_SNAKE}} and goes in the placeholder
+# tracker in CLAUDE.md. Never invent a date, a venue, or a faculty name.
+# ---------------------------------------------------------------------------
+
+course:
+  title: "Course title"
+  subtitle: "One line, used on the landing page"
+
+  # workshop | semester | single-session
+  shape: workshop
+
+  # day | week | session. Drives directory names and headings.
+  unit_word: day
+
+  # ISO. One per unit for a workshop; start and end for a semester.
+  dates:
+    - 2026-09-09
+    - 2026-09-10
+
+  venue: "{{VENUE}}"
+
+  # Published URL, with a trailing slash. Referenced everywhere, retyped nowhere.
+  site_url: "https://example.github.io/my-course/"
+  repo_url: "https://github.com/example/my-course"
+
+  contact: "{{CONTACT_EMAIL}}"
+
+  # r-quarto | python | none
+  # Selects the optional toolchain module: dataset generator, install script,
+  # check script, and the code-teaching parts of the session template.
+  stack: r-quarto
+
+  licence:
+    materials: "CC BY 4.0"
+    code: "MIT"
+
+  # Used in styles.scss and slides/custom.scss. Keep the two equal.
+  palette:
+    primary: "#0f5257"
+    accent: "#b8860b"
+
+  # Stated explicitly so content can be checked against it.
+  session_budget:
+    teaching_minutes: 45
+    handson_minutes: 60
+
+# ---------------------------------------------------------------------------
+# Units. One entry per day, week, or session.
+# ---------------------------------------------------------------------------
+
+units:
+  - id: day1                       # directory name. lowercase, no spaces
+    title: "Foundations"
+    date: 2026-09-09
+    # The one question every session in this unit attacks a piece of.
+    # Strongly recommended: it turns a list of sessions into one argument.
+    question: "Did the intervention work, and for whom?"
+
+    sessions:
+      - id: s1-fundamentals        # file stem: day1/s1-fundamentals.qmd
+        number: 1
+        title: "Why this matters"
+        subtitle: "Optional one-liner"
+        teaching: "09:30-10:15"    # one string, one source of truth
+        handson: "10:15-11:00"     # omit the key entirely if there is none
+        owner: "{{FACULTY}}"
+        slides: true               # false for live coding and group activities
+
+      - id: s2-getting-started
+        number: 2
+        title: "Getting started"
+        teaching: "11:15-12:00"
+        handson: "12:00-13:00"
+        owner: "{{FACULTY}}"
+        slides: true
+
+  - id: day2
+    title: "Analysis and communication"
+    date: 2026-09-10
+    question: "How do we report it so someone else can check it?"
+
+    sessions:
+      - id: s3-reporting
+        number: 3
+        title: "Reporting"
+        teaching: "09:30-10:15"
+        handson: "10:15-11:15"
+        owner: "{{FACULTY}}"
+        slides: true
+
+      - id: s4-group-activity
+        number: 4
+        title: "Group activity"
+        teaching: "14:00-14:30"
+        owner: "{{FACULTY}}"
+        slides: false              # a brief, not a deck
+
+# ---------------------------------------------------------------------------
+# Fixed timetable items that are not sessions. They appear in schedule.qmd and
+# in the unit arc tables, unlinked.
+# ---------------------------------------------------------------------------
+
+breaks:
+  - unit: day1
+    time: "09:00"
+    label: "Registration and pre-test"
+  - unit: day1
+    time: "13:00"
+    label: "Lunch"
+  - unit: day2
+    time: "11:15"
+    label: "Tea"
+
+# ---------------------------------------------------------------------------
+# Learning management system. Omit this whole block if the course has none.
+# The kit it describes must stay out of the render list AND the resources list
+# in _quarto.yml, because it contains answer keys.
+# ---------------------------------------------------------------------------
+
+lms:
+  platform: moodle
+  url: "{{LMS_URL}}"
+  course_id: "{{LMS_COURSE_ID}}"
+  # Directory holding the build kit. Never published.
+  kit_dir: "lms"
+  sections:
+    - "Welcome and pre-test"
+    - "Get set up"
+    - "Learn just enough"
+    - "Data and reading"
+    - "Reference"

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Moodle question bank template. One file per category.
+
+  Rules, in full, are in references/lms-kit.md section 5. The short version:
+    - The FIRST element is the category declaration. It builds the category
+      tree on import. One file, one category.
+    - Every distractor is the result of one specific, nameable error, and its
+      feedback names that error. A distractor nobody would pick teaches
+      nothing and wastes a slot.
+    - generalfeedback teaches the concept regardless of what they answered.
+      It is the highest-value element here and the one most often left empty.
+    - Code inside <pre><code> must be entity-escaped: &lt; and &gt;.
+    - Check that every distractor is actually wrong. In a shipped bank one
+      question had to be replaced because a distractor was, on inspection,
+      true.
+-->
+<quiz>
+
+  <question type="category">
+    <category>
+      <text>$course$/top/Prelude/Topic 01 · Short topic name</text>
+    </category>
+    <info format="html">
+      <text><![CDATA[<p>Four questions on this topic. Unlimited attempts, immediate feedback, zero weight.</p>]]></text>
+    </info>
+  </question>
+
+  <question type="multichoice">
+    <name><text>T1Q1 Short description of what is tested</text></name>
+
+    <questiontext format="html">
+      <text><![CDATA[<p>Five students sat a station and scored 78, 70, 91, 55 and 83.</p><pre><code>scores &lt;- c(78, 70, 91, 55, 83)
+
+sum(scores &gt;= 70)</code></pre><p>What does the second line print?</p>]]></text>
+    </questiontext>
+
+    <generalfeedback format="html">
+      <text><![CDATA[<p><code>4</code>. The comparison gives one <code>TRUE</code> or <code>FALSE</code> per student, and <code>sum()</code> counts each <code>TRUE</code> as 1. The bar matters: <code>&gt;=</code> keeps the student who scored exactly 70, <code>&gt;</code> drops them. Whenever a threshold is "70 or above" or "under 5", that single character decides whether a real person is counted.</p>]]></text>
+    </generalfeedback>
+
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <answernumbering>abc</answernumbering>
+
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p><code>4</code></p>]]></text>
+      <feedback format="html"><text><![CDATA[<p>Correct. 78, 70, 91 and 83 are all 70 or above.</p>]]></text></feedback>
+    </answer>
+
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p><code>3</code></p>]]></text>
+      <feedback format="html"><text><![CDATA[<p>That is the answer to <code>sum(scores &gt; 70)</code>, which drops the student who scored exactly 70. <code>&gt;=</code> means greater than <em>or equal to</em>, so that student is counted and the answer is 4.</p>]]></text></feedback>
+    </answer>
+
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p><code>5</code></p>]]></text>
+      <feedback format="html"><text><![CDATA[<p>That is how many students there are, which is <code>length(scores)</code>. Only four of them reached 70. The student who scored 55 did not.</p>]]></text></feedback>
+    </answer>
+
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p><code>377</code></p>]]></text>
+      <feedback format="html"><text><![CDATA[<p>That is the total of the five marks, <code>sum(scores)</code>. Here <code>sum()</code> is being given the <em>comparison</em>, not the marks, so it adds up TRUEs rather than scores.</p>]]></text></feedback>
+    </answer>
+  </question>
+
+</quiz>

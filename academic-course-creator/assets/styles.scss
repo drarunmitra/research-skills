@@ -1,0 +1,144 @@
+/*
+  Course site theme. Two blocks and nothing else.
+
+  scss:defaults holds only Bootstrap and Quarto variables.
+  scss:rules holds the named component classes, and that list stays short.
+
+  Palette values come from course.palette in course.yml. Keep this file and
+  slides/custom.scss on the same palette.
+
+  Before adding a sixth component class, check whether a native Quarto callout
+  does the job. See references/scaffold.md section 5.
+*/
+
+/*-- scss:defaults --*/
+
+$primary:        #0f5257;
+$secondary:      #4a7c7e;
+$success:        #2d6a4f;
+$warning:        #b8860b;
+$danger:         #9b2226;
+$light:          #f7f9f9;
+$dark:           #14212b;
+
+$body-color:     #22303c;
+$body-bg:        #ffffff;
+$link-color:     $primary;
+
+$font-family-sans-serif: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+$font-family-monospace:  "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, monospace;
+$font-size-root: 17px;
+$h1-font-size:   2.1rem;
+$h2-font-size:   1.55rem;
+$h3-font-size:   1.25rem;
+
+$code-block-bg:  #f4f6f6;
+$code-color:     $danger;
+$toc-color:      $primary;
+
+/*-- scss:rules --*/
+
+body { line-height: 1.62; }
+
+h1, h2, h3, h4 { font-weight: 600; letter-spacing: -0.01em; }
+
+h2 {
+  border-bottom: 2px solid rgba(15, 82, 87, 0.15);
+  padding-bottom: 0.25rem;
+  margin-top: 2.2rem;
+}
+
+// 1. Session metadata strip, at the top of every session page.
+.session-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: $light;
+  border-left: 4px solid $primary;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.9rem;
+
+  .meta-item { white-space: nowrap; }
+  .meta-label {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.72rem;
+    color: $secondary;
+    display: block;
+  }
+  .meta-value { font-weight: 600; }
+}
+
+// 2. Faculty ownership badge.
+.badge-faculty {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(15, 82, 87, 0.1);
+  color: $primary;
+}
+
+// 3. Schedule table. Break and hands-on rows are tinted so the shape of the
+//    day is readable without reading the words.
+table.schedule {
+  font-size: 0.92rem;
+  width: 100%;
+
+  th { background: $primary; color: #fff; font-weight: 600; }
+  tr.break td { background: #fdf6e3; font-style: italic; color: #6b5b2a; }
+  tr.handson td { background: rgba(45, 106, 79, 0.07); }
+  td.time { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
+}
+
+// 4. Landing page cards.
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.card-tile {
+  border: 1px solid #e2e8e8;
+  border-top: 3px solid $primary;
+  border-radius: 6px;
+  padding: 1rem 1.1rem;
+  background: #fff;
+  transition: box-shadow 0.15s ease;
+
+  &:hover { box-shadow: 0 4px 14px rgba(15, 82, 87, 0.12); }
+  h3 { margin-top: 0; font-size: 1.05rem; }
+  p  { margin-bottom: 0.4rem; font-size: 0.9rem; }
+}
+
+// 5. Make an exercise visually distinct from its solution while scrolling.
+div.callout-note.callout-style-default > .callout-header { background: rgba(15, 82, 87, 0.09); }
+div.callout-tip.callout-style-default  > .callout-header { background: rgba(45, 106, 79, 0.11); }
+
+code { font-size: 0.88em; }
+
+// Not cosmetic. Delete only if the course teaches no code.
+//
+// The monospace stack above may resolve to a ligature font on the reader's own
+// machine. JetBrains Mono, Fira Code and Cascadia Code all render `|>` as a
+// single arrow glyph. A beginner has to be able to copy an operator character
+// by character. Disabling the feature is font-independent; reordering the
+// stack is not, because it depends on what the reader has installed.
+code, pre, kbd, samp,
+div.sourceCode, .cm-editor, .cm-content, .cm-line {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0;
+}
+
+kbd {
+  background: #eceff1;
+  border: 1px solid #cfd8dc;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.85em;
+  color: $dark;
+}

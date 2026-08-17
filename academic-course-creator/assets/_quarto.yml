@@ -1,0 +1,159 @@
+# Generated from course.yml. Regenerate rather than hand-edit.
+# See references/scaffold.md section 4 for why each key is here.
+
+project:
+  type: website
+  output-dir: _site
+
+  # Load-bearing. Every chunk runs from the project root, so a page in day1/
+  # reads data/students.csv with no ../ prefix, and the path survives the page
+  # being moved to another unit.
+  execute-dir: project
+
+  # Globs, not a file list, so a new session file needs no config change.
+  render:
+    - "index.qmd"
+    - "schedule.qmd"
+    - "prelude/*.qmd"
+    - "day1/*.qmd"
+    - "day2/*.qmd"
+    - "resources/*.qmd"
+    - "slides/day1/*.qmd"
+    - "slides/day2/*.qmd"
+
+  # Copied into _site verbatim, with no render step. This is what makes
+  # "download the script" links work.
+  #
+  # It is also the leak. Anything listed here is published, silently.
+  # Never list the LMS kit directory: it holds answer keys.
+  # List admin/** only if the emails and feedback form are meant to be public.
+  resources:
+    - "data/**"
+    - "R/**"
+    - "setup/**"
+    - "admin/**"
+
+website:
+  title: "{{COURSE_TITLE}}"
+  description: "{{COURSE_SUBTITLE}}"
+  site-url: "{{SITE_URL}}"
+  repo-url: "{{REPO_URL}}"
+  repo-actions: [issue]
+  page-navigation: true
+  back-to-top-navigation: true
+  search:
+    location: navbar
+    type: overlay
+
+  navbar:
+    background: primary
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Prelude"
+        href: prelude/index.qmd
+      - text: "Day 1"
+        href: day1/index.qmd
+      - text: "Day 2"
+        href: day2/index.qmd
+      - text: "Schedule"
+        href: schedule.qmd
+      - text: "Resources"
+        href: resources/index.qmd
+    right:
+      - icon: github
+        href: "{{REPO_URL}}"
+        aria-label: GitHub repository
+
+  # One block per unit. Group sessions under section headings that match the
+  # real rhythm of the day. A flat list of ten sessions is unreadable.
+  sidebar:
+    - id: prelude
+      title: "Prelude"
+      style: floating
+      collapse-level: 2
+      contents:
+        - prelude/index.qmd
+        - prelude/install.qmd
+        - prelude/check-setup.qmd
+        - prelude/data.qmd
+        - prelude/pre-reading.qmd
+
+    - id: day1
+      title: "Day 1"
+      style: floating
+      collapse-level: 2
+      contents:
+        - day1/index.qmd
+        - section: "Morning"
+          contents:
+            - day1/s1-fundamentals.qmd
+        - section: "Afternoon"
+          contents:
+            - day1/s2-getting-started.qmd
+
+    - id: day2
+      title: "Day 2"
+      style: floating
+      collapse-level: 2
+      contents:
+        - day2/index.qmd
+        - section: "Morning"
+          contents:
+            - day2/s3-reporting.qmd
+        - section: "Afternoon"
+          contents:
+            - day2/s4-group-activity.qmd
+
+    - id: resources
+      title: "Resources"
+      style: floating
+      contents:
+        - resources/index.qmd
+        - resources/cheatsheet.qmd
+        - resources/troubleshooting.qmd
+        - resources/glossary.qmd
+        - resources/further-reading.qmd
+
+  page-footer:
+    background: light
+    left: "{{COURSE_TITLE}}"
+    center: "Materials licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); code [MIT](https://opensource.org/licenses/MIT)"
+    right: "Built with [Quarto](https://quarto.org)"
+
+# No revealjs block here. Decks declare their own format in their own front
+# matter, so a deck and a page can differ without either fighting the other.
+#
+# Never add a second format such as live-html to this block. In a website
+# project the map applies to every format-less input, so every page renders
+# twice to the same path: the build aborts on a rename error and empties _site.
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    code-link: true
+    df-print: paged
+    link-external-newwindow: true
+    anchor-sections: true
+    fig-align: center
+    fig-width: 7
+    fig-height: 4.5
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+  echo: true
+
+# Turn warnings back on per chunk where the warning is the lesson.
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: true
+    R.options:
+      width: 76

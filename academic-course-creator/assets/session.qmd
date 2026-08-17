@@ -1,0 +1,159 @@
+---
+title: "3 · Session title"
+subtitle: "The one-line promise of this session"
+---
+
+<!--
+Session page template. Ten parts, in order. See references/teaching-pages.md.
+
+Parts 1 and 2 are generated from course.yml. Never type a time into this file.
+Parts 3 to 10 are authored. Delete any part that does not apply, but keep the
+order of the ones that remain.
+
+For stack: none, delete the code chunks and keep everything else.
+-->
+
+::: {.session-meta}
+::: {.meta-item}
+[Teaching]{.meta-label}[11:15 – 12:00]{.meta-value}
+:::
+::: {.meta-item}
+[Hands-on]{.meta-label}[12:00 – 13:00]{.meta-value}
+:::
+::: {.meta-item}
+[Faculty]{.meta-label}[Name]{.meta-value}
+:::
+::: {.meta-item}
+[Slides]{.meta-label}[[Open deck ↗](../slides/day1/s3.html){target="_blank"}]{.meta-value}
+:::
+:::
+
+```{r}
+#| include: false
+# Hidden setup. Exists so the visible chunks below show only the line being
+# taught. Loads the stack, sets a plot theme, reads the data.
+library(tidyverse)
+theme_set(theme_minimal(base_size = 12))
+students <- read_csv("data/students.csv", show_col_types = FALSE)
+```
+
+## Learning objectives
+
+About five, each starting with a verb the participant can do at the end.
+Not "understand".
+
+1. Read a dataset in and inspect it before touching it.
+2. Name the three things every plot needs.
+3. Build a histogram, a boxplot and a scatterplot.
+4. Split a plot by a grouping variable.
+5. Label a figure so that it stands alone in a manuscript.
+
+## Start by looking
+
+Worked example first, prose after. A beginner reads the output and then wants
+to know why; explaining before showing gives them nothing to attach it to.
+
+```{r}
+glimpse(students)
+```
+
+240 rows, one per student. Note that `posttest` has missing values. We will
+meet them shortly.
+
+## The idea in one line
+
+> data, plus a mapping from variables to visual channels, plus a geometry
+> that draws it
+
+```{r}
+#| eval: false
+ggplot(students, aes(x = pretest, y = posttest)) +
+  geom_point()
+```
+
+Then two or three lines saying what each part did.
+
+## A trap worth stopping on
+
+```{r}
+#| warning: true
+ggplot(students, aes(x = posttest)) +
+  geom_histogram(binwidth = 5)
+```
+
+::: {.callout-important}
+## That warning is the point
+`Removed 11 rows containing non-finite values`. Eleven students have no
+post-test score. The message is easy to scroll past. Real analyses die here.
+
+Read the warning, then decide explicitly what to do about the missing eleven,
+and write that decision into your script.
+:::
+
+The count is fixed by the data generator, so it is safe to quote in prose.
+See references/course-materials.md.
+
+# Hands-on {#hands-on}
+
+Level one, with an explicit anchor, so the schedule page can deep-link
+`s3.qmd#hands-on` and a participant arriving at 12:00 lands here rather than at
+the top of the page.
+
+It is 12:00. Work in pairs. Raise a hand rather than stay stuck.
+
+::: {.callout-note title="Exercise 1: Distribution of post-test scores"}
+**Time:** 5 minutes
+
+Draw a histogram of `posttest`. Choose a binwidth that shows the shape without
+inventing detail.
+:::
+
+::: {.callout-tip title="Solution 1" collapse="true"}
+```{r}
+#| eval: false
+ggplot(students, aes(x = posttest)) +
+  geom_histogram(binwidth = 5)
+```
+
+The distribution is close to symmetric, so a mean is a fair summary here. The
+eleven removed rows are the same eleven students as before.
+
+A solution carries the interpretation, not only the code. Code answers "what do
+I type". The participant came for "what does it mean".
+:::
+
+::: {.callout-note title="Exercise 2: Does the arm matter?"}
+**Time:** 8 minutes
+
+Plot `posttest` by `teaching_arm`. Show the raw points as well as the summary.
+:::
+
+::: {.callout-tip title="Solution 2" collapse="true"}
+```{r}
+#| eval: false
+ggplot(students, aes(x = teaching_arm, y = posttest)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, alpha = 0.3)
+```
+
+The two arms overlap almost completely. There is no visible difference here,
+and that is the honest answer.
+
+Write at least one exercise per course whose answer is that the effect is
+absent. Every exercise finding a clean result teaches that analysis always
+finds something, which is the opposite of the lesson.
+:::
+
+## Key takeaways
+
+::: {.callout-note appearance="minimal"}
+- Every plot is data, a mapping, and a geometry.
+- A warning about removed rows is a finding, not noise.
+- Show the points when the sample is small enough to allow it.
+:::
+
+Each bullet is a sentence the participant could say out loud, not a topic name.
+
+## Next
+
+→ [4 · Next session](s4-next.qmd) : write a document that contains its own code.

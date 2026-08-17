@@ -1,0 +1,74 @@
+# Copy to .github/workflows/publish.yml
+#
+# Repository Settings > Pages > Source must be set to "GitHub Actions".
+# That cannot be done from this file.
+#
+# Drop the R steps entirely when course.stack is `none`.
+
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        # Pin to the version the site was verified on, and say why here.
+        # A different CI version is an untested render, and the failure shows
+        # up on the published site rather than locally.
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.36
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # List packages that another package loads at run time rather than
+      # declares as a hard dependency. The resolver reads declared dependencies
+      # only, so an undeclared one is never installed and the render dies on the
+      # single page that needs it.
+      #
+      # Do NOT put a comment inside the packages block below. It is a literal
+      # block scalar, so every line is handed to R as a package spec and a '#'
+      # line fails the step with "Error: unexpected symbol".
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::knitr
+            any::rmarkdown
+            any::here
+
+      - name: Generate teaching datasets
+        run: Rscript R/00_generate_datasets.R
+
+      - name: Render site
+        run: quarto render
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

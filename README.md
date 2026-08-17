@@ -15,6 +15,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
   zotero-cite ........... citations throughout (acquire / verify / export .bib)
   reproducible-repo ..................... package + Zenodo DOI
   slides-creator-skill .................. present results
+  academic-course-creator ............... teach it (course site + LMS kit)
   content-research-writer ............... separate non-academic track
 ```
 
@@ -35,6 +36,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 
 ### Teaching
 - slides-creator-skill: build minimal Quarto Reveal.js teaching decks.
+- academic-course-creator: build a whole course as a Quarto site plus its slide decks, teaching datasets, participant emails and Moodle question banks, all derived from one course manifest.
 
 ### Non-academic content
 - content-research-writer: write non-academic content such as blogs, newsletters, and thought leadership.
@@ -54,6 +56,7 @@ Skills fall into two classes. Pure-reasoning skills run on any LLM, including br
 | reproducible-repo | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | git, Quarto, R |
 | zotero-cite | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | shell, Zotero with Better BibTeX on local API port 23119 |
 | slides-creator-skill | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | Quarto, git |
+| academic-course-creator | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | Quarto, git; R only when the course teaches R |
 
 ## Install
 
