@@ -16,6 +16,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
   reproducible-repo ..................... package + Zenodo DOI
   slides-creator-skill .................. present results
   academic-course-creator ............... teach it (course site + LMS kit)
+  plain-instructions .................... steps a learner can actually follow
   content-research-writer ............... separate non-academic track
 ```
 
@@ -37,6 +38,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 ### Teaching
 - slides-creator-skill: build minimal Quarto Reveal.js teaching decks.
 - academic-course-creator: build a whole course as a Quarto site plus its slide decks, teaching datasets, participant emails and Moodle question banks, all derived from one course manifest.
+- plain-instructions: turn any instruction a learner follows into a numbered procedure with an explicit success criterion, and lint it with the bundled check.sh.
 
 ### Non-academic content
 - content-research-writer: write non-academic content such as blogs, newsletters, and thought leadership.
@@ -57,6 +59,7 @@ Skills fall into two classes. Pure-reasoning skills run on any LLM, including br
 | zotero-cite | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | shell, Zotero with Better BibTeX on local API port 23119 |
 | slides-creator-skill | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | Quarto, git |
 | academic-course-creator | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | Quarto, git; R only when the course teaches R |
+| plain-instructions | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | bash (for check.sh) |
 
 ## Install
 
