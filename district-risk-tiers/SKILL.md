@@ -1,6 +1,6 @@
 ---
 name: district-risk-tiers
-version: 0.1.0
+version: 0.1.1
 description: >
   Use when ranking districts or sub-districts into High, Moderate and Low tiers from hazard and vulnerability scores,
   or when asked to test, audit or explain such tiers. Covers a rule fixed before results, percentile ranks, what-if
@@ -86,6 +86,7 @@ When sub-areas have no vulnerability data of their own, they take the parent val
 | The map says hazard but the input column is `tier_*` or `R_*` | Those are risk tiers. Build from `H_*` scores or relabel. `biv_map()` stops on this. |
 | Two risk maps look alike | Mandals in one district share a vulnerability value. Show the hazard-only map beside the risk map. |
 | Two panels, one colour family | One family per quantity. |
+| The user picks a weighting or indicator because the results "look wrong" | Ask for the reason. Run the rule as first written as the base. Show the user's version as a what-if run. If the user insists, make it the base, log it as a deviation with the date, and say in the output that it was chosen after seeing results. |
 | The rule is silent on ties | Add the tie rule and rerun. A fresh auditor finds this first. |
 | The run in the code is not the run in the rule (for example a "5 km buffer" run that drops clusters) | Rename the run or log a deviation. |
 | Stability looks like a confidence level | It is a check against listed runs. Say so. |
@@ -114,3 +115,4 @@ Environment-dependent. The scripts need R (dplyr, purrr, tibble; jsonlite for `r
 ## Version history
 
 - 0.1.0 (2026-11-14): First release. Built from a health policy report that ranked 33 districts and 632 mandals. Tested on synthetic data.
+- 0.1.1 (2026-11-14): Added a red-flag row for weights chosen after seeing results. Passed three pressure tests (rule after results, risk labelled as hazard, coverage gap).
