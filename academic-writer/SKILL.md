@@ -45,6 +45,8 @@ This skill is the suite's canonical humanizer; it revises and humanizes existing
 - **peer-reviewer** -- judges the science and whether claims are earned; academic-writer fixes the prose.
 - **content-research-writer** -- for non-academic (blog/article/newsletter) content.
 
+- **numbers-audit** -- verifies that every result number traces to a pipeline output file. Adjacent and non-overlapping: this skill checks citations and prose, numbers-audit checks figures against files.
+
 They compose well; humanize last, after the argument is settled.
 
 ## Modes

@@ -1,6 +1,6 @@
 ---
 name: research-writer
-version: 2.5.0
+version: 2.6.0
 description: |
   Academic research writing assistant for public health and medical research.
   Helps draft, revise, structure, and polish research writing of any kind --
@@ -569,10 +569,42 @@ Author names may appear inline as part of the narrative, but the actual brackete
 - Tables for exact numbers; figures for patterns and trends
 - Caption should be self-explanatory (reader should understand without reading the text)
 - Flag suggested figures with `[FIGURE: description of what this should show]`
+- **Building and reviewing tables is your job, not the user's (HARD RULE).** Before
+  you call a manuscript, chapter or submission set done, render the final document
+  and look at every table page (for Word: export to PDF, then view the pages).
+  Check each table as an editor would: one label per variable with its levels
+  indented beneath; the reference level shown for every ratio (OR, PR, HR); clean,
+  capitalised level labels in a logical order (income ascending, not alphabetical;
+  "Female", not "F"); no near-empty or redundant columns (the test used and
+  separation flags go in lettered footnotes); one CI format throughout; units in
+  the row label; italic taxa; a title of 15 words or fewer above and a legend below.
+  Passing a journal's mechanical rules (no shading, table count) is not the same as
+  publication-ready, and reusing tables from an earlier draft does not excuse the
+  review. Say in your report that you reviewed the tables.
 
 #### 23. Table Format Decision Rule (HARD RULE)
 
-**Choose the format based on whether the table needs colour:**
+**First, choose by output format.**
+
+**Word output (.docx: journal submissions, most theses and reports):** build every
+table as a native, editable Word table with `flextable` (for `gtsummary`, use
+`as_flex_table()`). flextable honours column widths (`width()`), booktabs rules
+(`theme_booktabs()`), repeated header rows, and page breaks
+(`set_table_properties(opts_word = list(keep_with_next = FALSE))`). Avoid gt for
+Word: in testing, the Word writer of gt 0.11 ignored `cols_width()` and border options and kept
+every row with the next, so long tables jumped to a new page and stranded the title. Check your gt version.
+huxtable writes Word through flextable, so it adds nothing. Give each table title
+the "Table Caption" paragraph style (a pandoc `custom-style` div) so it stays on
+the page with its table. Put the footnote texts and the legend in paragraphs under
+the table, not in table footer rows: footer rows can break onto the next page and
+sit alone under a repeated header. Never insert a table as an image: many journals, including BMC and
+Springer Nature, do not accept image tables. Check the journal's instructions. Use no colour or shading unless the journal
+allows it. Take the numbers from the audited analysis outputs rather than
+recomputing them in the table code, and check programmatically that every source
+number still appears in the finished table. The LaTeX and PNG rules below apply
+to PDF and HTML output only.
+
+**PDF/HTML output: choose based on whether the table needs colour:**
 
 **Plain tables (no colour, no conditional formatting):** Use raw LaTeX inside ```` ```{=latex} ```` blocks with `booktabs`, `tabularx`, `multirow`, and `longtable`. This produces crisp, native PDF rendering with proper typography.
 
@@ -649,7 +681,7 @@ For every piece of research writing you write or revise:
 2. **Check** against the 23 patterns -- fix any problems found
 3. **Em-dash scan** (MANDATORY): Search all output for — and --. Replace every instance using the alternatives in Pattern 21. Zero em-dashes is the target.
 4. **Citation placement scan** (MANDATORY): Search all output for `[@` that does NOT appear at the end of a sentence (i.e., not followed by `.` or `]` then `.`). Move every mid-sentence citation to the end of its sentence. Zero mid-sentence citations is the target.
-5. **Table format check** (MANDATORY): For every table, apply Pattern 23: plain tables use raw LaTeX (booktabs + tabularx); colour-coded tables use `gt` PNG. Never use Markdown pipe tables for PDF output.
+5. **Table format and readiness check** (MANDATORY): For every table, apply Pattern 23. Word output: `flextable` (or `gtsummary` via `as_flex_table()`) native Word tables, never images. PDF output: plain tables use raw LaTeX (booktabs + tabularx); colour-coded tables use `gt` PNG; never Markdown pipe tables. Then render the final document, look at every table page, and review each table against the checklist under Figures and Tables before presenting. This applies equally to tables reused from an earlier draft.
 6. **Verify** the argument thread: Does each paragraph advance the thesis?
 7. **Audit** with the examiner test: Read it as a hostile but fair examiner and ask:
    - "What is the weakest point in this argument?"
