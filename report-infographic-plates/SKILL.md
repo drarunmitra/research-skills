@@ -1,6 +1,6 @@
 ---
 name: report-infographic-plates
-version: 0.1.1
+version: 0.1.2
 description: >
   Use when building infographic plates and per-area sheets for a Typst or Quarto PDF report from the project's own
   output files, so every number traces to a numbers file. Covers one white design language, a data feed, a build with
@@ -36,7 +36,7 @@ Do not use it for one stand-alone infographic (use epic-infographics), for build
 2. One design language, one CSS token set, and a white page on every plate.
 3. The build exits non-zero if any preflight fails, and names the plate.
 4. Run the text extractor and the number checker after every rebuild. "0 unverified" is the gate.
-5. Look at every PNG, or the contact sheet, before you place it.
+5. After every build, make a contact sheet of the whole set and look at it. Then open each new or changed plate at full size. Re-look at the plates you did not change, because a shared token or data change can move them. Never place a plate you have not seen.
 6. A drawing that is not data is labelled illustrative. A proposal is labelled a proposal. An unverified item is shown as to be confirmed.
 7. A plate that quotes a total names its scope.
 8. The audit agent is a fresh agent that reads output files, not the generator.
@@ -51,7 +51,7 @@ Do not use it for one stand-alone infographic (use epic-infographics), for build
 6. Extract the text and check it:
    `python scripts/plate_text.py html_dir text_dir`, then `Rscript scripts/check_plate_numbers.R numbers.csv text_dir allow.txt`.
    Allow structural tokens (axis ticks, dates) with a short allow file or `ALLOW_EXTRA` for one run. Never widen the pattern.
-7. Make a contact sheet (`python scripts/contact_sheet.py png_dir sheet.png`) and look at it.
+7. Make a contact sheet of the whole set (`python scripts/contact_sheet.py png_dir sheet.png`) and look at it. Then look at each new or changed plate at full size. Do this after every rebuild, even when you only added one plate: re-look at the others too. Check for clipped text, collisions, empty zones, wrong scale and a different look from the rest of the set.
 8. Place the plates (`references/placement.md`): full-page plates with the page counter fixed, figure plates with captions and `@fig-` references, area sheets after the references.
 9. Render the PDF. Look at the pages that carry plates, as images. Check that the contents numbers match the footer numbers and that no page is nearly empty. A render that compiled is not a layout check.
 10. Fresh-agent audit (`references/audit-prompt.md`). Fix the must-fix items. Log the rest.
@@ -88,6 +88,7 @@ The agent reads the plate text, the PNGs, `numbers.csv`, the output files and th
 | A caption says "all are labelled" | Count the labels. |
 | A line that could read as a forecast | Use a text callout. |
 | A date or bar the report text never gives | Source it or mark it assumed. |
+| I added one plate, so I only need to look at that one | Make the contact sheet of the whole set and re-look at the old plates. Shared tokens and data move them. |
 | The user is in a hurry | Hurry skips only the fresh-agent audit. Still run steps 5, 6, 7 and 9: they take minutes. Say plainly in the reply that the audit was skipped and what it would have checked. |
 | The report compiled, so the plates are placed well | Look at the plate pages as images. |
 | `data.json` was typed by hand and its numbers match | Matching today is not tracing. Build it from the data feed and `numbers.csv`. |
@@ -110,5 +111,6 @@ Environment-dependent. Needs node with Playwright and Chromium (installed throug
 
 ## Version history
 
+- 0.1.2 (2026-11-14): Contact sheet of the whole set and a re-look at every plate are now required after every build.
 - 0.1.1 (2026-11-14): Fixed build_plates.sh for Windows line endings and a missing png folder. Added red flags for hurry, unviewed PDF pages and hand-typed data after three pressure tests.
 - 0.1.0 (2026-11-14): First release. Built from a health policy report with 11 plates and 12 area sheets. Scripts were not run against a live Playwright install in this release, apart from the text and checker scripts.
