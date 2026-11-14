@@ -10,7 +10,8 @@
 ## After you render
 - The build printed "all plates passed" (a non-zero exit means a plate failed).
 - `plate_text.py` then `check_plate_numbers.R` printed "0 unverified".
-- You looked at the contact sheet.
+- You made a contact sheet of the whole set after this build and looked at it.
+- You looked at each new or changed plate at full size, and re-looked at the unchanged plates.
 - The PDF page numbers run in order.
 - A fresh agent audited the plates and every must-fix is closed.
 
