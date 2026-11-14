@@ -283,6 +283,7 @@
       </div>
     </div>
     <div class="loop rv"><b>↻ revise loop</b>: peer-reviewer routes fixes back to research-writer and academic-writer, then re-reviews.</div>
+    <div class="loop rv"><b>Policy track</b>: district-risk-tiers ranks the places, report-infographic-plates draws the plates, health-policy-brief shapes the document, numbers-audit checks every number, typst-report-tikz builds the PDF, and peer-reviewer reviews it in policy-document mode.</div>
 
     <div class="throughout rv">
       <div><div class="t">zotero-cite</div><div class="d">Citations throughout: find, verify, persist a reference, export the .bib.</div></div>
@@ -298,7 +299,7 @@
     <div class="sec-head rv">
       <span class="idx">02</span>
       <h2 class="sec-title">The catalogue</h2>
-      <span class="note">Nine skills in five groups. Each entry lists what it does and a phrase that triggers it.</span>
+      <span class="note">Sixteen skills in six groups. Each entry lists what it does and a phrase that triggers it.</span>
     </div>
 
     <div class="group-label rv">Analysis</div>
@@ -381,9 +382,75 @@
       <div class="req"><span class="tag env">Environment</span></div>
     </div>
 
-    <div class="group-label rv">Non-academic content</div>
     <div class="entry rv">
       <div class="num">09</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/academic-course-creator">academic-course-creator</a></div>
+        <div class="desc">Build a whole course as a Quarto website with a slide deck per session, generated teaching datasets, participant emails and a Moodle question bank, all derived from one course manifest.</div>
+        <div class="trig">Triggers on <b>"build a course site"</b>, <b>"make the Moodle kit"</b></div>
+      </div>
+      <div class="req"><span class="tag env">Environment</span></div>
+    </div>
+    <div class="entry rv">
+      <div class="num">10</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/plain-instructions">plain-instructions</a></div>
+        <div class="desc">Rewrite any instruction a learner will follow into a numbered procedure in plain English, with one action per step and a literal success check after each step.</div>
+        <div class="trig">Triggers on <b>"rewrite these steps for learners"</b>, <b>"make this README followable"</b></div>
+      </div>
+      <div class="req"><span class="tag pure">Any LLM</span></div>
+    </div>
+
+    <div class="group-label rv">Policy documents &amp; reports</div>
+    <div class="entry rv">
+      <div class="num">11</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/health-policy-brief">health-policy-brief</a></div>
+        <div class="desc">Draft and check health policy briefs, action plans and dossiers for officials. Opens with a summary box, traces every number and citation, labels forecasts as scenarios, and ships a text checker and a fresh-agent audit prompt.</div>
+        <div class="trig">Triggers on <b>"draft a policy brief"</b>, <b>"check this action plan"</b>, <b>"this dossier overclaims"</b></div>
+      </div>
+      <div class="req"><span class="tag pure">Any LLM</span></div>
+    </div>
+    <div class="entry rv">
+      <div class="num">12</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/district-risk-tiers">district-risk-tiers</a></div>
+        <div class="desc">Rank districts or sub-districts into High, Moderate and Low tiers with a rule fixed before results, what-if stability runs, a coverage check and an independent rebuild. Four R scripts, tested on synthetic data.</div>
+        <div class="trig">Triggers on <b>"rank these districts into tiers"</b>, <b>"audit these tiers"</b>, <b>"is this ranking robust"</b></div>
+      </div>
+      <div class="req"><span class="tag env">Environment</span></div>
+    </div>
+    <div class="entry rv">
+      <div class="num">13</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/report-infographic-plates">report-infographic-plates</a></div>
+        <div class="desc">Build infographic plates and per-area sheets for a Typst or Quarto report from the project's own output files. A build that fails on layout errors, a number check on plate text, page placement rules and a fresh-agent audit.</div>
+        <div class="trig">Triggers on <b>"make infographic plates for the report"</b>, <b>"rebuild the plates"</b>, <b>"audit the plates"</b></div>
+      </div>
+      <div class="req"><span class="tag env">Environment</span></div>
+    </div>
+    <div class="entry rv">
+      <div class="num">14</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/numbers-audit">numbers-audit</a></div>
+        <div class="desc">Prove that every number in a manuscript or report traces to a file the pipeline wrote. A builder script and a checker script catch numbers from memory, invented numbers and stale numbers after a rerun.</div>
+        <div class="trig">Triggers on <b>"check the numbers in this paper"</b>, <b>"is the manuscript stale"</b></div>
+      </div>
+      <div class="req"><span class="tag env">Environment</span></div>
+    </div>
+    <div class="entry rv">
+      <div class="num">15</div>
+      <div class="body">
+        <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/typst-report-tikz">typst-report-tikz</a></div>
+        <div class="desc">Build a designed PDF report from Quarto with a custom Typst template and TikZ diagrams. Notes on references, page numbering, full-page plates, locked PDFs and layout checks.</div>
+        <div class="trig">Triggers on <b>"make the report look designed"</b>, <b>"Typst template"</b></div>
+      </div>
+      <div class="req"><span class="tag env">Environment</span></div>
+    </div>
+
+    <div class="group-label rv">Non-academic content</div>
+    <div class="entry rv">
+      <div class="num">16</div>
       <div class="body">
         <div class="name"><a href="https://github.com/drarunmitra/research-skills/tree/main/content-research-writer">content-research-writer</a></div>
         <div class="desc">A writing partner for non-academic content: blogs, newsletters and thought leadership. Collaborative outlining, sharper hooks, section-by-section feedback, and your voice preserved. Fenced off from the academic track.</div>
@@ -399,7 +466,7 @@
     <div class="sec-head rv">
       <span class="idx">03</span>
       <h2 class="sec-title">Where each one runs</h2>
-      <span class="note">Five skills are pure reasoning and run anywhere, including browser chat. Four need a local shell and tools.</span>
+      <span class="note">Seven skills are pure reasoning and run anywhere, including browser chat. Nine need a local shell and tools.</span>
     </div>
     <div class="matrix-wrap rv">
       <table>
@@ -416,6 +483,13 @@
           <tr><td class="skill">zotero-cite</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">shell, Zotero + Better BibTeX (:23119)</td></tr>
           <tr><td class="skill">reproducible-repo</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">git, quarto, R</td></tr>
           <tr><td class="skill">slides-creator-skill</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">quarto, git</td></tr>
+          <tr><td class="skill">plain-instructions</td><td>Pure reasoning</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="req">none</td></tr>
+          <tr><td class="skill">health-policy-brief</td><td>Pure reasoning</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="req">none (Python 3 for the text checker)</td></tr>
+          <tr><td class="skill">academic-course-creator</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">quarto, git (R optional)</td></tr>
+          <tr><td class="skill">district-risk-tiers</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">R (dplyr, purrr, sf, ggplot2)</td></tr>
+          <tr><td class="skill">report-infographic-plates</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">node + Playwright, Python, R, quarto</td></tr>
+          <tr><td class="skill">numbers-audit</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">shell, R or Python</td></tr>
+          <tr><td class="skill">typst-report-tikz</td><td>Environment</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="cli">CLI / agent</td><td class="req">quarto + Typst, LaTeX for TikZ</td></tr>
         </tbody>
       </table>
     </div>
@@ -488,7 +562,7 @@ ln -s "$PWD/research-skills/research-writer" ~/.claude/skills/research-writer</p
       </div>
       <div class="ncard">
         <div class="nk">Runtime</div>
-        <p>The nine public skills are symlinked into <span class="mono">~/.claude/skills</span>, so the assistant uses the same files. Private skills stay as real folders there and never enter the repo.</p>
+        <p>The public skills are symlinked into <span class="mono">~/.claude/skills</span>, so the assistant uses the same files. Private skills stay as real folders there and never enter the repo.</p>
       </div>
       <div class="ncard">
         <div class="nk">This site</div>
