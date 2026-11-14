@@ -25,6 +25,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 ### Analysis
 - time-series: analyse and forecast time series in R with the tidyverts stack (tsibble, feasts, fable), including surveillance and outbreak detection.
 - qual-researcher: qualitative analysis from transcript cleaning through coding, thematic analysis, framework mapping, and COREQ/SRQR reporting.
+- district-risk-tiers: rank districts or sub-districts into High, Moderate and Low tiers with a rule fixed before results, what-if stability runs, a coverage check and an independent rebuild.
 
 ### Writing and review
 - research-writer: draft, structure, and revise academic writing of any kind (thesis, manuscript, grant, report).
