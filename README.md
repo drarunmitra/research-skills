@@ -29,11 +29,14 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 ### Writing and review
 - research-writer: draft, structure, and revise academic writing of any kind (thesis, manuscript, grant, report).
 - academic-writer: revise and humanize academic prose, calibrate claims to evidence, verify citations, and convert citation styles.
-- peer-reviewer: review a manuscript as a journal editor and peer reviewer, with reporting-guideline and statistics critique.
+- peer-reviewer: review a manuscript as a journal editor and peer reviewer, with reporting-guideline and statistics critique. Has a mode for policy documents.
+- health-policy-brief: draft and check health policy briefs, action plans and dossiers for officials, with a text checker and a fresh-agent audit prompt.
 
 ### Citations and reproducibility
 - zotero-cite: find and verify references, manage Zotero, export a .bib, and cite with @citekey.
 - reproducible-repo: package code, data, and manuscript into a reproducible repository with a Zenodo DOI.
+- numbers-audit: prove that every number in a manuscript or report traces to a file the pipeline wrote.
+- typst-report-tikz: build a designed PDF report from Quarto with a custom Typst template and TikZ diagrams.
 
 ### Teaching
 - slides-creator-skill: build minimal Quarto Reveal.js teaching decks.

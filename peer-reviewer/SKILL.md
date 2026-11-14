@@ -1,6 +1,6 @@
 ---
 name: peer-reviewer
-version: 1.1.0
+version: 1.2.0
 allowed-tools: Read, Grep, Glob
 description: >
   Reviews a research manuscript as a journal editor and peer reviewer would, for
@@ -28,6 +28,7 @@ This is a **read-only judgement skill**: it reads/searches the provided manuscri
 - "What would a reviewer / editor say?"
 - "Pre-submission review", "mock peer review", "will this be desk-rejected?"
 - "Find the weaknesses", "stress-test the argument", "is this novel enough?"
+- "Review this policy brief / action plan / dossier" (use the policy document mode)
 - After a draft is written and before submission (compose after `academic-writer` has humanized the prose; this skill judges substance, not voice).
 
 Do NOT use this to rewrite prose (that is `academic-writer`) or to draft new sections (that is `research-writer`). This skill *judges* and *directs*; it edits the manuscript only if explicitly asked, and even then prefers a review report over silent rewriting.
@@ -37,6 +38,8 @@ Do NOT use this to rewrite prose (that is `academic-writer`) or to draft new sec
 This skill judges whether claims are earned; the writing skills fix them.
 - **Inbound** -- run after **research-writer** has drafted and **academic-writer** has humanized the manuscript.
 - **Outbound (route the fixes)** -- substance to **research-writer**; re-humanizing and citation verification to **academic-writer**; flagged references to **zotero-cite**; reproducibility/data-and-code comments to **reproducible-repo**. Then re-run peer-reviewer on the revision.
+- **numbers-audit** -- mechanically checks that every number in the manuscript traces to a pipeline output. Run it before reviewing; it removes a whole class of comment.
+
 
 ## Stance
 
@@ -209,6 +212,25 @@ Re-review verdict: where it was addressed / what is still missing.
 ## Residual issues blocking acceptance
 The Major-level items, if any, that still must be resolved.
 ```
+
+## Mode: policy document, action plan or dossier
+
+Use this mode when the document is a health policy brief, action plan or dossier for officials, not a journal paper. The judge is a fresh reader who sees only the draft and the source files, never your conclusions. The `health-policy-brief` skill holds the audit prompt (`references/audit-prompt.md`); use it when it is installed.
+
+Check these, each with a quoted extract:
+- Who decided what. A proposal by the authors must not read as a government decision. No named decider the author did not give.
+- Is the ask actionable, or is the document suggestive? Money, owner, month and trigger must match the stated purpose.
+- Scope match. The headline, the summary and the tables cover the same places, phase and institutions. Each total says what it counts and what it leaves out. Totals are on a stated basis.
+- Owner level. One accountable owner per action part. The authors' institute is adviser, not owner.
+- Scenarios have a label, range, signpost and trigger. A threshold with no source is written "not provided".
+- Test scope. "Consistent" or "robust" names what was re-run and at what level.
+- Coverage. Does each score or action cover every group the document names (for example mothers as well as children)?
+- "No data" claims. Search the files before you accept "the files give no X".
+- Citation fit. Each citation supports the exact sentence it sits on. Abstract-level reads are stated as such.
+- Cost basis. Rates and quantities carry a source label that matches how they were derived. Share of cost on weak sources is stated.
+- Plain words and layout. Terms the reader will not know are defined or replaced. Check the rendered PDF as images: page numbers in order, no near-empty pages, figures and tables named in the text.
+
+Report: a table of findings with severity (must fix, should fix, note), the quoted extract, and the fix. End with open items that need input from the author (for example budget heads, owner agreement, population data). Do not fix the document yourself unless asked.
 
 ## Quality bar for your review
 
