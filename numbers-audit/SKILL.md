@@ -122,7 +122,7 @@ add is a check you have switched off, so add the *specific* token, never a
 pattern.
 
 **The staleness trap, and it is the dangerous one.** Rerun a model and estimates
-drift — a DIC by 0.2, a variance in the fourth decimal. The draft still reads
+drift: a DIC by 0.2, a variance in the fourth decimal. The draft still reads
 plausibly. **The file on disk is the single source of truth; sync the prose to
 it, never the other way round.** If the builder and the draft disagree, the
 draft is wrong by definition. This is the failure mode that a human reviewer
@@ -153,7 +153,7 @@ Cheap, and they fail for the same reason:
 
 - The checker reports **0 unverified**, and you have read the allow-list to
   confirm nothing real is hiding in it.
-- The builder runs clean from a fresh session — no objects inherited from the
+- The builder runs clean from a fresh session, with no objects inherited from the
   console.
 - Every number in the abstract and conclusion is in `numbers.csv`. These get
   written last, edited most, and checked least.
