@@ -190,6 +190,54 @@ Editable text block — move, resize, retype live.
 **Use case:** interactive teaching where you annotate/correct in front of the
 class; capturing student-suggested edits and saving them.
 
+### C4. Concept diagrams: `EmilHvitfeldt/quarto-diagrams`
+Turns plain divs into process flows, pyramids, cycles, 2×2 matrices, Venns,
+funnels, org charts and pies. No image files, no Mermaid. Good for a
+**3-tier health-system pyramid**, the **policy cycle**, a **Haddon / 2×2
+matrix**, or a labels-only **policy → plan → programme → scheme** flow (when
+each step also needs a definition, use the native table instead).
+- Docs and live examples: <https://emilhvitfeldt.github.io/quarto-diagrams/>
+- Install: `quarto add EmilHvitfeldt/quarto-diagrams` (v0.5.0 tested; repo has
+  no licence file, so install it, don't copy its code into a skill or deck repo)
+- YAML (top level, next to `format:`): `filters: [diagrams]`
+- Markup: a layout div holding a flat list of `::: item` divs (only
+  `.hierarchy` nests). Bottom of a `.pyramid` is the **last** item:
+```markdown
+::: pyramid
+::: item
+District hospital
+:::
+::: item
+Secondary unit
+:::
+::: item
+Primary unit
+:::
+:::
+```
+- Layouts: `.process` (`.vertical`, `.chevron`, `.arrow`), `.pyramid`
+  (`.inverted`), `.cycle`, `.circle-flow`, `.matrix`, `.venn`,
+  `.stacked-venn`, `.funnel` (`value=`), `.hierarchy`, `.pie` (`.donut`,
+  `center=`).
+- Colour: `node-color=` / `arrow-color=` on the container, `color=` on one
+  item (no `data-` prefix). Use one colour that matches the deck.
+
+**Limits found when testing on Reveal (1280×720):**
+- **Labels render at about half body-text size**, and the filter fixes the
+  shape size, so neither a `style="width/height"` attribute nor a CSS
+  `font-size` override makes them bigger. Keep labels to 1-3 words, at most
+  ~5 items. Put the explanation in bullets or a table beside or below it.
+- **Narrow bands shrink text further**: the top band of a `.pyramid` turned a
+  2-word label into unreadable text. Put the shortest label at the top.
+- **Items are plain text only**: bold, links, math and images inside an
+  `.item` are flattened.
+- Works with `embed-resources: true` (still a single portable HTML).
+- When every word must be read from the back row, use a native table with
+  `↓` in the first column, or `:::: {.columns}`, instead of a diagram.
+
+Always render and screenshot the slide (see SKILL.md **Review**) before
+keeping a diagram.
+
 [SVG.js]: https://svgjs.dev/
 
 ---
@@ -207,3 +255,4 @@ class; capturing student-suggested edits and saving them.
 | Chronology/timeline | quarto-timeline (§C1) | ◐ extension |
 | SVG / OR / mechanism animation | quarto-revealjs-animate (§C2) | ◐ extension |
 | Edit live during talk | quarto-revealjs-editable (§C3) | ◐ extension |
+| Flow / pyramid / cycle / 2×2 / Venn | quarto-diagrams (§C4) | ◐ extension |

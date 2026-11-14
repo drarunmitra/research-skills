@@ -1,6 +1,6 @@
 ---
 name: slides-creator-skill
-version: 1.0.0
+version: 1.1.0
 description: |
   Builds and publishes teaching slide decks as Quarto
   Reveal.js presentations in a minimal house style: stock Quarto defaults plus a
@@ -65,7 +65,16 @@ This skill presents work the rest of the suite produced:
 - Dark divider/section slides: `# Section title {.inverse background-color="#222222"}`
   (pick a divider colour to taste; the `.inverse` rule turns headings/text white
   so they stay readable).
-- Diagrams: native ```` ```{mermaid} ```` blocks (no external image needed).
+- Diagrams: pick by how much text the boxes carry.
+  - Boxes with 1-3 word labels (flow, pyramid, cycle, 2×2, Venn):
+    `quarto-diagrams` extension, see `references/advanced-and-extensions.md` §C4.
+  - Boxes that must hold a sentence each: a native table (`↓` in the first
+    column for a flow) or `:::: {.columns}`.
+  - Branching flowcharts / sequence diagrams: ```` ```{mermaid} ````. A wide
+    `flowchart LR` with four multi-line nodes rendered tiny and clipped its
+    text on a 1280×720 slide, even with `%%| fig-width: 11`. Keep nodes to one
+    short line.
+  - Render and screenshot every diagram slide before keeping it.
 - Keep `embed-resources: true` so the `.html` is a
   single portable file (good for sharing and GitHub Pages).
 
@@ -136,6 +145,18 @@ When asked to publish (use an example deploy as the worked example):
 - Update flow: re-render → copy HTML to `index.html` in the stage →
   `git add/commit/push origin main` → Pages auto-rebuilds.
 
+## Lessons from real decks (check before you render)
+
+- **Credit lines:** never start a line with `@key.` (key plus a period). Pandoc reads it as an example-list marker, so the source vanishes from the References slide. Start with "Source: @key." or put a comma after the key.
+- **Long cite lists** in a `::: credit` expand to full author-year text and overlap the footer. Keep credits to one or two sources. Put long lists in the speaker notes.
+- **Figure after a bullet list** can render blank (stretch height collapses). Put the figure first, then one line of text under it.
+- **Plain backgrounds:** no navy or coloured section dividers and no coloured Take Home slide, unless the user asks. A divider slide with only a title is dead space; drop it.
+- **Wording:** plain, descriptive, neutral. No casual or gimmicky phrases in titles, bullets or case names (use "a 58-year-old woman with diabetes", not a named character).
+- **Series decks:** open with a short bridge slide from the previous lecture (what it ended on, how today follows, what comes next). Then the objectives.
+- **Visual check:** `quarto render` passing is not enough. These steps use local tools (Chrome, pdftoppm from poppler, montage from ImageMagick); if one is missing, use another way to view every slide as an image. Print with headless Chrome (`chrome.exe --headless --no-pdf-header-footer --virtual-time-budget=30000 --print-to-pdf=out.pdf "file:///.../deck.html?print-pdf"`), run `pdftoppm -r 40 -png`, then `montage s-*.png -tile 7x all.png` and look at every slide. Overflow, blank figures and footer overlaps only show here.
+- **Re-render fails with "permission denied"** on the HTML: a viewer still holds the file. Wait a few seconds and run it again.
+- **Drawn stand-in figures:** if an official figure cannot be saved, draw a simple diagram with matplotlib, label it "simplified teaching diagram" with its sources, and say so in the notes.
+
 ## Recipes & deeper reference
 
 When a slide needs more than the basics, consult these cookbooks (all examples
@@ -153,7 +174,8 @@ are teaching-oriented and, unless flagged, pure-native = on-brand):
 - `references/advanced-and-extensions.md`: auto-animate (morph state→state),
   fragment-triggered JavaScript, and opt-in extensions (quarto-timeline,
   quarto-revealjs-animate for SVG/OR visuals, quarto-revealjs-editable for live
-  editing). Extensions need `quarto add`; confirm with the user first.
+  editing, quarto-diagrams for flows/pyramids/cycles/matrices). Extensions need
+  `quarto add`; confirm with the user first.
 
 ## Assets in this skill
 
