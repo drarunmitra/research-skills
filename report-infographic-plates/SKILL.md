@@ -1,6 +1,6 @@
 ---
 name: report-infographic-plates
-version: 0.1.0
+version: 0.1.1
 description: >
   Use when building infographic plates and per-area sheets for a Typst or Quarto PDF report from the project's own
   output files, so every number traces to a numbers file. Covers one white design language, a data feed, a build with
@@ -53,7 +53,7 @@ Do not use it for one stand-alone infographic (use epic-infographics), for build
    Allow structural tokens (axis ticks, dates) with a short allow file or `ALLOW_EXTRA` for one run. Never widen the pattern.
 7. Make a contact sheet (`python scripts/contact_sheet.py png_dir sheet.png`) and look at it.
 8. Place the plates (`references/placement.md`): full-page plates with the page counter fixed, figure plates with captions and `@fig-` references, area sheets after the references.
-9. Render the PDF. Check that the contents numbers match the footer numbers and that no page is nearly empty.
+9. Render the PDF. Look at the pages that carry plates, as images. Check that the contents numbers match the footer numbers and that no page is nearly empty. A render that compiled is not a layout check.
 10. Fresh-agent audit (`references/audit-prompt.md`). Fix the must-fix items. Log the rest.
 11. If the project keeps a document hub, rebuild it and give the owner the link.
 
@@ -88,6 +88,9 @@ The agent reads the plate text, the PNGs, `numbers.csv`, the output files and th
 | A caption says "all are labelled" | Count the labels. |
 | A line that could read as a forecast | Use a text callout. |
 | A date or bar the report text never gives | Source it or mark it assumed. |
+| The user is in a hurry | Hurry skips only the fresh-agent audit. Still run steps 5, 6, 7 and 9: they take minutes. Say plainly in the reply that the audit was skipped and what it would have checked. |
+| The report compiled, so the plates are placed well | Look at the plate pages as images. |
+| `data.json` was typed by hand and its numbers match | Matching today is not tracing. Build it from the data feed and `numbers.csv`. |
 | The number check passed, so the plate is fine | Single digits pass by accident. Run the fresh-agent audit. |
 | A textured or off-white page | White page, no grain. |
 | Contents numbers do not match the footer after a full-page plate | `#counter(page).update(n => n - 1)` inside the plate page. |
@@ -107,4 +110,5 @@ Environment-dependent. Needs node with Playwright and Chromium (installed throug
 
 ## Version history
 
+- 0.1.1 (2026-11-14): Fixed build_plates.sh for Windows line endings and a missing png folder. Added red flags for hurry, unviewed PDF pages and hand-typed data after three pressure tests.
 - 0.1.0 (2026-11-14): First release. Built from a health policy report with 11 plates and 12 area sheets. Scripts were not run against a live Playwright install in this release, apart from the text and checker scripts.
