@@ -38,6 +38,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 - reproducible-repo: package code, data, and manuscript into a reproducible repository with a Zenodo DOI.
 - numbers-audit: prove that every number in a manuscript or report traces to a file the pipeline wrote.
 - typst-report-tikz: build a designed PDF report from Quarto with a custom Typst template and TikZ diagrams.
+- report-infographic-plates: build infographic plates and per-area sheets for a Typst or Quarto report from the project's own output files, with a build that fails on layout errors, a number check on plate text and a fresh-agent audit.
 
 ### Teaching
 - slides-creator-skill: build minimal Quarto Reveal.js teaching decks.
