@@ -7,7 +7,7 @@ description: >
   "prepare for medRxiv/journal submission", "code and data availability". Covers
   repos with non-redistributable source data, large spatial/binary files,
   CITATION.cff, Zenodo, and Quarto manuscript front-matter.
-version: 1.0.0
+version: 1.1.0
 allowed-tools: Read, Write, Edit, Bash, Grep, Glob
 ---
 
@@ -25,6 +25,7 @@ This is the terminal, packaging step of the research lifecycle. Upstream skills 
 - **zotero-cite** -- the reproducible `.bib` that the manuscript points at.
 - **time-series** and **qual-researcher** -- the temporal and qualitative analysis the repo packages.
 - **peer-reviewer** -- the pre-submission review whose reproducibility comments this skill addresses.
+- **numbers-audit** -- run before packaging; every number in the shipped manuscript must trace to a file in the compendium.
 
 ## Repo layout (research-compendium convention)
 ```
@@ -142,6 +143,46 @@ A compendium ships two different kinds of work that need two different licenses;
 - **Ethics statement:** institutional committee + approval/exemption number.
 - **Preprint PDF:** add a `pdf:` format. If headings are manually numbered ("## 2. Methods"), set `number-sections: false` or you get double numbering. Set `geometry`, `fontsize`, `linestretch: 1.5`.
 
+## Journal submission package (separate from the repo)
+
+The compendium is for reproducibility; the submission package is for the
+publisher, and they want different things. Build it into its own folder, never
+into the repo.
+
+Manuscript. Render Markdown to DOCX with pandoc and let citeproc do the
+citations -- never hand-number a reference list.
+```
+pandoc manuscript.md -o manuscript.docx   --citeproc --bibliography=references.bib --csl=vancouver.csl
+```
+Then verify inside the DOCX, not by eye: unzip `word/document.xml`, strip tags,
+and confirm zero surviving `@key` tokens and a rendered reference list. Check
+the style's actual bracket convention before you write the check. Some Vancouver
+CSL files render `(1)`, `(2,3)` and others `[1]`, so a regex written for one
+reports zero citations on a perfectly good file.
+
+Figures. Most journals want TIFF or EPS, not PNG. Convert and set the DPI
+metadata; PIL is enough.
+```python
+im = Image.open(src).convert('RGB')
+im.save(dst, format='TIFF', compression='tiff_lzw', dpi=(300, 300))
+```
+Check pixel width against the publisher's range rather than trusting the DPI tag
+in the source -- a plot saved at 2100 px is 7 in at 300 dpi whatever its metadata
+claims. PLOS (check the current author guidelines before you rely on this): 789-2250 px wide, <=10 MB, 300-600 dpi.
+
+Naming is a hard requirement, not a convention. PLOS asked for exactly `Fig1.tif`
+... `Fig5.tif` and `S1_Fig.tif`, `S1_Text.docx`. Descriptive names like
+`Fig1_rates_and_change.tif` may be rejected by the submission system. Check the journal's current instructions.
+
+Every SI item must be cited in the main text. Figures rendered during
+analysis but never referenced are easy to miss and can be flagged at submission. Grep the draft for each SI filename before packaging.
+
+Ship a submission checklist in the folder: what to upload as what, what was
+verified mechanically, and what still needs a human (CRediT confirmation, author
+order, AI-use wording, cover letter). Keep author decisions out of the manuscript
+body -- a reviewer reads an inline "confirm before submission" note as an
+unfinished draft.
+
 ## Verify before you publish
 - Syntax-check every reorganized script (`parse(file=...)`), don't assume a path-rewrite worked.
 - Render the manuscript/supplement **from inside the repo** to confirm relative paths (`../out`, `../files`) resolve self-contained.
@@ -161,12 +202,24 @@ Creating/pushing to GitHub may be blocked (no `gh`, no token, MCP "Bad credentia
 | Cite the version DOI | Cite the concept (all-versions) DOI. |
 | Cut the release, then enable Zenodo | Toggle Zenodo ON before the release or it isn't archived. |
 | "I'll just push it" | You likely can't authenticate. Set up locally, hand off one command, verify the remote HEAD. |
+| Submit the PNGs | Most journals require TIFF/EPS. Convert, set 300 dpi, check pixel width against their range. |
+| Keep descriptive figure filenames | PLOS asked for exact names (`Fig1.tif`, `S1_Fig.tif`) and other journals may too. Check their instructions. |
+| Leave "confirm before submission" notes in the draft | A reviewer reads them as an unfinished manuscript. Move them to a separate checklist file. |
 
 ## Platform compatibility
 
 - **Class:** Environment-dependent (needs a CLI/agent with a local shell)
-- **Requires:** git, quarto, R.
+- **Requires:** git, quarto, R. For the journal submission package: pandoc, and Python with Pillow.
 - **Load it on:**
   - Claude: drop into `~/.claude/skills/` (Claude Code), or paste this body into a Project's instructions (claude.ai).
   - ChatGPT: paste this body into a Custom GPT or Project. Needs Codex/agent mode with a connected environment for the shell steps.
   - Gemini: create a Gem from this body, or place it under the Gemini CLI. Needs the Gemini CLI for the shell steps.
+
+## Version history
+- 1.1.0 (2026-08-28): Added "Journal submission package": pandoc + CSL to DOCX
+  with in-file citation verification (and the bracket-convention trap that makes
+  a good file look uncited), PNG->TIFF conversion at 300 dpi with pixel-width
+  checks, publisher-mandated figure naming, the requirement that every SI item be
+  cited, and keeping author decisions in a separate checklist rather than in the
+  draft.
+- 1.0.0: Initial release.
