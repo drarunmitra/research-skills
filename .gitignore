@@ -15,3 +15,9 @@ Thumbs.db
 
 # Stray/other local skill folders (not part of this suite)
 visual-frameworks/
+
+# doc-reader
+doc-reader-fixtures/
+.superpowers/
+__pycache__/
+*.pyc
