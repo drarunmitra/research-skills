@@ -6,11 +6,35 @@ from . import cache, outline
 from .extract import DocError, pymupdf
 
 
+def _warn_tail(sha: str, pages) -> str:
+    """Warnings that belong to the pages just shown, as a short block."""
+    wanted = set(pages)
+    meta = cache.load_meta(sha) or {}
+    rows = []
+    for w in meta.get("warnings", []):
+        m = re.match(r"^p(\d+):", w)
+        if m and int(m.group(1)) in wanted:
+            rows.append(w)
+    return ("\n[warnings]\n" + "\n".join(rows)) if rows else ""
+
+
+def _snippet(line: str, needle: str, width: int = 200) -> str:
+    """At most `width` characters of the line, centred on the match."""
+    s = line.strip()
+    if len(s) <= width:
+        return s
+    i = max(s.lower().find(needle), 0)
+    start = max(0, i - width // 2)
+    end = min(len(s), start + width)
+    return ("..." if start else "") + s[start:end] + ("..." if end < len(s) else "")
+
+
 def _pages_text(sha: str, a: int, b: int, n_pages: int) -> str:
     if a < 1 or b > n_pages or a > b:
         raise DocError(f"pages out of range 1-{n_pages}")
     lines, page_of, _ = outline._load(sha)
-    return "\n".join(ln for ln, pg in zip(lines, page_of) if a <= pg <= b)
+    body = "\n".join(ln for ln, pg in zip(lines, page_of) if a <= pg <= b)
+    return body + _warn_tail(sha, range(a, b + 1))
 
 
 def read_pages(sha: str, a: int, b: int) -> str:
@@ -42,7 +66,8 @@ def read_section(sha: str, query: str) -> str:
         return f"ambiguous: '{query}' matches:\n" + "\n".join(shown) + more
     e = hits[0]
     lines, _, _ = outline._load(sha)
-    return "\n".join(lines[e.start_line:e.end_line])
+    body = "\n".join(lines[e.start_line:e.end_line])
+    return body + _warn_tail(sha, range(e.page, e.end_page + 1))
 
 
 def grep(sha: str, pattern: str, context: int = 1, max_hits: int = 20) -> str:
@@ -55,13 +80,13 @@ def grep(sha: str, pattern: str, context: int = 1, max_hits: int = 20) -> str:
         return f"no hits for '{pattern}'"
     out = []
     for i in hits[:max_hits]:
-        out.append(f"p{page_of[i]}: {lines[i].strip()[:200]}")
+        out.append(f"p{page_of[i]}: {_snippet(lines[i], needle)}")
         for j in range(max(0, i - context), min(len(lines), i + context + 1)):
             if j != i and lines[j].strip() and not outline._MARK.match(lines[j]):
                 out.append(f"    {lines[j].strip()[:120]}")
     if len(hits) > max_hits:
         out.append(f"...and {len(hits) - max_hits} more hits")
-    return "\n".join(out)
+    return "\n".join(out) + _warn_tail(sha, {page_of[i] for i in hits[:max_hits]})
 
 
 def page_image(pdf: Path, page: int, out: Path | None = None) -> Path:

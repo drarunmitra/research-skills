@@ -152,6 +152,23 @@ def _captions(sha: str, limit: int = 30) -> list[str]:
     return out
 
 
+_WARN = re.compile(r"^p(\d+): (.*)$")
+
+
+def format_flags(warnings: list[str]) -> list[str]:
+    """Group warnings by message: 'message: p45, p46'. Non-page warnings stay as they are."""
+    groups: dict[str, list[int]] = {}
+    other = []
+    for w in warnings:
+        m = _WARN.match(w)
+        if m:
+            groups.setdefault(m.group(2), []).append(int(m.group(1)))
+        else:
+            other.append(w)
+    lines = [f"{msg}: " + ", ".join(f"p{n}" for n in sorted(pgs)) for msg, pgs in groups.items()]
+    return lines + other
+
+
 def _render(entries, meta, cap: int, caps: list[str]) -> str:
     out = [f"{meta['name']}: {meta['pages']} pages, ~{meta['tokens']} tokens. "
            "Page numbers are PDF pages."]
@@ -167,14 +184,19 @@ def _render(entries, meta, cap: int, caps: list[str]) -> str:
         out.append("Figures and tables:")
         out.extend(caps)
     if meta.get("warnings"):
-        out.append("Warnings: " + "; ".join(meta["warnings"][:5]))
+        out.append("Flagged pages (check them with page-image):")
+        out.extend(format_flags(meta["warnings"]))
     return "\n".join(out)
 
 
 def render_map(entries, meta) -> str:
     if meta["small"]:
-        return (f"small document (~{meta['tokens']} tokens): "
-                "read whole with: docread.py read FILE --all")
+        msg = (f"small document (~{meta['tokens']} tokens): "
+               "read whole with: docread.py read FILE --all")
+        if meta.get("warnings"):
+            flags = "\n".join(format_flags(meta["warnings"]))
+            msg += "\nFlagged pages (check them with page-image):\n" + flags
+        return msg
     caps = _captions(meta["sha"])
     text = ""
     for cap in (4, 3, 2, 1):

@@ -34,7 +34,7 @@ Run once: `python scripts/docread.py setup` from the skill folder. It creates a 
 
 ## Rules for Claude
 
-1. Run `convert FILE` first, then `map FILE`. The first convert of a long document is slow (a 234-page report took about 2 minutes). Later calls use the cache and return at once.
+1. Run `convert FILE` first, then `map FILE`. The first convert of a long document is slow: a 234-page report took 2 to 3 minutes, and a scanned document takes longer. Run it in the background, or with a shell timeout of at least 10 minutes, because a killed convert caches nothing. It prints a "still converting" line every 30 seconds. Later calls use the cache and return at once. Every command other than `convert` also converts on first use.
 2. Read the map before anything else. Never open the cached Markdown file directly.
 3. A document under about 5,000 tokens is marked small. For those, run `read FILE --all` and skip the map.
 4. For a question about one topic, run `read FILE --section TEXT`. If the answer says the match is ambiguous, pick one title from the list and run again.
@@ -42,7 +42,7 @@ Run once: `python scripts/docread.py setup` from the skill folder. It creates a 
 6. Use `read FILE --pages A-B` when you know the pages. Page numbers are PDF pages. The printed page number can differ (the map says when it does).
 7. Do not run `read FILE --all --yes` on a large document unless the whole text is truly needed. The command refuses without `--yes` on purpose.
 8. If a table or figure looks wrong in the text, or the convert output has a warning for that page, run `page-image FILE N` and open the PNG path it prints. This costs fewer tokens than reading the whole PDF natively.
-9. Say which pages an answer came from. Quote numbers exactly as printed, and flag any page that carries a warning.
+9. Say which pages an answer came from. Quote numbers exactly as printed. The map ends with the list of flagged pages, and `read` and `grep` print the warnings for the pages they return. Check a flagged page with `page-image` before relying on a number from its table.
 10. Do not ask the user to install Docling. It installs itself when a scanned page is found, and prints progress.
 
 ## Commands

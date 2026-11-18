@@ -19,13 +19,27 @@ def _plain(line: str) -> str:
     return re.sub(r"^[-+]\s+", "", s)
 
 
-def _norm(line: str) -> str:
-    return re.sub(r"\d+", "#", _plain(line))
+def _is_table_row(line: str) -> bool:
+    return line.lstrip().startswith("|")
+
+
+def _key(line: str) -> str:
+    """Comparison key. Digits are ignored only on page-number lines; any other
+    line must repeat exactly, so rows that differ only by their numbers survive."""
+    s = _plain(line)
+    if any(rx.match(s) for rx in _LABEL):
+        return re.sub(r"\d+", "#", s)
+    return s
 
 
 def _zone_indexes(lines: list[str]) -> list[int]:
     idx = [i for i, ln in enumerate(lines) if ln.strip()]
     return sorted(set(idx[:ZONE] + idx[-ZONE:]))
+
+
+def _candidates(lines: list[str]) -> list[int]:
+    """Zone lines that may be running text. Table rows are never candidates."""
+    return [i for i in _zone_indexes(lines) if not _is_table_row(lines[i])]
 
 
 def strip_running(pages: list[PageText]) -> list[PageText]:
@@ -34,14 +48,14 @@ def strip_running(pages: list[PageText]) -> list[PageText]:
     counts: dict[str, int] = {}
     for p in pages:
         lines = p.text.splitlines()
-        for n in {_norm(lines[i]) for i in _zone_indexes(lines)}:
-            counts[n] = counts.get(n, 0) + 1
-    running = {n for n, c in counts.items() if n and c / len(pages) >= REPEAT_SHARE}
+        for k in {_key(lines[i]) for i in _candidates(lines)}:
+            counts[k] = counts.get(k, 0) + 1
+    running = {k for k, c in counts.items() if k and c / len(pages) >= REPEAT_SHARE}
     for p in pages:
         lines = p.text.splitlines()
-        zone = set(_zone_indexes(lines))
-        keep = [ln for i, ln in enumerate(lines) if not (i in zone and _norm(ln) in running)]
-        p.text = "\n".join(keep).strip("\n")
+        drop = {i for i in _candidates(lines) if _key(lines[i]) in running}
+        p.stripped = len(drop)
+        p.text = "\n".join(ln for i, ln in enumerate(lines) if i not in drop).strip("\n")
     return pages
 
 

@@ -27,7 +27,9 @@ class PageText:
     tables_md: int = 0
     warnings: list[str] = field(default_factory=list)
     images: int = 0
+    image_cover: float = 0.0  # share of the page covered by images, 0 to 1
     ocr: bool = False
+    stripped: int = 0
 
 
 OFFICE = {".docx", ".doc", ".pptx", ".ppt", ".xlsx", ".xls"}
@@ -200,7 +202,11 @@ def extract_pages(pdf: Path) -> list[PageText]:
     try:
         doc = pymupdf.open(pdf)
         for p in pages:
-            p.images = len(doc[p.page - 1].get_images())
+            pg = doc[p.page - 1]
+            p.images = len(pg.get_images())
+            area = pg.rect.get_area() or 1.0
+            covered = sum((pymupdf.Rect(i["bbox"]) & pg.rect).get_area() for i in pg.get_image_info())
+            p.image_cover = min(1.0, covered / area)
     except Exception:
         pass  # image counts only feed scan detection
     return pages

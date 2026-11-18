@@ -4,7 +4,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-PACKAGES = ["pymupdf4llm", "pdfplumber", "pytest"]
+PACKAGES = ["pymupdf4llm>=2.1", "pdfplumber>=0.11"]
+DEV_PACKAGES = ["pytest>=8"]
+
+
+def packages(dev: bool = False) -> list[str]:
+    return PACKAGES + (DEV_PACKAGES if dev else [])
 
 
 def home() -> Path:
@@ -24,14 +29,13 @@ def venv_python() -> Path:
     return venv_dir() / sub
 
 
-def setup() -> None:
+def setup(dev: bool = False) -> None:
     """Create the private venv and install the light dependencies."""
     if not venv_python().exists():
         print(f"creating venv at {venv_dir()}", flush=True)
         home().mkdir(parents=True, exist_ok=True)
         subprocess.run([sys.executable, "-m", "venv", str(venv_dir())], check=True)
-    print("installing: " + " ".join(PACKAGES), flush=True)
-    subprocess.run(
-        [str(venv_python()), "-m", "pip", "install", "-q", *PACKAGES], check=True
-    )
+    pkgs = packages(dev)
+    print("installing: " + " ".join(pkgs), flush=True)
+    subprocess.run([str(venv_python()), "-m", "pip", "install", "-q", *pkgs], check=True)
     print("setup done", flush=True)

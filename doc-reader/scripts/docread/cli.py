@@ -12,8 +12,8 @@ def _convert(args) -> int:
     kind = "small" if meta["small"] else "mapped"
     print(f"{meta['name']}: {meta['pages']} pages, ~{meta['tokens']} tokens, "
           f"{kind}, cache {meta['sha'][:8]}")
-    for w in meta["warnings"][:5]:
-        print(f"warning: {w}")
+    if meta["warnings"]:
+        print(f"{len(meta['warnings'])} warning(s); map lists the flagged pages")
     return 0
 
 

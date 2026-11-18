@@ -11,10 +11,10 @@ from docread import env  # noqa: E402
 
 def main(argv: list[str]) -> int:
     if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
     if argv and argv[0] == "setup":
-        env.setup()
+        env.setup(dev="--dev" in argv)
         return 0
     vpy = env.venv_python()
     if not vpy.exists():

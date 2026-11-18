@@ -11,12 +11,14 @@ from . import env
 from .extract import PageText
 
 MIN_TEXT = 100
+MIN_COVER = 0.5  # a scan is mostly picture; a divider or logo page is not
 CPU_INDEX = "https://download.pytorch.org/whl/cpu"
 
 
 def scan_pages(pages: list[PageText]) -> list[int]:
     """Pages with almost no text but an image. A cover page is not a scan."""
-    cand = [p.page for p in pages if len(p.text.strip()) < MIN_TEXT and p.images > 0]
+    cand = [p.page for p in pages
+            if len(p.text.strip()) < MIN_TEXT and p.images > 0 and p.image_cover >= MIN_COVER]
     if len(cand) > len(pages) / 2:
         return cand
     last = pages[-1].page if pages else 0

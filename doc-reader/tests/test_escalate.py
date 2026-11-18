@@ -7,7 +7,8 @@ from docread.extract import PageText
 
 def _pages(spec):
     """spec: list of (chars, images)"""
-    return [PageText(i + 1, "x" * c, None, 0, [], images=im) for i, (c, im) in enumerate(spec)]
+    return [PageText(i + 1, "x" * c, None, 0, [], images=im, image_cover=1.0 if im else 0.0)
+            for i, (c, im) in enumerate(spec)]
 
 
 def test_cover_page_not_scan():
@@ -51,6 +52,7 @@ def test_extract_counts_images(tmp_path):
     pdf = _scan_pdf(tmp_path, [], {2}, 3)
     pages = extract.extract_pages(pdf)
     assert pages[1].images >= 1 and len(pages[1].text.strip()) < 100
+    assert pages[1].image_cover >= 0.5 and pages[0].image_cover == 0.0
     assert pages[0].images == 0
 
 
