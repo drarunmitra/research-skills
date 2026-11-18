@@ -39,6 +39,44 @@ def _count_md_tables(text: str) -> int:
     return n
 
 
+MAX_TABLE_AREA = 0.8
+MIN_FILLED = 0.6
+
+
+def accept_table(bbox, page_size, cells) -> bool:
+    """True when a detected table looks like data: not page-wide, mostly filled."""
+    x0, top, x1, bottom = bbox
+    w, h = page_size
+    if (x1 - x0) * (bottom - top) >= MAX_TABLE_AREA * w * h:
+        return False
+    flat = [c for row in cells for c in row]
+    if not flat:
+        return False
+    filled = sum(1 for c in flat if c and str(c).strip())
+    return filled / len(flat) >= MIN_FILLED
+
+
+def apply_table_rule(pdf: Path, pages: list["PageText"]) -> None:
+    """Pages whose Markdown tables fail the check fall back to raw text plus a warning."""
+    import pdfplumber
+
+    with pdfplumber.open(pdf) as doc:
+        for p in pages:
+            if p.tables_md == 0:
+                continue
+            pg = doc.pages[p.page - 1]
+            size = (float(pg.width), float(pg.height))
+            bad = False
+            for t in pg.find_tables():
+                if not accept_table(t.bbox, size, t.extract()):
+                    bad = True
+                    break
+            if bad:
+                p.text = pg.extract_text() or ""
+                p.tables_md = 0
+                p.warnings.append(f"p{p.page}: table layout not reliable, raw text kept")
+
+
 def _with_pymupdf4llm(path: Path) -> list[PageText]:
     import pymupdf
     import pymupdf4llm
@@ -82,4 +120,8 @@ def extract_pages(pdf: Path) -> list[PageText]:
             raise DocError(f"cannot read PDF: {e}") from None
     if not pages:
         raise DocError("PDF has no pages")
+    try:
+        apply_table_rule(pdf, pages)
+    except Exception:
+        pass  # table check is advisory; never block extraction
     return pages
