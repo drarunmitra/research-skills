@@ -18,9 +18,12 @@ def main(argv: list[str]) -> int:
         return 0
     vpy = env.venv_python()
     if not vpy.exists():
-        print("doc-reader is not set up. Run: python docread.py setup")
-        return 2
-    if Path(sys.executable).resolve() != vpy.resolve():
+        try:
+            import pymupdf4llm  # noqa: F401  (already inside a suitable env)
+        except ImportError:
+            print("doc-reader is not set up. Run: python docread.py setup")
+            return 2
+    elif Path(sys.executable).resolve() != vpy.resolve():
         e = dict(os.environ, PYTHONUTF8="1")
         return subprocess.call([str(vpy), __file__, *argv], env=e)
     from docread import cli  # noqa: E402

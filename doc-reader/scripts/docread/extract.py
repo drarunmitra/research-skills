@@ -1,0 +1,85 @@
+"""Page-wise text extraction (pymupdf4llm, pdfplumber fallback)."""
+from dataclasses import dataclass, field
+from pathlib import Path
+
+
+class DocError(Exception):
+    """A user-facing problem with the input file. Message is one line."""
+
+
+@dataclass
+class PageText:
+    page: int
+    text: str
+    label: str | None = None
+    tables_md: int = 0
+    warnings: list[str] = field(default_factory=list)
+
+
+OFFICE = {".docx", ".doc", ".pptx", ".ppt", ".xlsx", ".xls"}
+ENGINE = {"name": "pymupdf4llm"}
+
+
+def check_input(path: Path) -> None:
+    if not path.exists():
+        raise DocError(f"file not found: {path}")
+    if path.suffix.lower() in OFFICE:
+        raise DocError("Office files are not supported in v1")
+    if path.suffix.lower() != ".pdf":
+        raise DocError(f"unsupported file type: {path.suffix or '(none)'}")
+
+
+def _count_md_tables(text: str) -> int:
+    n, inside = 0, False
+    for line in text.splitlines():
+        is_row = line.lstrip().startswith("|") and line.rstrip().endswith("|")
+        if is_row and not inside:
+            n += 1
+        inside = is_row
+    return n
+
+
+def _with_pymupdf4llm(path: Path) -> list[PageText]:
+    import pymupdf
+    import pymupdf4llm
+
+    doc = pymupdf.open(path)
+    chunks = pymupdf4llm.to_markdown(
+        doc, page_chunks=True, ignore_images=True, show_progress=False
+    )
+    return [
+        PageText(i + 1, c["text"], None, _count_md_tables(c["text"]))
+        for i, c in enumerate(chunks)
+    ]
+
+
+def _with_pdfplumber(path: Path) -> list[PageText]:
+    import pdfplumber
+
+    with pdfplumber.open(path) as pdf:
+        return [PageText(i + 1, p.extract_text() or "") for i, p in enumerate(pdf.pages)]
+
+
+def extract_pages(pdf: Path) -> list[PageText]:
+    check_input(pdf)
+    import pymupdf
+
+    try:
+        probe = pymupdf.open(pdf)
+    except Exception as e:  # corrupt file
+        raise DocError(f"cannot open PDF: {e}") from None
+    if probe.needs_pass:
+        raise DocError("PDF is password protected")
+    probe.close()
+    try:
+        pages = _with_pymupdf4llm(pdf)
+        ENGINE["name"] = "pymupdf4llm"
+    except Exception:
+        try:
+            pages = _with_pdfplumber(pdf)
+            ENGINE["name"] = "pdfplumber"
+        except Exception as e:
+            raise DocError(f"cannot read PDF: {e}") from None
+    if not pages:
+        raise DocError("PDF has no pages")
+    return pages
