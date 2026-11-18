@@ -95,7 +95,8 @@ def _with_pymupdf4llm(path: Path) -> list[PageText]:
     sink = io.StringIO()
     with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
         chunks = pymupdf4llm.to_markdown(
-            doc, page_chunks=True, ignore_images=True, show_progress=False
+            doc, page_chunks=True, ignore_images=True, show_progress=False,
+            use_ocr=False,  # one OCR owner: Docling escalation, same result on every machine
         )
     return [
         PageText(i + 1, c["text"], None, _count_md_tables(c["text"]))
