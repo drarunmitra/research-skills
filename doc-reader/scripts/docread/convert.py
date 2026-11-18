@@ -42,6 +42,7 @@ def convert(path: Path, force: bool = False) -> dict:
         "engine": extract.ENGINE["name"],
         "warnings": [w for p in pages for w in p.warnings],
         "labels": {str(k): v for k, v in labels.items()},
+        "toc": extract.read_toc(path),
     }
     final = cache.entry_dir(sha)
     tmp = final.with_name(final.name + ".tmp")

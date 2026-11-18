@@ -18,9 +18,9 @@ def main(argv: list[str]) -> int:
         return 0
     vpy = env.venv_python()
     if not vpy.exists():
-        try:
-            import pymupdf4llm  # noqa: F401  (already inside a suitable env)
-        except ImportError:
+        import importlib.util
+
+        if importlib.util.find_spec("pymupdf4llm") is None:  # not already in a suitable env
             print("doc-reader is not set up. Run: python docread.py setup")
             return 2
     elif Path(sys.executable).resolve() != vpy.resolve():

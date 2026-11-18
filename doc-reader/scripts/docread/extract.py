@@ -1,6 +1,17 @@
 """Page-wise text extraction (pymupdf4llm, pdfplumber fallback)."""
+import contextlib
+import io
 from dataclasses import dataclass, field
 from pathlib import Path
+
+# pymupdf4llm prints banners ("RapidOCR is missing") on import and first use.
+# They cost tokens when Claude reads the output, so every import and call is silenced.
+with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+    try:
+        import pymupdf
+        import pymupdf4llm
+    except ImportError:  # setup not run; docread.py reports it
+        pymupdf = pymupdf4llm = None
 
 
 class DocError(Exception):
@@ -78,13 +89,12 @@ def apply_table_rule(pdf: Path, pages: list["PageText"]) -> None:
 
 
 def _with_pymupdf4llm(path: Path) -> list[PageText]:
-    import pymupdf
-    import pymupdf4llm
-
     doc = pymupdf.open(path)
-    chunks = pymupdf4llm.to_markdown(
-        doc, page_chunks=True, ignore_images=True, show_progress=False
-    )
+    sink = io.StringIO()
+    with contextlib.redirect_stdout(sink), contextlib.redirect_stderr(sink):
+        chunks = pymupdf4llm.to_markdown(
+            doc, page_chunks=True, ignore_images=True, show_progress=False
+        )
     return [
         PageText(i + 1, c["text"], None, _count_md_tables(c["text"]))
         for i, c in enumerate(chunks)
@@ -98,10 +108,16 @@ def _with_pdfplumber(path: Path) -> list[PageText]:
         return [PageText(i + 1, p.extract_text() or "") for i, p in enumerate(pdf.pages)]
 
 
+def read_toc(pdf: Path) -> list[list]:
+    """PDF bookmarks as [level, title, page]; empty when the PDF has none."""
+    try:
+        return [[lv, str(t), pg] for lv, t, pg in pymupdf.open(pdf).get_toc() if pg >= 1]
+    except Exception:
+        return []
+
+
 def extract_pages(pdf: Path) -> list[PageText]:
     check_input(pdf)
-    import pymupdf
-
     try:
         probe = pymupdf.open(pdf)
     except Exception as e:  # corrupt file
