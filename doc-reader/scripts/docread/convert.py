@@ -4,7 +4,7 @@ import os
 import shutil
 from pathlib import Path
 
-from . import cache, clean, extract
+from . import cache, clean, escalate, extract
 from .extract import DocError
 
 VERSION = 1
@@ -19,12 +19,32 @@ def render_doc(pages, labels: dict[int, str]) -> str:
     parts = []
     for p in pages:
         lab = labels.get(p.page)
-        marker = f"<!-- page {p.page} label {lab} -->" if lab else f"<!-- page {p.page} -->"
+        marker = f"<!-- page {p.page}" + (f" label {lab}" if lab else "") + (" ocr" if p.ocr else "") + " -->"
         parts.append(f"{marker}\n{p.text}\n")
     return "\n".join(parts)
 
 
-def convert(path: Path, force: bool = False) -> dict:
+def _escalate(path: Path, pages, docling: bool) -> None:
+    """OCR scan pages (and table-warning pages when docling=True) with Docling."""
+    scans = escalate.scan_pages(pages)
+    targets = sorted(set(scans) | ({p.page for p in pages if p.warnings} if docling else set()))
+    if not targets:
+        return
+    try:
+        if scans:
+            print(f"{len(scans)} scan page(s) found; using Docling OCR", flush=True)
+        escalate.ensure_docling()
+        texts = escalate.ocr_pages(path, targets)
+    except Exception as e:
+        for n in targets:
+            pages[n - 1].warnings.append(f"p{n}: OCR failed ({e}), page text may be empty")
+        return
+    for n, t in texts.items():
+        pg = pages[n - 1]
+        pg.text, pg.ocr, pg.warnings = t, True, []
+
+
+def convert(path: Path, force: bool = False, docling: bool = False) -> dict:
     path = Path(path)
     extract.check_input(path)
     sha = cache.file_hash(path)
@@ -32,6 +52,7 @@ def convert(path: Path, force: bool = False) -> dict:
     if meta and meta.get("v") == VERSION and not force:
         return meta
     pages = extract.extract_pages(path)
+    _escalate(path, pages, docling)
     labels = clean.page_labels(pages)
     pages = clean.strip_running(pages)
     doc = render_doc(pages, labels)

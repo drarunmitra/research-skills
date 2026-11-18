@@ -8,7 +8,7 @@ from .extract import DocError
 
 
 def _convert(args) -> int:
-    meta = convert.convert(Path(args.file), force=args.force)
+    meta = convert.convert(Path(args.file), force=args.force or args.docling, docling=args.docling)
     kind = "small" if meta["small"] else "mapped"
     print(f"{meta['name']}: {meta['pages']} pages, ~{meta['tokens']} tokens, "
           f"{kind}, cache {meta['sha'][:8]}")
@@ -58,6 +58,7 @@ def run(argv: list[str]) -> int:
     c = sub.add_parser("convert")
     c.add_argument("file")
     c.add_argument("--force", action="store_true")
+    c.add_argument("--docling", action="store_true", help="re-run pages with table warnings through Docling")
     c.set_defaults(fn=_convert)
     m = sub.add_parser("map")
     m.add_argument("file")

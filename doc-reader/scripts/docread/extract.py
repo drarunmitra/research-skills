@@ -25,6 +25,8 @@ class PageText:
     label: str | None = None
     tables_md: int = 0
     warnings: list[str] = field(default_factory=list)
+    images: int = 0
+    ocr: bool = False
 
 
 OFFICE = {".docx", ".doc", ".pptx", ".ppt", ".xlsx", ".xls"}
@@ -140,4 +142,10 @@ def extract_pages(pdf: Path) -> list[PageText]:
         apply_table_rule(pdf, pages)
     except Exception:
         pass  # table check is advisory; never block extraction
+    try:
+        doc = pymupdf.open(pdf)
+        for p in pages:
+            p.images = len(doc[p.page - 1].get_images())
+    except Exception:
+        pass  # image counts only feed scan detection
     return pages

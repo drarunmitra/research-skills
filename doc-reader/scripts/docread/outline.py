@@ -6,7 +6,7 @@ from . import cache
 
 MAP_BUDGET_TOKENS = 2000
 WINDOW = 5
-_MARK = re.compile(r"^<!-- page (\d+)(?: label (\S+))? -->$")
+_MARK = re.compile(r"^<!-- page (\d+)(?: label (\S+))?(?: ocr)? -->$")
 _MD_HEAD = re.compile(r"^(#{1,6})\s+(.*\S)\s*$")
 _NUMBERED = re.compile(r"^(\d+(?:\.\d+)*)[.)]?\s+[A-Z]\S")
 _CHAPTER = re.compile(r"^(Chapter|Section|Part)\s+(\d+|[IVX]+)\b", re.I)
