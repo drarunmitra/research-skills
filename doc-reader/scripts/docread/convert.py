@@ -7,7 +7,7 @@ from pathlib import Path
 from . import cache, clean, escalate, extract
 from .extract import DocError
 
-VERSION = 1
+VERSION = 3
 SMALL_TOKENS = 5000
 
 

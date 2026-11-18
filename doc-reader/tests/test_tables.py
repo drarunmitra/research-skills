@@ -61,3 +61,48 @@ def test_rule_keeps_small_filled_table(tmp_path):
 def test_hta_brief_emits_no_bogus_markdown_table(sample):
     pages = extract.extract_pages(sample("hta_hemoglobinometer_policy.pdf"))
     assert all("|---" not in p.text for p in pages)
+
+
+def test_md_table_row_counts_ignores_separator():
+    text = "intro\n| a | b |\n|---|---|\n| 1 | 2 |\n\nmid\n| c |\n|---|\n| 3 |\n| 4 |"
+    assert extract.md_table_row_counts(text) == [2, 3]
+
+
+def test_rule_warns_when_markdown_has_more_rows_than_the_pdf_table(tmp_path):
+    pdf = _grid_pdf(tmp_path, 260, 120, 3, 2, lambda r, c: True)  # 3 real rows
+    split = "| a | b |\n|---|---|\n" + "\n".join(f"| r{i} | x |" for i in range(5))
+    pages = [PageText(1, split, None, 1, [])]
+    extract.apply_table_rule(pdf, pages)
+    assert pages[0].text == split  # flag only, no repair
+    assert "p1: table rows may be split across lines, check page-image" in pages[0].warnings
+
+
+def test_kiht_wrapped_cell_table_is_flagged(sample, monkeypatch):
+    import os
+
+    monkeypatch.setenv("DOCREAD_HOME", os.path.expandvars(r"%LOCALAPPDATA%\doc-reader"))
+    from docread import convert
+
+    meta = convert.convert(sample("KIHT_HEOR.pdf"))
+    assert any(w.startswith("p46:") and "split" in w for w in meta["warnings"])
+    assert not any(w.startswith("p98:") for w in meta["warnings"])
+    doc = (convert.cache.entry_dir(meta["sha"]) / "doc.md").read_text(encoding="utf-8")
+    assert "|**Discount Rate**|3% per annum" in doc  # Table 10 survives as Markdown
+
+
+def test_rule_judges_the_markdown_not_pdfplumber_cells(tmp_path):
+    # pdfplumber sees an almost empty small grid, but the Markdown table is full: keep it
+    pdf = _grid_pdf(tmp_path, 260, 120, 3, 3, lambda r, c: r == 0 and c == 0)
+    full = "| a | b |\n|---|---|\n| 1 | 2 |"
+    pages = [PageText(1, full, None, 1, [])]
+    extract.apply_table_rule(pdf, pages)
+    assert pages[0].text == full and pages[0].warnings == []
+
+
+def test_rule_rejects_sparse_markdown_table(tmp_path):
+    pdf = _grid_pdf(tmp_path, 260, 120, 3, 3, lambda r, c: True)
+    sparse = "| a |  |  |\n|---|---|---|\n|  |  |  |\n|  | z |  |"
+    pages = [PageText(1, sparse, None, 1, [])]
+    extract.apply_table_rule(pdf, pages)
+    assert pages[0].tables_md == 0
+    assert "p1: table layout not reliable, raw text kept" in pages[0].warnings

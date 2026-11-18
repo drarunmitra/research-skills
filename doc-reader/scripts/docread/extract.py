@@ -1,6 +1,7 @@
 """Page-wise text extraction (pymupdf4llm, pdfplumber fallback)."""
 import contextlib
 import io
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -56,21 +57,72 @@ MAX_TABLE_AREA = 0.8
 MIN_FILLED = 0.6
 
 
-def accept_table(bbox, page_size, cells) -> bool:
-    """True when a detected table looks like data: not page-wide, mostly filled."""
+def table_fits_page(bbox, page_size) -> bool:
+    """False when the table box covers most of the page (a layout grid, not data)."""
     x0, top, x1, bottom = bbox
     w, h = page_size
-    if (x1 - x0) * (bottom - top) >= MAX_TABLE_AREA * w * h:
-        return False
+    return (x1 - x0) * (bottom - top) < MAX_TABLE_AREA * w * h
+
+
+def table_filled(cells) -> bool:
+    """True when at least MIN_FILLED of the cells hold text."""
     flat = [c for row in cells for c in row]
     if not flat:
         return False
-    filled = sum(1 for c in flat if c and str(c).strip())
-    return filled / len(flat) >= MIN_FILLED
+    return sum(1 for c in flat if c and str(c).strip()) / len(flat) >= MIN_FILLED
+
+
+def accept_table(bbox, page_size, cells) -> bool:
+    """True when a detected table looks like data: not page-wide, mostly filled."""
+    return table_fits_page(bbox, page_size) and table_filled(cells)
+
+
+_SEP = re.compile(r"^\|[\s:|-]+\|$")
+
+
+def md_table_row_counts(text: str) -> list[int]:
+    """Rows (header included, separator excluded) of each Markdown table in the text."""
+    counts, cur = [], None
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith("|") and s.endswith("|"):
+            cur = 0 if cur is None else cur
+            if not _SEP.match(s):
+                cur += 1
+        elif cur is not None:
+            counts.append(cur)
+            cur = None
+    if cur is not None:
+        counts.append(cur)
+    return counts
+
+
+def md_table_cells(text: str) -> list[list[list[str]]]:
+    """Cells of every row of every Markdown table (separator rows dropped)."""
+    tables, cur = [], None
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith("|") and s.endswith("|"):
+            if cur is None:
+                cur = []
+            if not _SEP.match(s):
+                cur.append([c.strip() for c in s.strip("|").split("|")])
+        elif cur is not None:
+            tables.append(cur)
+            cur = None
+    if cur is not None:
+        tables.append(cur)
+    return tables
 
 
 def apply_table_rule(pdf: Path, pages: list["PageText"]) -> None:
-    """Pages whose Markdown tables fail the check fall back to raw text plus a warning."""
+    """Judge the Markdown tables the extractor emitted.
+
+    Raw text replaces a page when a table box covers most of the page (a layout grid)
+    or when a Markdown table is mostly empty. A table with more Markdown rows than the
+    PDF grid is kept but flagged, because wrapped cells were probably split across rows.
+    pdfplumber cell text is not trusted: it reads many real cells as empty.
+    """
     import pdfplumber
 
     with pdfplumber.open(pdf) as doc:
@@ -79,15 +131,17 @@ def apply_table_rule(pdf: Path, pages: list["PageText"]) -> None:
                 continue
             pg = doc.pages[p.page - 1]
             size = (float(pg.width), float(pg.height))
-            bad = False
-            for t in pg.find_tables():
-                if not accept_table(t.bbox, size, t.extract()):
-                    bad = True
-                    break
-            if bad:
+            grids = pg.find_tables()
+            too_big = any(not table_fits_page(t.bbox, size) for t in grids)
+            md = md_table_cells(p.text)
+            sparse = any(not table_filled([r for r in tbl]) for tbl in md)
+            if too_big or sparse:
                 p.text = pg.extract_text() or ""
                 p.tables_md = 0
                 p.warnings.append(f"p{p.page}: table layout not reliable, raw text kept")
+            elif len(md) == len(grids) and any(len(m) > len(g.rows) for m, g in zip(md, grids)):
+                p.warnings.append(
+                    f"p{p.page}: table rows may be split across lines, check page-image")
 
 
 def _with_pymupdf4llm(path: Path) -> list[PageText]:
