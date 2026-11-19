@@ -25,6 +25,7 @@ Guide and how-to: https://drarunmitra.github.io/research-skills/
 ### Analysis
 - time-series: analyse and forecast time series in R with the tidyverts stack (tsibble, feasts, fable), including surveillance and outbreak detection.
 - qual-researcher: qualitative analysis from transcript cleaning through coding, thematic analysis, framework mapping, and COREQ/SRQR reporting.
+- epi-thinking: choose a study design, pick the right measure and denominator, sign and size biases, and appraise a study you are reading. Companion to peer-reviewer.
 - district-risk-tiers: rank districts or sub-districts into High, Moderate and Low tiers with a rule fixed before results, what-if stability runs, a coverage check and an independent rebuild.
 
 ### Writing and review
@@ -58,6 +59,7 @@ Skills fall into two classes. Pure-reasoning skills run on any LLM, including br
 | academic-writer | Pure-reasoning | Yes | Yes | Yes | none |
 | content-research-writer | Pure-reasoning | Yes | Yes | Yes | none |
 | peer-reviewer | Pure-reasoning | Yes | Yes | Yes | none |
+| epi-thinking | Pure-reasoning | Yes | Yes | Yes | none |
 | qual-researcher | Pure-reasoning | Yes | Yes | Yes | none |
 | time-series | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | R with tidyverts (tsibble, feasts, fable) |
 | reproducible-repo | Environment-dependent | Yes (CLI/agent) | Yes (CLI/agent) | Yes (CLI/agent) | git, Quarto, R |

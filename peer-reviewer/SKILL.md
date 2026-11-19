@@ -1,6 +1,6 @@
 ---
 name: peer-reviewer
-version: 1.2.0
+version: 1.3.1
 allowed-tools: Read, Grep, Glob
 description: >
   Reviews a research manuscript as a journal editor and peer reviewer would, for
@@ -38,6 +38,8 @@ Do NOT use this to rewrite prose (that is `academic-writer`) or to draft new sec
 This skill judges whether claims are earned; the writing skills fix them.
 - **Inbound** -- run after **research-writer** has drafted and **academic-writer** has humanized the manuscript.
 - **Outbound (route the fixes)** -- substance to **research-writer**; re-humanizing and citation verification to **academic-writer**; flagged references to **zotero-cite**; reproducibility/data-and-code comments to **reproducible-repo**. Then re-run peer-reviewer on the revision.
+- **epi-thinking** -- supplies the direction-and-size reasoning behind a Major comment. Read `epi-thinking/validity.md` (bias directions, opposing biases, treatment-effect biases) before writing Major comments on bias, and `epi-thinking/appraisal.md` for the known-causes check. When you flag selection bias, confounding or measurement error, ask `epi-thinking` for the likely sign and size, and whether the biases together could explain the result. Do not use its five-threat cap here: the no-cap rule below governs the review.
+- **causal-inference** -- the formal adjustment set and DAG for any confounding or collider comment.
 - **numbers-audit** -- mechanically checks that every number in the manuscript traces to a pipeline output. Run it before reviewing; it removes a whole class of comment.
 
 
@@ -46,7 +48,8 @@ This skill judges whether claims are earned; the writing skills fix them.
 - **You are not the author's friend.** A review that only praises is useless. Lead with what is wrong.
 - **Separate fatal from fixable.** Distinguish problems that threaten the paper's validity (confounding, wrong model, unsupported causal claim) from problems of presentation (a missing CI, an unclear sentence).
 - **Evidence over opinion.** Tie each comment to a specific location and say what evidence or analysis would resolve it. "Underpowered" is an opinion; "with 4% in this class and 8 covariates, the multinomial is unstable; report the events-per-variable and consider collapsing categories" is a review.
-- **Calibrate to venue.** A general-medical-journal bar differs from a specialty or methods journal. If the target journal is unknown, ask or state the assumed tier and review to it.
+- **Calibrate to venue.** A general-medical-journal bar differs from a specialty or methods journal. If the target journal is unknown, ask; if no one can be asked, state the assumed tier and review to it.
+- **Group by root cause.** Comments that share one root cause (for example an undefined time zero, prevalent users and immortal time) may be split for the author to answer, but say they share a root cause so the count does not overstate severity.
 - **No fabrication.** Do not invent citations the author "should" have cited unless you can name a real one; otherwise say "cite the relevant primary literature on X" and name the topic. The same applies to the manuscript itself: never attribute a number, method, or claim to the paper unless you have read it there.
 - **Uncertainty is a legitimate review comment.** If the manuscript does not say enough for you to judge something, write that: "the sampling frame is not described, so selection bias cannot be assessed; please report X." Do not fill the gap with an assumption and then critique the assumption.
 
@@ -64,6 +67,7 @@ This skill judges whether claims are earned; the writing skills fix them.
 - **Desk reject / reject:** out of scope; fatal design flaw; no novel contribution; conclusions not supported by data and not salvageable with the data in hand.
 - **Major revision:** sound core but one or more issues that change the analysis or the conclusions (model choice, confounding, missing sensitivity analysis, overclaiming, key comparison absent).
 - **Minor revision:** valid and sufficient; needs clarification, added detail, reporting-guideline compliance, or tempered language.
+- **Reject, resubmission encouraged:** the design flaw is fixable by re-analysis; say which re-analysis and what must be withdrawn.
 - **Accept (rare pre-submission):** state what still must be true.
 
 State the recommendation AND the two or three things that drive it.
@@ -78,6 +82,7 @@ State the recommendation AND the two or three things that drive it.
 ### B. Design & internal validity
 - Does the design support the causal verb used? Cross-sectional ⇒ association only.
 - Confounding: are the obvious confounders measured and adjusted? Residual/unmeasured confounding acknowledged?
+- For each bias you raise, say its likely **direction** (towards or away from the null) and rough **size**, and whether the authors' stated remedy actually addresses it. An unsigned bias is a weak comment. See `epi-thinking`.
 - Selection: how was the sample derived; who was excluded; could exclusions bias the estimate? Is there a participant-flow account?
 - Measurement: are exposures/outcomes validly measured? Self-report bias? Construct overlap / circularity between "exposure" and "outcome"?
 - Reverse causation and time order.
@@ -89,6 +94,13 @@ State the recommendation AND the two or three things that drive it.
 - **Competing risks:** flag if a time-to-event analysis treats a competing event (e.g., death from another cause) as censoring rather than using cumulative-incidence / Fine-Gray methods; standard Kaplan-Meier overstates risk.
 - **Ecological fallacy:** flag if associations measured at the group/area level are interpreted as individual-level effects (common in spatial/aggregate studies).
 - **Regression to the mean:** flag if subjects are selected on an extreme baseline value and "improvement" at follow-up is claimed without a control group or appropriate adjustment.
+- **Exposure defined from the future / prevalent users:** flag if exposure is "ever filled during follow-up" or if people already on the drug at baseline are not handled. This is immortal-time bias plus prevalent-user bias; ask for a new-user design with a stated time zero.
+- **Healthy-user bias and confounding by indication:** flag for any drug or behaviour study; state which way each pushes.
+- **Confounder selection by p-value:** flag; ask for a pre-specified set and crude plus adjusted estimates.
+- **Detection / surveillance bias:** flag if the exposed group has more contact with services; it raises outcome counts in that group.
+- **"No association" from a wide interval:** flag; report what range of effects the CI allows.
+- **Missing data / loss to follow-up:** flag if the amount and mechanism are not reported, or complete-case analysis is used when missingness plausibly depends on the outcome. Ask who is missing and which way it biases.
+- **Known-causes check:** ask whether the design could recover two or three well-established causes. If a design cannot, its novel finding is not credible.
 - **Interrupted-time-series / autocorrelation issues:** flag if a before/after or ITS design ignores serial autocorrelation, underlying trend, or seasonality, or uses too few pre-intervention points to estimate the counterfactual trend.
 
 ### C. Statistics & reporting
@@ -155,13 +167,16 @@ Many manuscripts need more than one (e.g., a diagnostic study reported with STAR
 2-4 sentences: what they did, found, and claim. (If you cannot write the contribution in one sentence, say so; that is comment M1.)
 
 ## Strengths
-A short, honest list. Real strengths only.
+A short, honest list. Real strengths only; "none material" is allowed.
 
 ## Major comments
 M1, M2, ... Each: the problem, where it is, why it threatens the conclusions, and the specific analysis/text that would resolve it.
 
 ## Minor comments
 m1, m2, ... Presentation, clarity, reporting-guideline items, missing details.
+
+## Claims versus evidence
+Each headline claim in the abstract and conclusion, the result that supports it, and the verb that is not earned (checklist D).
 
 ## Statistical review
 Targeted notes on models, effect sizes, multiplicity, missing data, assumptions, sensitivity.
